@@ -166,35 +166,35 @@
                               <input type="number" class="form-control no_special_char" id="alert_qty" name="alert_qty" placeholder="<?= $this->lang->line('alert_qty'); ?>" min="0" value="<?php print $alert_qty; ?>">
                               <span id="alert_qty_msg" style="display:none" class="text-danger"></span>
                            </div>
-                           <div class="form-group col-md-4">
+                           <!-- <div class="form-group col-md-4">
                               <label for="auteur"><?= $this->lang->line('auteur'); ?></label>
                               <input type="text" class="form-control " id="auteur" name="auteur" placeholder="<?= $this->lang->line('auteur'); ?>" value="<?php print $auteur; ?>">
                               <span id="auteur" style="display:none" class="text-danger"></span>
-                           </div>
+                           </div> -->
 
-                           <div class="form-group col-md-4">
+                           <!-- <div class="form-group col-md-4">
                               <label for="verificateur"><?= $this->lang->line('verificateur'); ?></label>
                               <input type="text" class="form-control " id="verificateur" name="verificateur" placeholder="<?= $this->lang->line('verificateur'); ?>" value="<?php print $verificateur; ?>">
                               <span id="verificateur" style="display:none" class="text-danger"></span>
-                           </div>
+                           </div> -->
 
-                           <div class="form-group col-md-4">
+                           <!-- <div class="form-group col-md-4">
                               <label for="traducteur"><?= $this->lang->line('traducteur'); ?></label>
                               <input type="text" class="form-control " id="traducteur" name="traducteur" placeholder="<?= $this->lang->line('traducteur'); ?>" value="<?php print $traducteur; ?>">
                               <span id="traducteur" style="display:none" class="text-danger"></span>
-                           </div>
+                           </div> -->
 
-                           <div class="form-group col-md-4">
+                           <!-- <div class="form-group col-md-4">
                               <label for="editeur"><?= $this->lang->line('editeur'); ?> </label>
                               <input type="text" class="form-control " id="editeur" name="editeur" placeholder="<?= $this->lang->line('editeur'); ?>" value="<?php print $editeur; ?>">
                               <span id="editeur" style="display:none" class="text-danger"></span>
-                           </div>
+                           </div> -->
 
-                           <div class="form-group col-md-4">
+                           <!-- <div class="form-group col-md-4">
                               <label for="annee_edition"><?= $this->lang->line('annee'); ?></label>
                               <input type="text" class="form-control " id="annee_edition" name="annee_edition" placeholder="<?= $this->lang->line('annee'); ?>" value="<?php print $annee_edition; ?>">
                               <span id="annee_edition" style="display:none" class="text-danger"></span>
-                           </div>
+                           </div> -->
 
                            <!--                               <div class="form-group col-md-4">-->
                            <!--                                   <label for="ISBN" >--><?php //= $this->lang->line('ISBN'); 
@@ -203,30 +203,30 @@
                                                                                                                                                                ?><!--" >-->
                            <!--                                   <span id="ISBN" style="display:none" class="text-danger"></span>-->
                            <!--                               </div>-->
-
+                           <!-- 
                            <div class="form-group col-md-4">
                               <label for="n_edition"><?= $this->lang->line('nedition'); ?></label>
                               <input type="text" class="form-control " id="n_edition" name="n_edition" placeholder="<?= $this->lang->line('nedition'); ?>" value="<?php print $n_edition; ?>">
                               <span id="n_edition" style="display:none" class="text-danger"></span>
-                           </div>
+                           </div> -->
 
-                           <div class="form-group col-md-4">
+                           <!-- <div class="form-group col-md-4">
                               <label for="theme"><?= $this->lang->line('theme'); ?></label>
                               <input type="text" class="form-control " id="theme" name="theme" placeholder="<?= $this->lang->line('theme'); ?>" value="<?php print $theme; ?>">
                               <span id="theme" style="display:none" class="text-danger"></span>
-                           </div>
+                           </div> -->
 
-                           <div class="form-group col-md-4">
+                           <!-- <div class="form-group col-md-4">
                               <label for="nature_de_Papier"><?= $this->lang->line('naturedepapier'); ?> </label>
                               <input type="text" class="form-control " id="nature_de_Papier" name="nature_de_Papier" placeholder="<?= $this->lang->line('naturedepapier'); ?>" value="<?php print $nature_de_Papier; ?>">
                               <span id="nature_de_Papier" style="display:none" class="text-danger"></span>
-                           </div>
+                           </div> -->
 
-                           <div class="form-group col-md-4">
+                           <!-- <div class="form-group col-md-4">
                               <label for="couverture"><?= $this->lang->line('Couverture'); ?></label>
                               <input type="text" class="form-control " id="couverture" name="couverture" placeholder="<?= $this->lang->line('Couverture'); ?>" value="<?php print $couverture; ?>">
                               <span id="couverture" style="display:none" class="text-danger"></span>
-                           </div>
+                           </div> -->
 
                            <div class="form-group col-md-4">
                               <label for="emplacement"><?= $this->lang->line('emplacement'); ?></label>

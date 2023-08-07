@@ -3246,48 +3246,23 @@ table.text-center th {
   margin-bottom: 25px;
   font-weight: 300;
 }
-.aa {
-  display: flex;
-  justify-content: start;
-  align-items: start;
-  flex-direction: row;
-}
-.aa .ads {
-  width: 50%;
-  /* overflow: hidden; */
-  background-color: #fff;
-  /* background-image: url("../../../uploads/bg/bg-ads.jpg"); */
-  background-position: center bottom;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh;
-}
-.text-no-wrap {
-  white-space: nowrap;
-}
-.aa .ads img {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  object-fit: cover;
-}
 .login-logo a,
 .register-logo a {
   color: #444;
 }
 .login-page,
 .register-page {
-  height: 100vh;
-  overflow: hidden;
   /*background:#d2d6de;*/
   /*background: radial-gradient(circle, rgb(234, 237, 255) 0%, rgb(90, 56, 166) 97%);*/
-  background: linear-gradient(to right, rgb(255, 255, 255), rgb(44, 109, 234));
-  /* background: red; */
+  background: linear-gradient(to left, #3c8dbc, #367fa9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .login-box,
 .register-box {
   width: 360px;
-  margin: 0.5% auto;
+  margin: 7% auto;
 }
 @media (max-width: 768px) {
   .login-box,
@@ -5074,7 +5049,16 @@ table.text-center th {
   border: none;
   width: 100%;
 }
+.ads {
+  width: 50%;
+  overflow: hidden;
+}
+.ads img {
+  height: 100vh;
+  object-fit: cover;
 
+  width: 100%;
+}
 /*#sales_table tbody {
     display:block;
     height:220px;

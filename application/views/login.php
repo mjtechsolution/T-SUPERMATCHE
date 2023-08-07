@@ -34,95 +34,92 @@
   <!-- <input type="hidden" id="base_url" value="<?= base_url() ?>">
   <?php $this->load->view('comman/language.php'); ?> -->
   <!-- language end -->
-  <div class="d-flex aa">
+  <div class="ads">
+    <img src="<?php echo base_url("uploads/bg/bg-store.jpg"); ?>" alt="ads">
+  </div>
+  <div class="login-box">
 
-    <div class="ads bg-danger ">
-      <img src="<?php echo base_url('uploads/bg/bg-ads.jpg'); ?>" alt="">
+    <div class="login-logo">
+      <a href="#"><b>
+          <img src="<?php echo base_url(get_site_logo()); ?>" width="200px">
+        </b></a>
     </div>
-    <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="login-box-body">
 
-      <div class="login-logo">
-        <a href="#"><b>
-            <img src="<?php echo base_url(get_site_logo()); ?>">
-          </b></a>
-      </div>
-      <!-- /.login-logo -->
-      <div class="login-box-body">
+      <p class="login-box-msg"><?= $this->lang->line('sign_in_message'); ?></p>
 
-        <p class="login-box-msg"><?= $this->lang->line('sign_in_message'); ?></p>
-
-        <div class="text-danger tex-center "><?php echo $this->session->flashdata('failed'); ?></div>
-        <div class="text-success tex-center"><?php echo $this->session->flashdata('success'); ?></div>
+      <div class="text-danger tex-center"><?php echo $this->session->flashdata('failed'); ?></div>
+      <div class="text-success tex-center"><?php echo $this->session->flashdata('success'); ?></div>
 
 
-        <form id="login-form" action="<?php echo $base_url; ?>login/verify" method="post">
-          <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
-          <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Email/Nom d'utilisateur" id="email" name="email" autofocus><span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-          </div>
-          <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="<?= $this->lang->line('password') ?>" id="pass" name="pass">
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          </div>
-          <div class="row">
-            <div class="col-xs-12">
-              <button type="submit" class="btn btn-primary btn-block btn-flat"><?= $this->lang->line('sign_in'); ?></button>
-            </div>
-          </div>
-          <div class="row">
-            <?php if (store_module()) { ?>
-              <div class="col-xs-6 "><br>
-                <a href="<?= base_url('register') ?>"><?= $this->lang->line('register'); ?></a>
-              </div>
-            <?php } ?>
-            <div class="col-xs-6 text-right pull-right"><br>
-              <a href="<?= base_url('login/forgot_password') ?>"><?= $this->lang->line('forgot_password'); ?></a>
-            </div>
-          </div>
-        </form>
+      <form id="login-form" action="<?php echo $base_url; ?>login/verify" method="post">
+        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>">
+        <div class="form-group has-feedback">
+          <input type="text" class="form-control" placeholder="Email/Nom d'utilisateur" id="email" name="email" autofocus><span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback">
+          <input type="password" class="form-control" placeholder="<?= $this->lang->line('password') ?>" id="pass" name="pass">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
         <div class="row">
-          <div class="col-md-12 text-center">
-            <p style='font-style: italic;'>Version : <?= app_version() ?></p>
+          <div class="col-xs-12">
+            <button type="submit" class="btn btn-primary btn-block btn-flat"><?= $this->lang->line('sign_in'); ?></button>
           </div>
+        </div>
+        <div class="row">
+          <?php if (store_module()) { ?>
+            <div class="col-xs-6 "><br>
+              <a href="<?= base_url('register') ?>"><?= $this->lang->line('register'); ?></a>
+            </div>
+          <?php } ?>
+          <div class="col-xs-6 text-right pull-right"><br>
+            <a href="<?= base_url('login/forgot_password') ?>"><?= $this->lang->line('forgot_password'); ?></a>
+          </div>
+        </div>
+      </form>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p style='font-style: italic;'>Version : <?= app_version() ?></p>
         </div>
       </div>
-      <!-- /.login-box-body -->
-      <?php if (demo_app()) { ?>
-        <div class="box-body">
-          <label>Cliquez sur Connection pour démarrer une session !</label>
-          <div class="row">
-            <div class="col-12">
-              <table class="table table-bordered table-condensed text-center">
-                <tr>
-                  <th span="1" style="width: 20%;">Rôle</th>
-                  <th span="1" style="width: 20%;">Utilisateur</th>
-                  <th span="1" class="text-no-wrap " style="width: 60%;">Mot de passe</th>
-                  <th span="1" style="width: 20%;"></th>
-                </tr>
-                <tr>
-                  <td>Administrateur</td>
-                  <td>sara</td>
-                  <td>123</td>
-                  <td><button type="button" class="btn btn-info btn-block btn-flat admin">Connection</button></td>
-                </tr>
-                <tr>
-                  <td>Caissier</td>
-                  <td>ahmed</td>
-                  <td>123</td>
-                  <td><button type="button" class="btn btn-info btn-block btn-flat caissier">Connection</button></td>
-                </tr>
-
-
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <i><i class="fa fa-fw fa-info-circle text-warning"></i>Certaines fonctionnalités sont désactivées dans la démo et seront réinitialisées après chaque heure.</i>
-        </div>
-      <?php } ?>
-
-
     </div>
+    <!-- /.login-box-body -->
+    <?php if (demo_app()) { ?>
+      <div class="box-body" style="color: white; " sapi_windows_cp_conv>
+        <label>Cliquez sur Connection pour démarrer une session !</label>
+        <div class="row">
+          <div class="col-md-12">
+            <table class="table table-bordered table-condensed text-center ">
+              <tr>
+                <th span="1" style="width: 20%;">Rôle</th>
+                <th span="1" style="width: 20%;">Utilisateur</th>
+                <th span="1" style="width: 40%; white-space: nowrap;">Mot de passe</th>
+                <th span="1" style="width: 20%;"></th>
+              </tr>
+              <tr>
+                <td>Administrateur</td>
+                <td>sara</td>
+                <td>123</td>
+                <td><button type="button" class="btn btn-info btn-block btn-flat admin">Connection</button></td>
+              </tr>
+              <tr>
+                <td>Caissier</td>
+                <td>ahmed</td>
+                <td>123</td>
+                <td><button type="button" class="btn btn-info btn-block btn-flat caissier">Connection</button></td>
+              </tr>
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- <i><i class="fa fa-fw fa-info-circle text-warning"></i>Certaines fonctionnalités sont désactivées dans la démo et seront réinitialisées après chaque heure.</i> -->
+      </div>
+    <?php } ?>
+
+
   </div>
 
   <!-- /.login-box -->
