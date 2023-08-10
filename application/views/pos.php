@@ -413,7 +413,7 @@
                       <div class="col-sm-3">
                         <button type="button" id="hold_invoice" name="" class="btn bg-maroon btn-block btn-flat btn-lg btnhold" title="Hold Invoice [Alt+H]" style="">
                           <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
-                          Hold
+                          Tenir
                         </button>
                       </div>
                       <div class="col-sm-3">
@@ -425,7 +425,7 @@
                       <div class="col-sm-3">
                         <button type="button" id="<?php echo "show_cash_modal"; ?>" name="" class="btn btnhold btn-success btn-block btn-flat btn-lg Alt_c" title="espèces" style="">
                           <i class="fa fa-money" aria-hidden="true"></i>
-                          espèces
+                          Èspèces
                         </button>
                       </div>
 
