@@ -56,6 +56,122 @@
       font-weight: bold;
       font-size: 14px;
     }
+
+    .livrison_box {
+      /* position: fixed;
+      top: 50%;
+      left: 50%;
+      z-index: 100000;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #111111CC;
+      display: flex;
+      justify-content: center;
+      align-items: center; */
+      /* display: none; */
+    }
+
+    .livrison {
+
+
+      /* height: 100px; */
+      /* width: 80%;
+      background: white;
+      border: 1px solid #b6b6b6; */
+      /* display: none; */
+    }
+
+    .livrison_header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #b6b6b6;
+      padding: 10px 25px;
+      box-shadow: 0 0 5px raba(0, 0, 0, 0.3);
+      font-size: 16px;
+    }
+
+    .livrison_body {
+      padding: 10px 25px;
+    }
+
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 10px;
+
+    }
+
+    .group_input {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 50%;
+
+    }
+
+    .group_input lable {
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .group_input input,
+    .group_input select {
+      width: 100%;
+      height: 30px;
+      padding: 5px;
+      padding-inline: 10px;
+      border: 1px solid #b6b6b6;
+      outline: none;
+      box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.2);
+
+    }
+
+    .group_input textarea {
+      border: 1px solid #b6b6b6;
+      padding: 5px;
+      outline: none;
+      box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.2);
+
+    }
+
+    .livrison_body p {
+      padding-block: 5px;
+      font-size: 16px;
+    }
+
+    .livrison_header h1 {
+      font-size: 23px;
+      font-weight: 600;
+    }
+
+    .livrison_header i {
+      cursor: pointer;
+      font-size: 27px;
+
+    }
+
+
+
+    button {
+      padding: 10px 20px;
+      border: 1px solid #3c8dbc;
+      color: white;
+      background: #3c8dbc;
+    }
+
+    button:hover {
+      background: #286090;
+      border: 1px solid #286090;
+
+    }
+
+    .show {
+      display: flex !important;
+    }
   </style>
   <!-- bootstrap datepicker -->
   <link rel="stylesheet" href="<?php echo $theme_link; ?>plugins/datepicker/datepicker3.css">
@@ -67,6 +183,7 @@
     <!-- Left side column. contains the logo and sidebar -->
 
     <?php include "sidebar.php"; ?>
+
 
     <?php
     /*Total Points*/
@@ -126,10 +243,16 @@
         </ol>
       </section>
 
+
       <div class="pay_now_modal">
       </div>
       <div class="view_payments_modal">
       </div>
+
+      <div class="view_livrison_modal">
+      </div>
+
+
 
       <!-- Main content -->
       <?= form_open('#', array('class' => '', 'id' => 'table_form')); ?>
@@ -357,6 +480,106 @@
       </section>
       <!-- /.content -->
       <?= form_close(); ?>
+      <!-- <div class="livrison_box" id="livrison_box">
+        <div class="livrison" id="livrison">
+          <div class="livrison_header ">
+
+            <?php
+
+            ?>
+            <h1 class="">AJOUTER UNE LIVRAISON</h1>
+            <div>
+              <i class=" fa fa-close" id="close_btn"></i>
+            </div>
+          </div>
+          <div class="livrison_body">
+            <p> Remplissez les informations ci-dessous. Les étiquettes de champs marquées avec * sont des champs de saisie requis.</p>
+
+            <div class="flex">
+              <div class="group_input">
+                <label>
+                  Date *
+                </label>
+                <input type="text">
+              </div>
+              <div class="group_input">
+                <label>
+                  Status *
+                </label>
+                <select name="" id="">
+                  <option value="">Enbalage</option>
+                  <option value="">Livraison</option>
+                  <option value="">Livré</option>
+                </select>
+              </div>
+            </div>
+            <div class="flex">
+              <div class="group_input">
+                <label>
+                  Numéro de référence de livraison *
+                </label>
+                <input type="text">
+              </div>
+              <div class="group_input">
+                <label>
+                  Livré par
+                </label>
+                <input type="text">
+              </div>
+            </div>
+            <div class="flex">
+              <div class="group_input">
+                <label>
+                  Référence de vente *
+                </label>
+                <input type="text">
+              </div>
+              <div class="group_input">
+                <label>
+                  Reçu par
+                </label>
+                <input type="text">
+              </div>
+            </div>
+            <div class="flex">
+              <div class="group_input">
+                <label>
+                  Clients *
+                </label>
+                <input type="text">
+              </div>
+              <div class="group_input">
+                <label>
+                  Attachement
+                </label>
+                <input type="text">
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="group_input">
+                <label>
+                  Addresse *
+                </label>
+                <textarea name="" id="" cols="30" rows="5"></textarea>
+              </div>
+              <div class="group_input">
+                <label>
+                  Note
+                </label>
+                <textarea name="" id="" cols="30" rows="5"></textarea>
+
+              </div>
+            </div>
+
+          </div>
+          <div class="livrison_footer">
+            <button>Enregistrer</button>
+
+          </div>
+        </div>
+      </div> -->
+
     </div>
     <!-- /.content-wrapper -->
     <?php include "footer.php"; ?>
@@ -575,10 +798,25 @@
     /**************************************************/
   </script>
   <script src="<?php echo $theme_link; ?>js/sales.js"></script>
+  <script src="<?php echo $theme_link; ?>js/delivery.js"></script>
   <script type="text/javascript">
     function print_invoice(id) {
       window.open("<?= base_url(); ?>pos/print_invoice_pos/" + id, "_blank", "scrollbars=1,resizable=1,height=500,width=500");
     }
+    // const livrisonBox = document.getElementById('livrison_box');
+
+    // // function makeLiveraison(id) {
+    // //   const a = id
+
+    // //   livrisonBox.classList.add('show')
+
+    // // }
+    // // const close = document.getElementById('close_btn');
+    // // close.addEventListener('click', closeBtn)
+
+    // // function closeBtn() {
+    // //   livrisonBox.classList.remove('show')
+    // // }
 
     function show_receipt(id) {
       window.open("<?= base_url(); ?>sales/print_show_receipt/" + id, "_blank", "scrollbars=1,resizable=1,height=500,width=500");

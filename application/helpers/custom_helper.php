@@ -468,6 +468,9 @@ function get_init_code($value, $store_id = '', $only_code_flag = false)
     $CI->db->select("category_init");
   if ($value == 'item')
     $CI->db->select("item_init");
+  if ($value == 'delivery') {
+    $CI->db->select("delivery_init");
+  }
   if ($value == 'supplier')
     $CI->db->select("supplier_init");
   if ($value == 'purchase')

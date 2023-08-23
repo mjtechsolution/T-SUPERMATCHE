@@ -88,6 +88,7 @@ $("#save,#update").on("click", function () {
 //On Enter Move the cursor to desigtation Id
 function shift_cursor(kevent, target) {
   if (kevent.keyCode == 13) {
+    console.log("Enter pressed");
     $("#" + target).focus();
   }
 }

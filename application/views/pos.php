@@ -413,13 +413,13 @@
                       <div class="col-sm-3">
                         <button type="button" id="hold_invoice" name="" class="btn bg-maroon btn-block btn-flat btn-lg btnhold" title="Hold Invoice [Alt+H]" style="">
                           <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
-                          Tenir
+                          Pause
                         </button>
                       </div>
                       <div class="col-sm-3">
                         <button type="button" id="" name="" class="btn btn-primary btnhold btn-block btn-flat btn-lg show_payments_modal" title="Multiple Payments [Alt+M]" style="">
                           <i class="fa fa-credit-card" aria-hidden="true"></i>
-                          Multiple
+                          Multi-payment
                         </button>
                       </div>
                       <div class="col-sm-3">

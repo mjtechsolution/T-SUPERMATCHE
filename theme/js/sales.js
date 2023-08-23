@@ -518,6 +518,18 @@ function view_payments(sales_id) {
   );
 }
 
+function view_livrison(sales_id) {
+  var base_url = $("#base_url").val();
+  $.post(
+    base_url + "sales/view_livrison_modal",
+    { sales_id: sales_id },
+    function (result) {
+      $(".view_livrison_modal").html("").html(result);
+      $("#view_livrison_modal").modal("toggle");
+    }
+  );
+}
+
 function save_payment(sales_id) {
   var base_url = $("#base_url").val();
 

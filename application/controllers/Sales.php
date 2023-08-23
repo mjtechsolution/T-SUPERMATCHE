@@ -56,7 +56,9 @@ class Sales extends MY_Controller
 
 	public function sales_save_and_update()
 	{
-		$this->form_validation->set_rules('sales_date', 'Sales Date', 'trim|required');
+
+
+		$this->form_validation->set_rules('reference_no', 'Sales Date', 'trim|required');
 		$this->form_validation->set_rules('customer_id', 'Customer Name', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE) {
@@ -65,6 +67,35 @@ class Sales extends MY_Controller
 		} else {
 			echo "Please Fill Compulsory(* marked) Fields.";
 		}
+	}
+
+
+	public function sales_delivery_save_and_update()
+	{
+
+
+		$this->form_validation->set_rules('sales_date', 'status', 'trim|required');
+		$this->form_validation->set_rules('reference_no_delivery', 'reference_no', 'trim|required');
+		$this->form_validation->set_rules('reference_no', 'customer_name', 'trim|required');
+
+
+
+		if ($this->form_validation->run() == TRUE) {
+			$result = $this->sales->sales_delivery_verify_save_and_update();
+			echo $result;
+		} else {
+			echo "Please Fill Compulsory(* marked) Fields.";
+		}
+	}
+
+	public function delivery($sales_id)
+	{
+		//Load model
+		$this->load->model('delivery_modal');
+		$this->permission_check('sales_add');
+		$data = $this->data;
+		$data['page_title'] = $this->lang->line('quotation_to_sales_invoice');
+		$this->load->view('delivery', $data);
 	}
 
 
@@ -193,6 +224,12 @@ class Sales extends MY_Controller
 												<a title="Sales Return" href="' . base_url() . 'sales_return/add/' . $sales->id . '">
 													<i class="fa fa-fw fa-undo text-blue"></i>Sales Return
 												</a>
+											</li>
+											
+											<li>
+												<a style="cursor:pointer" onclick="view_livrison(' . $sales->id . ')" title="' . base_url() . 'sales/delivery/' . $sales->id . '" title="AJOUTER UNE LIVRAISON" >
+													<i class="fa fa-truck  text-blue"></i>Ajouter une livraison													
+												</a>
 											</li>';
 
 			if ($this->permissions('sales_delete'))
@@ -201,9 +238,10 @@ class Sales extends MY_Controller
 													<i class="fa fa-fw fa-trash text-red"></i>Delete
 												</a>
 											</li>
-											
 										</ul>
 									</div>';
+
+
 
 			$row[] = $str2;
 
@@ -286,6 +324,7 @@ class Sales extends MY_Controller
 
 		$this->get_html_invoice($data);
 	}
+
 
 
 
@@ -382,6 +421,13 @@ class Sales extends MY_Controller
 		$this->permission_check_with_msg('sales_view');
 		$sales_id = $this->input->post('sales_id');
 		echo $this->sales->view_payments_modal($sales_id);
+	}
+
+	public function view_livrison_modal()
+	{
+		$this->permission_check_with_msg('sales_view');
+		$sales_id = $this->input->post('sales_id');
+		echo $this->sales->view_livrison_modal($sales_id);
 	}
 	public function get_customers_select_list()
 	{

@@ -122,7 +122,7 @@
          <!-- Content Header (Page header) -->
          <section class="content-header">
             <h1>
-               <?= $page_title; ?>
+               <?= $page_title; ?>hash_hkdf
                <small><?= $this->lang->line('add_or_update') ?> <?= $this->lang->line('sales') ?> Sales</small>
             </h1>
             <ol class="breadcrumb">

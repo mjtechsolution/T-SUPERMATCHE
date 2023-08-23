@@ -2,6 +2,7 @@
 <html>
 
 <head>
+
    <!-- TABLES CSS CODE -->
    <?php $this->load->view('comman/code_css.php'); ?>
    <!-- </copy> -->

@@ -293,6 +293,10 @@ $CI = &get_instance();
                   </a></li>
               <?php } ?>
 
+              <?php if ($CI->permissions('sales_view')) { ?>
+                <li class="sales-active-li"><a href="<?php echo $base_url; ?>deliverys"><i class="fa fa-list "></i> <span>List bon de livraison</span></a></li>
+              <?php } ?>
+
 
 
             </ul>
