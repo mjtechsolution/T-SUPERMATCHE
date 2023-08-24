@@ -27,19 +27,20 @@
 // Include the main TCPDF library (search for installation path).
 //require_once('tcpdf_include.php');
 
-include dirname(__DIR__).'/examples/tcpdf_include.php';
+include dirname(__DIR__) . '/examples/tcpdf_include.php';
 
-class MyPDF extends TCPDF {
+class MyPDF extends TCPDF
+{
 
     protected $last_page_flag = false;
-    
+
     public $_invoice_name = "Invoice Name";
 
     //public $_QRCODE = null;
 
     public $CI = null;
 
-    public $store =array();
+    public $store = array();
 
     public $_document_name = '';
 
@@ -58,24 +59,25 @@ class MyPDF extends TCPDF {
         parent::__construct();
         //Do your magic here
 
-        $this->CI =& get_instance();
+        $this->CI = &get_instance();
 
         $this->store = get_store_details();
 
         $this->_document_settings();
     }
 
-    public function Close() {
+    public function Close()
+    {
         $this->last_page_flag = true;
         parent::Close();
     }
 
     public function _set_header()
-    {   
+    {
 
-        $customer = $this->customer;//array()
+        $customer = $this->customer; //array()
 
-        $store = $this->store;//array()
+        $store = $this->store; //array()
 
         //Customer Records
         $state = (!empty($customer->state_id)) ? get_state_details($customer->state_id) : '';
@@ -84,24 +86,24 @@ class MyPDF extends TCPDF {
         $w = 100;
         $h = 40;
 
-        $custmer_details = '<span style="color:rgb(65, 59, 212);font-style:italic;">'.$this->CI->lang->line('bill_to').':</span>';
-        $custmer_details .= "<br><b>".$this->CI->lang->line('name')." :</b> ".$customer->customer_name;
-        $custmer_details .= "<br><b>".$this->CI->lang->line('address')." :</b> ".$customer->address;
-        $custmer_details .= "<br><b>".$this->CI->lang->line('postcode')." :</b> ".$customer->postcode;
-        $custmer_details .= "<br><b>".$this->CI->lang->line('mobile')." :</b> ".$customer->mobile;
-        $custmer_details .= "<br><b>".$this->CI->lang->line('email')." :</b> ".$customer->email;
-        $custmer_details .= "<br><b>".$this->CI->lang->line('gst_number')." :</b> ".$customer->gst_no; 
+        $custmer_details = '<span style="color:rgb(65, 59, 212);font-style:italic;">' . $this->CI->lang->line('bill_to') . ':</span>';
+        $custmer_details .= "<br><b>" . $this->CI->lang->line('name') . " :</b> " . $customer->customer_name;
+        $custmer_details .= "<br><b>" . $this->CI->lang->line('address') . " :</b> " . $customer->address;
+        $custmer_details .= "<br><b>" . $this->CI->lang->line('postcode') . " :</b> " . $customer->postcode;
+        $custmer_details .= "<br><b>" . $this->CI->lang->line('mobile') . " :</b> " . $customer->mobile;
+        $custmer_details .= "<br><b>" . $this->CI->lang->line('email') . " :</b> " . $customer->email;
+        $custmer_details .= "<br><b>" . $this->CI->lang->line('gst_number') . " :</b> " . $customer->gst_no;
 
-        $this->writeHTMLCell($w, $h, $x ='6', $y='52', $custmer_details, 1, 0, 1, true, 'J', true);
+        $this->writeHTMLCell($w, $h, $x = '6', $y = '52', $custmer_details, 1, 0, 1, true, 'J', true);
         return $this;
-    } 
+    }
 
-    public function _rtl($rtl=false)
+    public function _rtl($rtl = false)
     {
         $this->_rtl = $rtl;
 
         //Download fonts from :https://www.fontmirror.com/
-        
+
         /*$path = dirname(__DIR__).'/fonts/Garet Book 300.ttf';
         $strBNFont = TCPDF_FONTS::addTTFfont($path, 'TrueTypeUnicode', '', 32);
         
@@ -113,9 +115,9 @@ class MyPDF extends TCPDF {
         }
         exit;*/
 
-        if($rtl == true){
+        if ($rtl == true) {
             // set some language dependent data:
-            $lg = Array();
+            $lg = array();
             $lg['a_meta_charset'] = 'UTF-8';
             $lg['a_meta_dir'] = 'rtl';
             $lg['a_meta_language'] = 'fa';
@@ -123,18 +125,17 @@ class MyPDF extends TCPDF {
 
             // set some language-dependent strings (optional)
             $this->setLanguageArray($lg);
-        }
-        else{
+        } else {
             // set some language-dependent strings (optional)
-            if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
-                require_once(dirname(__FILE__).'/lang/eng.php');
+            if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
+                require_once(dirname(__FILE__) . '/lang/eng.php');
                 $this->setLanguageArray($l);
             }
         }
     }
 
     public function get_font_name()
-    {   
+    {
         /**
          * 1. English
          * 2. Russian
@@ -149,8 +150,8 @@ class MyPDF extends TCPDF {
          * English Fonts:
          * 
          * helvetica 
-        */
-        
+         */
+
         $lang_array['English'] = 'aefurat';
 
         /**
@@ -159,7 +160,7 @@ class MyPDF extends TCPDF {
          * aefurat - GOOD
          * aealarabiya
          */
-        
+
         $lang_array['Arabic'] = 'aefurat';
 
         /**
@@ -182,16 +183,13 @@ class MyPDF extends TCPDF {
         $lang_array['Russian'] = 'garetbook300';
 
 
-        if(strtoupper($this->_app_language)==strtoupper('Bangla')){
+        if (strtoupper($this->_app_language) == strtoupper('Bangla')) {
             return $lang_array['Bangla'];
-        }
-        else if(strtoupper($this->_app_language)==strtoupper('Arabic')){
+        } else if (strtoupper($this->_app_language) == strtoupper('Arabic')) {
             return $lang_array['Arabic'];
-        }
-        else if(strtoupper($this->_app_language)==strtoupper('Russian')){
+        } else if (strtoupper($this->_app_language) == strtoupper('Russian')) {
             return $lang_array['Russian'];
-        }
-        else{
+        } else {
             return $lang_array['English'];
         }
     }
@@ -201,72 +199,66 @@ class MyPDF extends TCPDF {
         $this->setFont($this->get_font_name(), '', 15);
 
         // Title
-        $this->writeHTMLCell(0, 50, $x ='', $y='8', strtoupper($this->_invoice_name), $border = 0, 1, 0, true, 'C', true);
+        $this->writeHTMLCell(0, 50, $x = '', $y = '8', strtoupper($this->_invoice_name), $border = 0, 1, 0, true, 'C', true);
         $this->Ln();
         return $this;
     }
 
     public function _get_logo()
-    {   
+    {
+        // center image name $image_file = K_PATH_IMAGES.'logo_example.jpg';
 
-        $image_file=(!empty($this->store->store_logo)) ? $this->store->store_logo : store_demo_logo();
 
-        $this->Image($image_file, $x = 5.5, $y = 16, 30, '', '', '', 'T', false, 300, '', false, false, $border =0, false, false, false);
+
+        $image_file = (!empty($this->store->store_logo)) ? base_url(get_site_logo()) : store_demo_logo();
+
+        $this->Image($image_file, $x = 10, $y = 22, 30, '', '', '', 'T', false, 300, '', false, false, $border = 0, false, false, false);
         return $this;
     }
 
     public function _get_company_details()
     {
         $store = $this->store;
-        $txt='';
-        $txt .= '<span style="font-size:16px;font-weight:500">'.$store->store_name.'</span>';
-        $txt .= '<br><span style="font-size:12px;">'.$store->address.'</span>';
+        $txt = '';
+        $txt .= '<span style="font-size:16px;font-weight:500; line-height:10px">' . $store->store_name . '</span>';
+        $txt .= '<br><span style="font-size:12px; ">' . $store->address . $store->city . $store->state . $store->postcode .   '</span>';
 
-        $address_line_2 = '';
-        if(!empty($store->city)){
-            $address_line_2 .= $store->city;
-        }
-        if(!empty($store->state)){
-            $address_line_2 .= ", ".$store->state;
-        }
-        if(!empty($store->postcode)){
-            $address_line_2 .= ", -".$store->postcode;
-        }
-            $txt .= '<br><span style="font-size:12px;">'.$address_line_2.'</span>';
 
-        $txt .= '<br><span style="font-size:12px;"><b>'.$this->CI->lang->line('mobile').' :</b>'.$store->mobile.'<b> '.$this->CI->lang->line('email').':</b> '.$store->email.'</span>';
+
+
+        $txt .= '<br><span style="font-size:12px;"><b>' . $this->CI->lang->line('mobile') . ' :</b>' . $store->mobile . '<b></span>';
+        $txt .= '<br><span style="font-size:12px;"><b>' . $this->CI->lang->line('email') . ':</b> ' . $store->email . '<b></span>';
         $txt .= '<br><span style="font-size:12px;"><b>';
-            if($this->_invoice_format=='Default'){
-               $txt .= $this->CI->lang->line('tax_number').' :</b> '.$store->vat_no; 
-            }
-            else{
-                $txt .= $this->CI->lang->line('gst_number').' :</b> '.$store->gst_no;
-            }
-        $txt .= ' <b>'.$this->CI->lang->line('website').':</b> '.$store->store_website.'</span>';
-        
+        if ($this->_invoice_format == 'Default') {
+            $txt .= $this->CI->lang->line('tax_number') . ' :</b> ' . $store->vat_no;
+        } else {
+            $txt .= $this->CI->lang->line('gst_number') . ' :</b> ' . $store->gst_no;
+        }
+        $txt .= ' <b> <br>' . $this->CI->lang->line('website') . ':</b> ' . $store->store_website . '</span>';
+
 
         $this->setFont($this->get_font_name(), '', 14, '', true);
 
-        $this->writeHTMLCell($w =135, 0, $x='38', $y='16', $txt, $border = 0, 0, 0, true, '', true);
+        $this->writeHTMLCell($w = 200, 0, $x = '50', $y = '16', $txt, $border = 0, 0, 0, true, '', true);
         return $this;
     }
     public function _get_qr()
     {
         $qr_data = $this->_get_qr_data();
-        
+
         // new style
         $style = array(
             'border' => false,
             'padding' => 0,
-            'fgcolor' => array( 38, 6, 108 ),
+            'fgcolor' => array(38, 6, 108),
             'bgcolor' => false
         );
 
         $w = $h = 30;
-        
+
         // QRCODE,H : QR-CODE Best error correction
-        $x = ($this->_rtl) ? 203 : 174;// for RTL 203
-        $this->write2DBarcode($qr_data, 'QRCODE,H', $x, $y='', $w, $h, $style, 'N');
+        $x = ($this->_rtl) ? 203 : 174; // for RTL 203
+        $this->write2DBarcode($qr_data, 'QRCODE,H', $x, $y = '', $w, $h, $style, 'N');
         //$this->Text(140, 205, 'QRCODE H - NO PADDING');
         return $this;
     }
@@ -278,25 +270,25 @@ class MyPDF extends TCPDF {
 
         $this->setFont($this->get_font_name(), '', 0.80);
 
-        $this->MultiCell('', '', $txt ='', $border =0, 'L', 1, 1, $x = '', $y = '50', true,1, true);
+        $this->MultiCell('', '', $txt = '', $border = 0, 'L', 1, 1, $x = '', $y = '50', true, 1, true);
         return $this;
     }
 
     public function _is_rtl_lang()
-    {   
+    {
         //Based on Session variable check RTL
         $lang = trim(strtoupper($this->CI->session->userdata('language')));
 
         $this->_app_language = $lang;
 
-        $rtl_languages = array(strtoupper('arabic'),strtoupper('urdu'));
+        $rtl_languages = array(strtoupper('arabic'), strtoupper('urdu'));
 
         return (in_array($lang, $rtl_languages)) ? true : false;
-
     }
 
     //Page header
-    public function Header() {
+    public function Header()
+    {
 
         //Auto find RTL language
         $this->_rtl($this->_is_rtl_lang());
@@ -316,7 +308,7 @@ class MyPDF extends TCPDF {
         $this->_get_qr();
 
         // Horizontal Line
-        $this->_get_hr(); 
+        $this->_get_hr();
 
         /*// Cusomer Details
         $this->_get_customer_details(); 
@@ -336,61 +328,106 @@ class MyPDF extends TCPDF {
 
     }
 
-    public function _get_qr_data(){
+    public function _get_qr_data()
+    {
         $store = $this->store;
         $sales = $this->sales;
         $customer = $this->customer;
 
         $str = '';
-        $str .= 'Seller Name:'.$store->store_name;
+        $str .= 'Seller Name:' . $store->store_name;
         $str .= PHP_EOL;
-        $str .= 'Buyer Name:'.$customer->customer_name;
+        $str .= 'Buyer Name:' . $customer->customer_name;
         $str .= PHP_EOL;
-        $str .= 'Buyer Tax Number:'.$store->vat_no;
+        $str .= 'Buyer Tax Number:' . $store->vat_no;
         $str .= PHP_EOL;
-        $str .= 'Invoice Number:'.$sales->sales_code;
+        $str .= 'Invoice Number:' . $sales->sales_code;
         $str .= PHP_EOL;
-        $str .= 'Date & Time:'.$sales->created_date." ".$sales->created_time;
+        $str .= 'Date & Time:' . $sales->created_date . " " . $sales->created_time;
         $str .= PHP_EOL;
-        $str .= 'TAX Total:'.store_number_format(get_sales_tax_total($sales->id));
+        $str .= 'TAX Total:' . store_number_format(get_sales_tax_total($sales->id));
         $str .= PHP_EOL;
-        $str .= 'Invoice Total:'.store_number_format($sales->grand_total);
+        $str .= 'Invoice Total:' . store_number_format($sales->grand_total);
         return $str;
     }
 
     //set footer document details
-    public function _set_document_name($value='')
+    public function _set_document_name($value = '')
     {
         $this->_document_name = $value;
     }
 
     //set footer document number
-    public function _set_document_number($value='')
+    public function _set_document_number($value = '')
     {
         $this->_document_number = $value;
     }
-    
-    //Signature Image
-    public function get_signature_image_path(){
-        $image_file=($this->store->show_signature && !empty($this->store->signature)) ? $this->store->signature : '';
 
-       // $this->Image($image_file, $x = 5.5, $y = 16, 30, '', '', '', 'T', false, 300, '', false, false, $border =0, false, false, false);
+    //Signature Image
+    public function get_signature_image_path()
+    {
+        $image_file = ($this->store->show_signature && !empty($this->store->signature)) ? $this->store->signature : '';
+
+        // $this->Image($image_file, $x = 5.5, $y = 16, 30, '', '', '', 'T', false, 300, '', false, false, $border =0, false, false, false);
         return $image_file;
     }
 
     // Page footer
-    public function Footer() {
+    public function Footer()
+    {
+        $store = $this->store;
+        $sales = $this->sales;
+
+        $this->setCellPaddings(1, 1, 1, 1);
+        $this->setFillColor(255, 255, 255);
+        $tbl3 = '<table class="table table-striped">
+        <tbody>
+            <tr nobr="true">
+                <td  style="text-align:left;font-size:11px">';
+        $tbl3 .=  $this->CI->lang->line("termsAndConditions");
+        $tbl3 .= '
+                </td>
+                <td style="text-align:right;font-size:11px">	
+                ' . $this->CI->lang->line("authorised_signatory") . '
+                </td>
+            </tr>
+            <tr nobr="true">
+                <td  style="text-align:left;font-size:11px">';
+        $tbl3 .= nl2br(html_entity_decode($sales->invoice_terms));
+        $tbl3 .= '
+                </td>
+                <td style="text-align:right;">	
+                ';
+        if (!empty($this->get_signature_image_path())) {
+            $tbl3 .= '
+    <img style="height:20px;" src="' . $this->get_signature_image_path() . '"/>
+    ';
+        };
+        $tbl3 .= '
+    </td>
+    </tr>
+                <tr>
+                <td style="text-align:center;font-size:10px" colspan="2">
+                ' . nl2br($store->sales_invoice_footer_text) . '
+                </td>
+                </tr>
+            </tbody>
+        </table>
+
+';
+        $this->writeHTMLCell('', '', $x = '', $y = -30, $tbl3, 0, 1, 1, true, 'J', true);
+
         // Position at 15 mm from bottom
-        $this->setY(-8);
+        $this->setY(-10);
         // Set font
         $this->setFont($this->get_font_name(), 'I', 8);
         // Page number
-        $this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+        $this->Cell(0, 10, 'Page ' . $this->getAliasNumPage() . '/' . $this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 
-        $this->Cell(0, 10, $this->_document_name.' : '.$this->_document_number, 0, false, 'R', 0, '', 0, false, 'T', 'M');
+        $this->Cell(0, 10, $this->_document_name . ' : ' . $this->_document_number, 0, false, 'R', 0, '', 0, false, 'T', 'M');
 
         //Last page
-        if($this->last_page_flag){
+        if ($this->last_page_flag) {
             //T&C
             //$this->_get_terms();
 
@@ -400,7 +437,6 @@ class MyPDF extends TCPDF {
             //Signature
             //$this->_get_signature();
         }
-
     }
 
     // set document information
@@ -414,21 +450,21 @@ class MyPDF extends TCPDF {
     }
 
     //Document Settings
-    public function _document_settings($value='')
+    public function _document_settings($value = '')
     {
         // set default header data
-        $this->setHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 048', PDF_HEADER_STRING);
+        $this->setHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE . ' 048', PDF_HEADER_STRING);
 
         // set header and footer fonts
-        $this->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-        $this->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+        $this->setHeaderFont(array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+        $this->setFooterFont(array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 
         // set default monospaced font
         $this->setDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
         // set margins
-         $this->setMargins($PDF_MARGIN_LEFT=5, $PDF_MARGIN_TOP=52, $PDF_MARGIN_RIGHT=5);
-         $this->setHeaderMargin(PDF_MARGIN_HEADER);
+        $this->setMargins($PDF_MARGIN_LEFT = 5, $PDF_MARGIN_TOP = 52, $PDF_MARGIN_RIGHT = 5);
+        $this->setHeaderMargin(PDF_MARGIN_HEADER);
         $this->setFooterMargin(PDF_MARGIN_FOOTER);
 
         // set auto page breaks
