@@ -209,7 +209,7 @@ class Sales extends MY_Controller
 			if ($this->permissions('sales_add') || $this->permissions('sales_edit'))
 				$str2 .= '
 											<li>
-												<a title="Download PDF" target="_blank" href="' . base_url() . 'pdf/sales/' . $sales->id . '">
+												<a title="Download PDF" target="_blank" href="' . base_url() . 'sales/print_sales/' . $sales->id . '">
 													<i class="fa fa-fw fa-file-pdf-o text-blue"></i>PDF
 												</a>
 											</li>
@@ -482,5 +482,35 @@ class Sales extends MY_Controller
 	public function return_quotation_list($quotation_id)
 	{
 		echo $this->sales->return_quotation_list($quotation_id);
+	}
+
+	public function print_sales($sales_id)
+	{
+
+		if (!$this->permissions('sales_add') && !$this->permissions('sales_edit')) {
+			$this->show_access_denied_page();
+		}
+		$data = $this->data;
+		$data = array_merge($data, array('sales_id' => $sales_id));
+		$data['page_title'] = "Facture de vente";
+
+		$this->load->view('print-sales', $data);
+		// Get output html
+		$html = $this->output->get_output();
+		$options = new Options();
+		$options->set('isRemoteEnabled', true);
+		$dompdf = new Dompdf($options);
+
+		// Load HTML content
+		$dompdf->loadHtml($html, 'UTF-8');
+
+		// (Optional) Setup the paper size and orientation
+		$dompdf->setPaper('A4', 'portrait');/*landscape or portrait*/
+
+		// Render the HTML as PDF
+		$dompdf->render();
+
+		// Output the generated PDF (1 = download and 0 = preview)
+		$dompdf->stream("Quotation_$sales_id-" . date('M') . "_" . date('d') . "_" . date('Y'), array("Attachment" => 0));
 	}
 }

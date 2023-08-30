@@ -558,7 +558,7 @@
 
           <div class="col-xs-6 text-right">
 
-            <a href="<?php echo $base_url; ?>pdf/sales/<?php echo  $sales_id ?>" target="_blank" class="btn btn-primary">
+            <a href="<?php echo $base_url; ?>sales/print_sales/<?php echo  $sales_id ?>" target="_blank" class="btn btn-primary">
               <i class="fa fa-file-pdf-o"></i>
               PDF
             </a>

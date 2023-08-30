@@ -78,6 +78,28 @@
                                              </div>
                                           </div>
                                        </div>
+                                       <div class="col-md-5"></div>
+                                       <div class="col-md-5">
+                                          <div class="form-group">
+                                             <label for="address" class="col-sm-4 control-label">Logo de facture</label>
+                                             <div class="col-sm-8">
+                                                <input type="file" id="logo_facture" name="logo_facture">
+                                                <span id="logo_facture_msg" style="display:block;" class="text-danger">Max Width/Height: 300px * 300px & Size: 300px </span>
+                                             </div>
+                                          </div>
+                                          <?php
+                                          if (empty($logo)) {
+                                             $logo_facture = base_url('uploads/no_logo/nologo.png');
+                                          } else {
+                                             $logo_facture = base_url(get_facture_logo());
+                                          }
+                                          ?>
+                                          <div class="form-group">
+                                             <div class="col-sm-8 col-sm-offset-4">
+                                                <img class='img-responsive' style='border:3px solid #d2d6de;' src="<?php echo $logo_facture; ?>">
+                                             </div>
+                                          </div>
+                                       </div>
                                        <!-- ########### -->
                                     </div>
                                  </div>

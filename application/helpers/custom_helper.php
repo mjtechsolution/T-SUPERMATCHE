@@ -48,6 +48,11 @@ function get_site_logo()
   $CI = &get_instance();
   return $CI->db->query("select logo from db_sitesettings")->row()->logo;
 }
+function get_facture_logo()
+{
+  $CI = &get_instance();
+  return $CI->db->query("select logo_facture from db_sitesettings")->row()->logo_facture;
+}
 function sql_mode()
 {
   $CI = &get_instance();

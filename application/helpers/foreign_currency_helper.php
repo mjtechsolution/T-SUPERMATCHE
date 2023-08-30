@@ -9,7 +9,7 @@ function foreign_currency($fig, $currency_code)
 
     $decimal = (int)explode('.', $figure)[1];
 
-    $sub_part = $decimal > 0 ? (" " . ($decimal <= 19 ? handleXDigits($decimal) : handleTwoDigits($decimal)) . " " . getCurrencyCodeUnit($currency_code)['fraction']) : "";
+    $sub_part = $decimal > 0 ? (" et " . ($decimal <= 19 ? handleXDigits($decimal) : handleTwoDigits($decimal)) . " Centimes " . getCurrencyCodeUnit($currency_code)['fraction']) : "";
 
     if ($number == 0) {
         $main_word = "Zero";
@@ -30,7 +30,7 @@ function foreign_currency($fig, $currency_code)
     }
 
 
-    return $main_word . " " . getCurrencyCodeUnit($currency_code)['main'] . $sub_part;
+    return $main_word . " Dirhams " . getCurrencyCodeUnit($currency_code)['main'] . $sub_part;
 }
 
 
@@ -181,7 +181,7 @@ function handleTwoDigits($digits)
         } else {
             // Handle other tens (20-69 and 80-89)
             if ($tens > 1) {
-                $tens_word .= '-' . xml()['x'][$units];
+                $tens_word .= ' ' . xml()['x'][$units];
             } else {
                 $tens_word = xml()['x'][$units];
             }
@@ -197,8 +197,11 @@ function handleHundreds($digits)
 
     $first_digit_word = handleXDigits(substr($digits, 0, 1));
     $other_two_digits_word = handleTwoDigits(substr($digits, 1));
+    if ($first_digit_word == "Un") {
+        $first_digit_word = "";
+    }
 
-    return (trim($first_digit_word) ? $first_digit_word . " Cent" : "") . (trim($other_two_digits_word) ? " et {$other_two_digits_word}" : "");
+    return (trim($first_digit_word) ? $first_digit_word . " Cent" : "Cent") . (trim($other_two_digits_word) ? " et {$other_two_digits_word}" : "");
 }
 
 
@@ -212,9 +215,15 @@ function handleThousands($digits)
     $dred = substr($digits, -3); //get last three digits
     $dred_word = handleHundreds($dred);
 
+
+
     $th_word = strlen($th) == 3 ? handleHundreds($th) : (strlen($th) == 2 ? handleTwoDigits($th) : handleXDigits($th));
 
-    return (trim($th_word) && trim($dred_word) ? $th_word . " Mille " : (trim($th_word) ? $th_word . " Mille" : "")) . (trim($dred_word) ? "{$dred_word}" : "");
+
+    if ($th_word == "Un") {
+        $th_word = "";
+    }
+    return (trim($th_word) && trim($dred_word) ? $th_word . " Mille " : (trim($th_word) ? $th_word . " Mille " : " Mille ")) . (trim($dred_word) ? "{$dred_word}" : "");
 }
 
 
@@ -228,9 +237,11 @@ function handleMillions($digits)
     $mill = substr($digits, 0, -6); //get everything excluding the last six digits.
     $mill_word = strlen($mill) == 3 ? handleHundreds($mill) : (strlen($mill) == 2 ? handleTwoDigits($mill) : handleXDigits($mill));
 
-    return (trim($mill_word) && trim($th_word) ? $mill_word . " Million, " : (trim($mill_word) ? $mill_word . " 
-        Million
-    " : "")) . (trim($th_word) ? "{$th_word}" : "");
+
+    if ($mill_word == "Un") {
+        $mill_word = "";
+    }
+    return (trim($mill_word) && trim($th_word) ? $mill_word . " Million, " : (trim($mill_word) ? $mill_word . "  Million " : " Million ")) . (trim($th_word) ? "{$th_word}" : "");
 }
 
 

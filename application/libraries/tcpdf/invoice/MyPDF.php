@@ -210,7 +210,7 @@ class MyPDF extends TCPDF
 
 
 
-        $image_file = (!empty($this->store->store_logo)) ? base_url(get_site_logo()) : store_demo_logo();
+        $image_file = (!empty($this->store->store_logo)) ? base_url(get_facture_logo()) : store_demo_logo();
 
         $this->Image($image_file, $x = 10, $y = 22, 30, '', '', '', 'T', false, 300, '', false, false, $border = 0, false, false, false);
         return $this;
@@ -220,12 +220,8 @@ class MyPDF extends TCPDF
     {
         $store = $this->store;
         $txt = '';
-        $txt .= '<span style="font-size:16px;font-weight:500; line-height:10px">' . $store->store_name . '</span>';
-        $txt .= '<br><span style="font-size:12px; ">' . $store->address . $store->city . $store->state . $store->postcode .   '</span>';
-
-
-
-
+        $txt .= '<h3>' . $store->store_name . '</h3>';
+        $txt .= '<p style="font-size:12px;width:200px;">' . $store->address . $store->city . $store->state . $store->postcode .   '</p>';
         $txt .= '<br><span style="font-size:12px;"><b>' . $this->CI->lang->line('mobile') . ' :</b>' . $store->mobile . '<b></span>';
         $txt .= '<br><span style="font-size:12px;"><b>' . $this->CI->lang->line('email') . ':</b> ' . $store->email . '<b></span>';
         $txt .= '<br><span style="font-size:12px;"><b>';
@@ -296,7 +292,7 @@ class MyPDF extends TCPDF
         $this->_document_details();
 
         // Title
-        $this->_get_invoice_title();
+        // $this->_get_invoice_title();
 
         // Logo
         $this->_get_logo();
