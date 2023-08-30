@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Aug 23, 2023 at 12:38 PM
--- Server version: 8.0.31
--- PHP Version: 7.4.33
+-- Host: 127.0.0.1
+-- Generation Time: Aug 31, 2023 at 01:49 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,43 +27,36 @@ SET time_zone = "+00:00";
 -- Table structure for table `ac_accounts`
 --
 
-DROP TABLE IF EXISTS `ac_accounts`;
-CREATE TABLE IF NOT EXISTS `ac_accounts` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `count_id` int DEFAULT NULL,
-  `store_id` int DEFAULT NULL,
-  `parent_id` int DEFAULT NULL,
-  `sort_code` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `account_name` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `account_code` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+CREATE TABLE `ac_accounts` (
+  `id` int(11) NOT NULL,
+  `count_id` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `sort_code` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `account_name` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `account_code` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
   `balance` double(20,4) DEFAULT NULL,
-  `note` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
-  `created_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `note` text CHARACTER SET latin1 DEFAULT NULL,
+  `created_by` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `system_ip` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `delete_bit` int DEFAULT '0',
-  `account_selection_name` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `paymenttypes_id` int DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
-  `supplier_id` int DEFAULT NULL,
-  `expense_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `paymenttypes_id` (`paymenttypes_id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `supplier_id` (`supplier_id`),
-  KEY `expense_id` (`expense_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_time` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `system_ip` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `system_name` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `delete_bit` int(11) DEFAULT 0,
+  `account_selection_name` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `paymenttypes_id` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `supplier_id` int(11) DEFAULT NULL,
+  `expense_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `ac_accounts`
 --
 
 INSERT INTO `ac_accounts` (`id`, `count_id`, `store_id`, `parent_id`, `sort_code`, `account_name`, `account_code`, `balance`, `note`, `created_by`, `created_date`, `created_time`, `system_ip`, `system_name`, `status`, `delete_bit`, `account_selection_name`, `paymenttypes_id`, `customer_id`, `supplier_id`, `expense_id`) VALUES
-(1, 1, 2, 0, '3', 'Compte Principale', 'AC0001', 97552.0000, '', 'SARA', '2023-05-25', '08:54:52 pm', '::1', 'DESKTOP-N3UE050', 1, 0, NULL, NULL, NULL, NULL, NULL),
+(1, 1, 2, 0, '3', 'Compte Principale', 'AC0001', 97577.0000, '', 'SARA', '2023-05-25', '08:54:52 pm', '::1', 'DESKTOP-N3UE050', 1, 0, NULL, NULL, NULL, NULL, NULL),
 (2, 2, 2, 1, '3.2', 'Compte Rabat', 'AC0002', 2017.0000, '', 'SARA', '2023-07-27', '10:58:21 am', '127.0.0.1', 'DESKTOP-UB6GIRK', 1, 0, NULL, NULL, NULL, NULL, NULL),
 (3, 3, 2, 0, '3', 'Compte banque BP', 'AC0003', -100000.0000, '', 'SARA', '2023-07-28', '01:25:00 pm', '127.0.0.1', 'DESKTOP-UB6GIRK', 1, 0, NULL, NULL, NULL, NULL, NULL),
 (4, 4, 2, 1, '3.2', 'Compte Casablanca', 'AC0004', 0.0000, '', 'SARA', '2023-07-28', '01:25:17 pm', '127.0.0.1', 'DESKTOP-UB6GIRK', 1, 0, NULL, NULL, NULL, NULL, NULL);
@@ -74,27 +67,22 @@ INSERT INTO `ac_accounts` (`id`, `count_id`, `store_id`, `parent_id`, `sort_code
 -- Table structure for table `ac_moneydeposits`
 --
 
-DROP TABLE IF EXISTS `ac_moneydeposits`;
-CREATE TABLE IF NOT EXISTS `ac_moneydeposits` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
+CREATE TABLE `ac_moneydeposits` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
   `deposit_date` date DEFAULT NULL,
-  `reference_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `debit_account_id` int DEFAULT NULL,
-  `credit_account_id` int DEFAULT NULL,
+  `reference_no` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `debit_account_id` int(11) DEFAULT NULL,
+  `credit_account_id` int(11) DEFAULT NULL,
   `amount` double(20,4) DEFAULT NULL,
-  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created_date` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `from_account_id` (`debit_account_id`),
-  KEY `to_account_id` (`credit_account_id`),
-  KEY `db_moneydeposits_ibfk_3` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `note` text CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_by` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_date` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_time` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `system_ip` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `system_name` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `ac_moneydeposits`
@@ -110,28 +98,23 @@ INSERT INTO `ac_moneydeposits` (`id`, `store_id`, `deposit_date`, `reference_no`
 -- Table structure for table `ac_moneytransfer`
 --
 
-DROP TABLE IF EXISTS `ac_moneytransfer`;
-CREATE TABLE IF NOT EXISTS `ac_moneytransfer` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `count_id` int DEFAULT NULL,
-  `transfer_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+CREATE TABLE `ac_moneytransfer` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `count_id` int(11) DEFAULT NULL,
+  `transfer_code` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
   `transfer_date` date DEFAULT NULL,
-  `reference_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `debit_account_id` int DEFAULT NULL,
-  `credit_account_id` int DEFAULT NULL,
+  `reference_no` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `debit_account_id` int(11) DEFAULT NULL,
+  `credit_account_id` int(11) DEFAULT NULL,
   `amount` double(20,4) DEFAULT NULL,
-  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created_date` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `from_account_id` (`debit_account_id`),
-  KEY `to_account_id` (`credit_account_id`),
-  KEY `db_moneytransfer_ibfk_3` (`store_id`)
+  `note` text CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_by` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_date` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_time` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `system_ip` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `system_name` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -140,46 +123,31 @@ CREATE TABLE IF NOT EXISTS `ac_moneytransfer` (
 -- Table structure for table `ac_transactions`
 --
 
-DROP TABLE IF EXISTS `ac_transactions`;
-CREATE TABLE IF NOT EXISTS `ac_transactions` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `payment_code` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+CREATE TABLE `ac_transactions` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `payment_code` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
   `transaction_date` date DEFAULT NULL,
-  `transaction_type` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `debit_account_id` int DEFAULT NULL,
-  `credit_account_id` int DEFAULT NULL,
+  `transaction_type` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `debit_account_id` int(11) DEFAULT NULL,
+  `credit_account_id` int(11) DEFAULT NULL,
   `debit_amt` double(20,4) DEFAULT NULL,
   `credit_amt` double(20,4) DEFAULT NULL,
-  `note` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
-  `created_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `note` text CHARACTER SET latin1 DEFAULT NULL,
+  `created_by` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `ref_accounts_id` int DEFAULT NULL COMMENT 'reference table',
-  `ref_moneytransfer_id` int DEFAULT NULL COMMENT 'reference table',
-  `ref_moneydeposits_id` int DEFAULT NULL COMMENT 'reference table',
-  `ref_salespayments_id` int DEFAULT NULL,
-  `ref_salespaymentsreturn_id` int DEFAULT NULL,
-  `ref_purchasepayments_id` int DEFAULT NULL,
-  `ref_purchasepaymentsreturn_id` int DEFAULT NULL,
-  `ref_expense_id` int DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
-  `supplier_id` int DEFAULT NULL,
-  `short_code` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `journal_id` (`transaction_type`),
-  KEY `account_id` (`debit_account_id`),
-  KEY `store_id` (`store_id`),
-  KEY `ac_accounts_id` (`ref_accounts_id`),
-  KEY `ac_moneytransfer_id` (`ref_moneytransfer_id`),
-  KEY `ac_moneydeposits_id` (`ref_moneydeposits_id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `ref_salespayments_id` (`ref_salespayments_id`),
-  KEY `ref_purchasepayments_id` (`ref_purchasepayments_id`),
-  KEY `ref_purchasepaymentsreturn_id` (`ref_purchasepaymentsreturn_id`),
-  KEY `ac_transactions_ibfk_9` (`ref_salespaymentsreturn_id`),
-  KEY `supplier_id` (`supplier_id`),
-  KEY `ref_expense_id` (`ref_expense_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=843 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `ref_accounts_id` int(11) DEFAULT NULL COMMENT 'reference table',
+  `ref_moneytransfer_id` int(11) DEFAULT NULL COMMENT 'reference table',
+  `ref_moneydeposits_id` int(11) DEFAULT NULL COMMENT 'reference table',
+  `ref_salespayments_id` int(11) DEFAULT NULL,
+  `ref_salespaymentsreturn_id` int(11) DEFAULT NULL,
+  `ref_purchasepayments_id` int(11) DEFAULT NULL,
+  `ref_purchasepaymentsreturn_id` int(11) DEFAULT NULL,
+  `ref_expense_id` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `supplier_id` int(11) DEFAULT NULL,
+  `short_code` varchar(50) CHARACTER SET latin1 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `ac_transactions`
@@ -198,7 +166,8 @@ INSERT INTO `ac_transactions` (`id`, `store_id`, `payment_code`, `transaction_da
 (839, 2, '', '2023-07-28', 'DEPOSIT', 3, 1, 100000.0000, 100000.0000, '', 'SARA', '2023-07-28', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (840, 2, 'SP0087', '2022-08-09', 'SALES PAYMENT', NULL, 1, NULL, 3.0000, 'Paid By Cash', 'SARA', '2023-07-28', NULL, NULL, NULL, 313, NULL, NULL, NULL, NULL, 2, NULL, NULL),
 (841, 2, '', '2023-07-28', 'DEPOSIT', 1, 2, 2000.0000, 2000.0000, '', 'SARA', '2023-07-28', NULL, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(842, 2, 'XP0002', '2023-07-28', 'EXPENSE PAYMENT', 1, NULL, 500.0000, NULL, '', 'SARA', '2023-07-28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL);
+(842, 2, 'XP0002', '2023-07-28', 'EXPENSE PAYMENT', 1, NULL, 500.0000, NULL, '', 'SARA', '2023-07-28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
+(843, 2, 'SP0093', '2023-08-30', 'SALES PAYMENT', NULL, 1, NULL, 25.0000, '', 'SARA', '2023-08-30', NULL, NULL, NULL, 382, NULL, NULL, NULL, NULL, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -206,34 +175,29 @@ INSERT INTO `ac_transactions` (`id`, `store_id`, `payment_code`, `transaction_da
 -- Table structure for table `bd_delivery`
 --
 
-DROP TABLE IF EXISTS `bd_delivery`;
-CREATE TABLE IF NOT EXISTS `bd_delivery` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `warehouse_id` int DEFAULT NULL,
-  `count_id` int DEFAULT NULL COMMENT 'Use to create quotation Code',
+CREATE TABLE `bd_delivery` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `warehouse_id` int(11) DEFAULT NULL,
+  `count_id` int(11) DEFAULT NULL COMMENT 'Use to create quotation Code',
   `delivery_code` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reference_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reference_no_delivery` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reference_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reference_no_delivery` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `delivery_date` date DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
-  `delivered_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `received_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `note` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `delivered_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `received_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `note` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Attachement` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Attachement` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_delivery` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT 'Livré',
   `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sales_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `warehouse_id` (`warehouse_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `sales_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `bd_delivery`
@@ -253,13 +217,11 @@ INSERT INTO `bd_delivery` (`id`, `store_id`, `warehouse_id`, `count_id`, `delive
 -- Table structure for table `ci_sessions`
 --
 
-DROP TABLE IF EXISTS `ci_sessions`;
-CREATE TABLE IF NOT EXISTS `ci_sessions` (
-  `id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `timestamp` int UNSIGNED NOT NULL DEFAULT '0',
-  `data` blob NOT NULL,
-  KEY `ci_sessions_timestamp` (`timestamp`)
+CREATE TABLE `ci_sessions` (
+  `id` varchar(128) CHARACTER SET utf8mb4 NOT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 NOT NULL,
+  `timestamp` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -286,7 +248,14 @@ INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('5vaijm3glgu3m8t49pd7vi00ijmvbjr3', '::1', 1692793204, 0x5f5f63695f6c6173745f726567656e65726174657c693a313639323739333230343b63757272656e63797c733a323a224448223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a303a22223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b646563696d616c737c733a313a2232223b7174795f646563696d616c737c733a313a2232223b73746f72655f6e616d657c733a31343a224269626c696f2054415953534952223b696e765f757365726e616d657c733a343a2253415241223b757365725f6c6e616d657c733a343a2253414944223b696e765f7573657269647c733a313a2232223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2232223b726f6c655f6e616d657c733a31313a2253746f72652041646d696e223b73746f72655f69647c733a313a2232223b656d61696c7c733a31383a227361726140746179737369722e636c6f7564223b6c616e67756167657c733a363a224672656e6368223b6c616e67756167655f69647c733a313a2236223b),
 ('5jvbmm3are6voal1fbjdpmbknbt5t446', '::1', 1692793553, 0x5f5f63695f6c6173745f726567656e65726174657c693a313639323739333535333b63757272656e63797c733a323a224448223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a303a22223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b646563696d616c737c733a313a2232223b7174795f646563696d616c737c733a313a2232223b73746f72655f6e616d657c733a31343a224269626c696f2054415953534952223b696e765f757365726e616d657c733a343a2253415241223b757365725f6c6e616d657c733a343a2253414944223b696e765f7573657269647c733a313a2232223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2232223b726f6c655f6e616d657c733a31313a2253746f72652041646d696e223b73746f72655f69647c733a313a2232223b656d61696c7c733a31383a227361726140746179737369722e636c6f7564223b6c616e67756167657c733a363a224672656e6368223b6c616e67756167655f69647c733a313a2236223b),
 ('0roc54aqtdrm5p6u258f47tb3gc0mkrf', '::1', 1692793863, 0x5f5f63695f6c6173745f726567656e65726174657c693a313639323739333836333b63757272656e63797c733a323a224448223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a303a22223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b646563696d616c737c733a313a2232223b7174795f646563696d616c737c733a313a2232223b73746f72655f6e616d657c733a31343a224269626c696f2054415953534952223b696e765f757365726e616d657c733a343a2253415241223b757365725f6c6e616d657c733a343a2253414944223b696e765f7573657269647c733a313a2232223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2232223b726f6c655f6e616d657c733a31313a2253746f72652041646d696e223b73746f72655f69647c733a313a2232223b656d61696c7c733a31383a227361726140746179737369722e636c6f7564223b6c616e67756167657c733a363a224672656e6368223b6c616e67756167655f69647c733a313a2236223b),
-('jp1tup033otndj7g6725ckc7k89tfl73', '::1', 1692793865, 0x5f5f63695f6c6173745f726567656e65726174657c693a313639323739333836333b63757272656e63797c733a323a224448223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a303a22223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b646563696d616c737c733a313a2232223b7174795f646563696d616c737c733a313a2232223b73746f72655f6e616d657c733a31343a224269626c696f2054415953534952223b696e765f757365726e616d657c733a343a2253415241223b757365725f6c6e616d657c733a343a2253414944223b696e765f7573657269647c733a313a2232223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2232223b726f6c655f6e616d657c733a31313a2253746f72652041646d696e223b73746f72655f69647c733a313a2232223b656d61696c7c733a31383a227361726140746179737369722e636c6f7564223b6c616e67756167657c733a363a224672656e6368223b6c616e67756167655f69647c733a313a2236223b);
+('jp1tup033otndj7g6725ckc7k89tfl73', '::1', 1692793865, 0x5f5f63695f6c6173745f726567656e65726174657c693a313639323739333836333b63757272656e63797c733a323a224448223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a303a22223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b646563696d616c737c733a313a2232223b7174795f646563696d616c737c733a313a2232223b73746f72655f6e616d657c733a31343a224269626c696f2054415953534952223b696e765f757365726e616d657c733a343a2253415241223b757365725f6c6e616d657c733a343a2253414944223b696e765f7573657269647c733a313a2232223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2232223b726f6c655f6e616d657c733a31313a2253746f72652041646d696e223b73746f72655f69647c733a313a2232223b656d61696c7c733a31383a227361726140746179737369722e636c6f7564223b6c616e67756167657c733a363a224672656e6368223b6c616e67756167655f69647c733a313a2236223b),
+('5oq7g4jqo1doc4md4f615aa62aoc2k81', '::1', 1693435143, 0x5f5f63695f6c6173745f726567656e65726174657c693a313639333433353134333b63757272656e63797c733a323a224448223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a303a22223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b646563696d616c737c733a313a2232223b7174795f646563696d616c737c733a313a2232223b73746f72655f6e616d657c733a31343a224269626c696f2054415953534952223b696e765f757365726e616d657c733a343a2253415241223b757365725f6c6e616d657c733a343a2253414944223b696e765f7573657269647c733a313a2232223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2232223b726f6c655f6e616d657c733a31313a2253746f72652041646d696e223b73746f72655f69647c733a313a2232223b656d61696c7c733a31383a227361726140746179737369722e636c6f7564223b6c616e67756167657c733a363a224672656e6368223b6c616e67756167655f69647c733a313a2236223b),
+('6dqphom7i7f9fgnbtuarmc5faccin86j', '::1', 1693435445, 0x5f5f63695f6c6173745f726567656e65726174657c693a313639333433353434353b63757272656e63797c733a323a224448223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a303a22223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b646563696d616c737c733a313a2232223b7174795f646563696d616c737c733a313a2232223b73746f72655f6e616d657c733a31343a224269626c696f2054415953534952223b696e765f757365726e616d657c733a343a2253415241223b757365725f6c6e616d657c733a343a2253414944223b696e765f7573657269647c733a313a2232223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2232223b726f6c655f6e616d657c733a31313a2253746f72652041646d696e223b73746f72655f69647c733a313a2232223b656d61696c7c733a31383a227361726140746179737369722e636c6f7564223b6c616e67756167657c733a363a224672656e6368223b6c616e67756167655f69647c733a313a2236223b),
+('acq7bnh1notks8riocjd0ott9cqu0oda', '::1', 1693436310, 0x5f5f63695f6c6173745f726567656e65726174657c693a313639333433363331303b63757272656e63797c733a323a224448223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a303a22223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b646563696d616c737c733a313a2232223b7174795f646563696d616c737c733a313a2232223b73746f72655f6e616d657c733a31343a224269626c696f2054415953534952223b696e765f757365726e616d657c733a343a2253415241223b757365725f6c6e616d657c733a343a2253414944223b696e765f7573657269647c733a313a2232223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2232223b726f6c655f6e616d657c733a31313a2253746f72652041646d696e223b73746f72655f69647c733a313a2232223b656d61696c7c733a31383a227361726140746179737369722e636c6f7564223b6c616e67756167657c733a363a224672656e6368223b6c616e67756167655f69647c733a313a2236223b),
+('td703hfkr1v86rhh6gk43k6i4m54ua7i', '::1', 1693437644, 0x5f5f63695f6c6173745f726567656e65726174657c693a313639333433373634343b63757272656e63797c733a323a224448223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a303a22223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b646563696d616c737c733a313a2232223b7174795f646563696d616c737c733a313a2232223b73746f72655f6e616d657c733a31343a224269626c696f2054415953534952223b696e765f757365726e616d657c733a343a2253415241223b757365725f6c6e616d657c733a343a2253414944223b696e765f7573657269647c733a313a2232223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2232223b726f6c655f6e616d657c733a31313a2253746f72652041646d696e223b73746f72655f69647c733a313a2232223b656d61696c7c733a31383a227361726140746179737369722e636c6f7564223b6c616e67756167657c733a363a224672656e6368223b6c616e67756167655f69647c733a313a2236223b),
+('2ka87eg01ib4lqqc388cljg1bup486v2', '::1', 1693438214, 0x5f5f63695f6c6173745f726567656e65726174657c693a313639333433383231343b63757272656e63797c733a323a224448223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a303a22223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b646563696d616c737c733a313a2232223b7174795f646563696d616c737c733a313a2232223b73746f72655f6e616d657c733a31343a224269626c696f2054415953534952223b696e765f757365726e616d657c733a343a2253415241223b757365725f6c6e616d657c733a343a2253414944223b696e765f7573657269647c733a313a2232223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2232223b726f6c655f6e616d657c733a31313a2253746f72652041646d696e223b73746f72655f69647c733a313a2232223b656d61696c7c733a31383a227361726140746179737369722e636c6f7564223b6c616e67756167657c733a363a224672656e6368223b6c616e67756167655f69647c733a313a2236223b),
+('k9jmcgq9ed5b6k56r3egr7gm7ra1ai31', '::1', 1693438908, 0x5f5f63695f6c6173745f726567656e65726174657c693a313639333433383930383b63757272656e63797c733a323a224448223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a303a22223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b646563696d616c737c733a313a2232223b7174795f646563696d616c737c733a313a2232223b73746f72655f6e616d657c733a31343a224269626c696f2054415953534952223b696e765f757365726e616d657c733a343a2253415241223b757365725f6c6e616d657c733a343a2253414944223b696e765f7573657269647c733a313a2232223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2232223b726f6c655f6e616d657c733a31313a2253746f72652041646d696e223b73746f72655f69647c733a313a2232223b656d61696c7c733a31383a227361726140746179737369722e636c6f7564223b6c616e67756167657c733a363a224672656e6368223b6c616e67756167655f69647c733a313a2236223b),
+('ju70n35839naj4jqb503i4t79idmd90e', '::1', 1693438997, 0x5f5f63695f6c6173745f726567656e65726174657c693a313639333433383930383b63757272656e63797c733a323a224448223b63757272656e63795f706c6163656d656e747c733a353a225269676874223b63757272656e63795f636f64657c733a303a22223b766965775f646174657c733a31303a2264642d6d6d2d79797979223b766965775f74696d657c733a323a223132223b646563696d616c737c733a313a2232223b7174795f646563696d616c737c733a313a2232223b73746f72655f6e616d657c733a31343a224269626c696f2054415953534952223b696e765f757365726e616d657c733a343a2253415241223b757365725f6c6e616d657c733a343a2253414944223b696e765f7573657269647c733a313a2232223b6c6f676765645f696e7c623a313b726f6c655f69647c733a313a2232223b726f6c655f6e616d657c733a31313a2253746f72652041646d696e223b73746f72655f69647c733a313a2232223b656d61696c7c733a31383a227361726140746179737369722e636c6f7564223b6c616e67756167657c733a363a224672656e6368223b6c616e67756167655f69647c733a313a2236223b);
 
 -- --------------------------------------------------------
 
@@ -294,23 +263,20 @@ INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 -- Table structure for table `db_bankdetails`
 --
 
-DROP TABLE IF EXISTS `db_bankdetails`;
-CREATE TABLE IF NOT EXISTS `db_bankdetails` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `country_id` int DEFAULT NULL,
-  `holder_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bank_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `branch_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'IFSC or Bank Code',
-  `account_type` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `account_number` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `other_details` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_bankdetails` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `holder_name` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bank_name` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `branch_name` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'IFSC or Bank Code',
+  `account_type` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `account_number` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `other_details` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_bankdetails`
@@ -325,17 +291,14 @@ INSERT INTO `db_bankdetails` (`id`, `store_id`, `country_id`, `holder_name`, `ba
 -- Table structure for table `db_brands`
 --
 
-DROP TABLE IF EXISTS `db_brands`;
-CREATE TABLE IF NOT EXISTS `db_brands` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `brand_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `brand_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=385 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_brands` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `brand_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `brand_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_brands`
@@ -350,19 +313,16 @@ INSERT INTO `db_brands` (`id`, `store_id`, `brand_code`, `brand_name`, `descript
 -- Table structure for table `db_category`
 --
 
-DROP TABLE IF EXISTS `db_category`;
-CREATE TABLE IF NOT EXISTS `db_category` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `count_id` int DEFAULT NULL COMMENT 'Use to create category Code',
-  `category_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `category_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `company_id` int DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_category` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `count_id` int(11) DEFAULT NULL COMMENT 'Use to create category Code',
+  `category_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_category`
@@ -402,21 +362,19 @@ INSERT INTO `db_category` (`id`, `store_id`, `count_id`, `category_code`, `categ
 -- Table structure for table `db_cobpayments`
 --
 
-DROP TABLE IF EXISTS `db_cobpayments`;
-CREATE TABLE IF NOT EXISTS `db_cobpayments` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `customer_id` int DEFAULT NULL,
+CREATE TABLE `db_cobpayments` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) DEFAULT NULL,
   `payment_date` date DEFAULT NULL,
-  `payment_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payment` double(10,2) DEFAULT NULL,
-  `payment_note` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_note` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_time` time DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -425,43 +383,42 @@ CREATE TABLE IF NOT EXISTS `db_cobpayments` (
 -- Table structure for table `db_company`
 --
 
-DROP TABLE IF EXISTS `db_company`;
-CREATE TABLE IF NOT EXISTS `db_company` (
+CREATE TABLE `db_company` (
   `id` double DEFAULT NULL,
-  `company_code` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `company_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `company_website` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mobile` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `website` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `company_logo` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `logo` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `upi_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `upi_code` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `country` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `postcode` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gst_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `vat_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pan_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bank_details` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `cid` int DEFAULT NULL,
-  `category_init` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `item_init` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
-  `supplier_init` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
-  `purchase_init` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
-  `purchase_return_init` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `customer_init` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
-  `sales_init` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
-  `sales_return_init` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `expense_init` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `invoice_view` int DEFAULT NULL COMMENT '1=Standard,2=Indian GST',
-  `status` int DEFAULT NULL,
-  `sms_status` int DEFAULT NULL COMMENT '1=Enable 0=Disable',
-  `sales_terms_and_conditions` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
+  `company_code` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_name` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_website` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `website` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_logo` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `upi_id` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `upi_code` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `postcode` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gst_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `vat_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pan_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bank_details` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cid` int(11) DEFAULT NULL,
+  `category_init` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `item_init` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
+  `supplier_init` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
+  `purchase_init` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
+  `purchase_return_init` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_init` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
+  `sales_init` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
+  `sales_return_init` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `expense_init` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `invoice_view` int(11) DEFAULT NULL COMMENT '1=Standard,2=Indian GST',
+  `status` int(11) DEFAULT NULL,
+  `sms_status` int(11) DEFAULT NULL COMMENT '1=Enable 0=Disable',
+  `sales_terms_and_conditions` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -477,14 +434,12 @@ INSERT INTO `db_company` (`id`, `company_code`, `company_name`, `company_website
 -- Table structure for table `db_country`
 --
 
-DROP TABLE IF EXISTS `db_country`;
-CREATE TABLE IF NOT EXISTS `db_country` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `country` varchar(4050) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_country` (
+  `id` int(11) NOT NULL,
+  `country` varchar(4050) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `added_on` date DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_country`
@@ -705,25 +660,22 @@ INSERT INTO `db_country` (`id`, `country`, `added_on`, `status`) VALUES
 -- Table structure for table `db_coupons`
 --
 
-DROP TABLE IF EXISTS `db_coupons`;
-CREATE TABLE IF NOT EXISTS `db_coupons` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+CREATE TABLE `db_coupons` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `value` double(20,2) DEFAULT NULL,
-  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `expire_date` date DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created_by` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=344 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_time` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_coupons`
@@ -738,16 +690,14 @@ INSERT INTO `db_coupons` (`id`, `store_id`, `code`, `name`, `description`, `valu
 -- Table structure for table `db_currency`
 --
 
-DROP TABLE IF EXISTS `db_currency`;
-CREATE TABLE IF NOT EXISTS `db_currency` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `currency_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `currency_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `currency` blob,
-  `symbol` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_currency` (
+  `id` int(11) NOT NULL,
+  `currency_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `currency_code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `currency` blob DEFAULT NULL,
+  `symbol` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_currency`
@@ -816,27 +766,23 @@ INSERT INTO `db_currency` (`id`, `currency_name`, `currency_code`, `currency`, `
 -- Table structure for table `db_custadvance`
 --
 
-DROP TABLE IF EXISTS `db_custadvance`;
-CREATE TABLE IF NOT EXISTS `db_custadvance` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `count_id` int DEFAULT NULL,
-  `payment_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+CREATE TABLE `db_custadvance` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `count_id` int(11) DEFAULT NULL,
+  `payment_code` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
   `payment_date` date DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
   `amount` double(20,4) DEFAULT NULL,
-  `payment_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `payment_type` varchar(100) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `note` text CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_by` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `system_ip` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `system_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_time` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `system_ip` varchar(250) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `system_name` varchar(250) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_custadvance`
@@ -852,50 +798,47 @@ INSERT INTO `db_custadvance` (`id`, `store_id`, `count_id`, `payment_code`, `pay
 -- Table structure for table `db_customers`
 --
 
-DROP TABLE IF EXISTS `db_customers`;
-CREATE TABLE IF NOT EXISTS `db_customers` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `count_id` int DEFAULT NULL COMMENT 'Use to create Customer Code',
-  `customer_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `customer_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mobile` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gstin` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tax_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `vatin` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_customers` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `count_id` int(11) DEFAULT NULL COMMENT 'Use to create Customer Code',
+  `customer_code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gstin` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax_number` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `vatin` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `opening_balance` double(20,4) DEFAULT NULL,
   `sales_due` double(20,4) DEFAULT NULL,
   `sales_return_due` double(20,4) DEFAULT NULL,
-  `country_id` int DEFAULT NULL,
-  `state_id` int DEFAULT NULL,
-  `city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `postcode` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ship_country_id` int DEFAULT NULL,
-  `ship_state_id` int DEFAULT NULL,
-  `ship_city` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ship_postcode` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ship_address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `city` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `postcode` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ship_country_id` int(11) DEFAULT NULL,
+  `ship_state_id` int(11) DEFAULT NULL,
+  `ship_city` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ship_postcode` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ship_address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `company_id` int DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `location_link` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `attachment_1` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `price_level_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'Increase',
-  `price_level` double(20,4) DEFAULT '0.0000',
-  `delete_bit` int DEFAULT '0',
+  `created_time` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `location_link` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `attachment_1` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price_level_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT 'Increase',
+  `price_level` double(20,4) DEFAULT 0.0000,
+  `delete_bit` int(11) DEFAULT 0,
   `tot_advance` double(20,4) DEFAULT NULL,
-  `credit_limit` double(20,4) DEFAULT '-1.0000',
-  `shippingaddress_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `credit_limit` double(20,4) DEFAULT -1.0000,
+  `shippingaddress_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_customers`
@@ -913,29 +856,24 @@ INSERT INTO `db_customers` (`id`, `store_id`, `count_id`, `customer_code`, `cust
 -- Table structure for table `db_customer_coupons`
 --
 
-DROP TABLE IF EXISTS `db_customer_coupons`;
-CREATE TABLE IF NOT EXISTS `db_customer_coupons` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+CREATE TABLE `db_customer_coupons` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `value` double(20,2) DEFAULT NULL,
-  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `expire_date` date DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `created_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created_by` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
-  `coupon_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `coupon_id` (`coupon_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_time` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `coupon_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_customer_coupons`
@@ -951,24 +889,20 @@ INSERT INTO `db_customer_coupons` (`id`, `store_id`, `code`, `name`, `descriptio
 -- Table structure for table `db_customer_payments`
 --
 
-DROP TABLE IF EXISTS `db_customer_payments`;
-CREATE TABLE IF NOT EXISTS `db_customer_payments` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `salespayment_id` int DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
+CREATE TABLE `db_customer_payments` (
+  `id` int(11) NOT NULL,
+  `salespayment_id` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
   `payment_date` date DEFAULT NULL,
-  `payment_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `payment_type` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
   `payment` double(10,2) DEFAULT NULL,
-  `payment_note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created_date` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `salespayment_id` (`salespayment_id`)
+  `payment_note` text CHARACTER SET utf8mb4 DEFAULT NULL,
+  `system_ip` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `system_name` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_time` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_date` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_by` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -977,20 +911,17 @@ CREATE TABLE IF NOT EXISTS `db_customer_payments` (
 -- Table structure for table `db_emailtemplates`
 --
 
-DROP TABLE IF EXISTS `db_emailtemplates`;
-CREATE TABLE IF NOT EXISTS `db_emailtemplates` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `key` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `template_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `variables` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `status` int DEFAULT NULL,
-  `undelete_bit` int DEFAULT NULL,
-  `admin_only` int DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_emailtemplates` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `key` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `template_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `variables` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `undelete_bit` int(11) DEFAULT NULL,
+  `admin_only` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_emailtemplates`
@@ -1006,30 +937,26 @@ INSERT INTO `db_emailtemplates` (`id`, `store_id`, `key`, `template_name`, `cont
 -- Table structure for table `db_expense`
 --
 
-DROP TABLE IF EXISTS `db_expense`;
-CREATE TABLE IF NOT EXISTS `db_expense` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `count_id` int DEFAULT NULL COMMENT 'Use to create Expense Code',
-  `expense_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `category_id` int DEFAULT NULL,
+CREATE TABLE `db_expense` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `count_id` int(11) DEFAULT NULL COMMENT 'Use to create Expense Code',
+  `expense_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
   `expense_date` date DEFAULT NULL,
-  `reference_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `expense_for` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reference_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `expense_for` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `expense_amt` double(20,4) DEFAULT NULL,
-  `payment_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `account_id` int DEFAULT NULL,
-  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `account_id` int(11) DEFAULT NULL,
+  `note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `account_id` (`account_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_expense`
@@ -1044,18 +971,15 @@ INSERT INTO `db_expense` (`id`, `store_id`, `count_id`, `expense_code`, `categor
 -- Table structure for table `db_expense_category`
 --
 
-DROP TABLE IF EXISTS `db_expense_category`;
-CREATE TABLE IF NOT EXISTS `db_expense_category` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `category_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `category_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_expense_category` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `category_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_expense_category`
@@ -1071,16 +995,13 @@ INSERT INTO `db_expense_category` (`id`, `store_id`, `category_code`, `category_
 -- Table structure for table `db_fivemojo`
 --
 
-DROP TABLE IF EXISTS `db_fivemojo`;
-CREATE TABLE IF NOT EXISTS `db_fivemojo` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `token` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `instance_id` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `status` int DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
+CREATE TABLE `db_fivemojo` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `url` text CHARACTER SET utf8mb4 DEFAULT NULL,
+  `token` text CHARACTER SET utf8mb4 DEFAULT NULL,
+  `instance_id` text CHARACTER SET utf8mb4 DEFAULT NULL,
+  `status` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1089,31 +1010,26 @@ CREATE TABLE IF NOT EXISTS `db_fivemojo` (
 -- Table structure for table `db_hold`
 --
 
-DROP TABLE IF EXISTS `db_hold`;
-CREATE TABLE IF NOT EXISTS `db_hold` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `warehouse_id` int DEFAULT NULL,
-  `reference_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Temprary',
-  `reference_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_hold` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `warehouse_id` int(11) DEFAULT NULL,
+  `reference_id` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Temprary',
+  `reference_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sales_date` date DEFAULT NULL,
-  `sales_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
+  `sales_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
   `other_charges_input` double(20,2) DEFAULT NULL,
-  `other_charges_tax_id` int DEFAULT NULL,
+  `other_charges_tax_id` int(11) DEFAULT NULL,
   `other_charges_amt` double(20,2) DEFAULT NULL,
   `discount_to_all_input` double(20,2) DEFAULT NULL,
-  `discount_to_all_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_to_all_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tot_discount_to_all_amt` double(20,2) DEFAULT NULL,
   `subtotal` double(20,2) DEFAULT NULL,
   `round_off` double(20,2) DEFAULT NULL,
   `grand_total` double(20,4) DEFAULT NULL,
-  `sales_note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `pos` int DEFAULT NULL COMMENT '1=yes 0=no',
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `warehouse_id` (`warehouse_id`)
+  `sales_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pos` int(11) DEFAULT NULL COMMENT '1=yes 0=no'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1122,27 +1038,22 @@ CREATE TABLE IF NOT EXISTS `db_hold` (
 -- Table structure for table `db_holditems`
 --
 
-DROP TABLE IF EXISTS `db_holditems`;
-CREATE TABLE IF NOT EXISTS `db_holditems` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `hold_id` int DEFAULT NULL,
-  `item_id` int DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+CREATE TABLE `db_holditems` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `hold_id` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sales_qty` double(20,2) DEFAULT NULL,
   `price_per_unit` double(20,4) DEFAULT NULL,
-  `tax_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tax_id` int DEFAULT NULL,
+  `tax_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax_id` int(11) DEFAULT NULL,
   `tax_amt` double(20,4) DEFAULT NULL,
-  `discount_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `discount_input` double(20,4) DEFAULT NULL,
   `discount_amt` double(20,4) DEFAULT NULL,
   `unit_total_cost` double(20,4) DEFAULT NULL,
-  `total_cost` double(20,4) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `sales_id` (`hold_id`),
-  KEY `item_id` (`item_id`)
+  `total_cost` double(20,4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1151,19 +1062,16 @@ CREATE TABLE IF NOT EXISTS `db_holditems` (
 -- Table structure for table `db_instamojo`
 --
 
-DROP TABLE IF EXISTS `db_instamojo`;
-CREATE TABLE IF NOT EXISTS `db_instamojo` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `sandbox` int DEFAULT NULL,
-  `api_key` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `api_token` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+CREATE TABLE `db_instamojo` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `sandbox` int(11) DEFAULT NULL,
+  `api_key` text CHARACTER SET utf8mb4 DEFAULT NULL,
+  `api_token` text CHARACTER SET utf8mb4 DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
-  `updated_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_by` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_instamojo`
@@ -1178,29 +1086,27 @@ INSERT INTO `db_instamojo` (`id`, `store_id`, `sandbox`, `api_key`, `api_token`,
 -- Table structure for table `db_instamojopayments`
 --
 
-DROP TABLE IF EXISTS `db_instamojopayments`;
-CREATE TABLE IF NOT EXISTS `db_instamojopayments` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `phone` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `buyer_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+CREATE TABLE `db_instamojopayments` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `phone` varchar(25) CHARACTER SET utf8 DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `buyer_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `amount` decimal(16,2) NOT NULL,
-  `purpose` text CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
-  `expires_at` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `status` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `send_sms` varchar(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'false',
-  `send_email` varchar(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'false',
-  `sms_status` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `email_status` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `shorturl` mediumtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
-  `longurl` mediumtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
-  `redirect_url` mediumtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
-  `webhook` mediumtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
-  `allow_repeated_payments` varchar(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL DEFAULT 'false',
-  `customer_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `created_at` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `modified_at` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `purpose` text CHARACTER SET utf8 DEFAULT NULL,
+  `expires_at` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `status` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `send_sms` varchar(5) CHARACTER SET utf8 NOT NULL DEFAULT 'false',
+  `send_email` varchar(5) CHARACTER SET utf8 NOT NULL DEFAULT 'false',
+  `sms_status` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `email_status` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `shorturl` mediumtext CHARACTER SET utf8 DEFAULT NULL,
+  `longurl` mediumtext CHARACTER SET utf8 DEFAULT NULL,
+  `redirect_url` mediumtext CHARACTER SET utf8 DEFAULT NULL,
+  `webhook` mediumtext CHARACTER SET utf8 DEFAULT NULL,
+  `allow_repeated_payments` varchar(5) CHARACTER SET utf8 NOT NULL DEFAULT 'false',
+  `customer_id` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `created_at` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `modified_at` varchar(255) CHARACTER SET utf8 DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1209,68 +1115,65 @@ CREATE TABLE IF NOT EXISTS `db_instamojopayments` (
 -- Table structure for table `db_items`
 --
 
-DROP TABLE IF EXISTS `db_items`;
-CREATE TABLE IF NOT EXISTS `db_items` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `count_id` int DEFAULT NULL COMMENT 'Use to create ITEM Code',
-  `item_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `item_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `category_id` int DEFAULT NULL,
-  `sku` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `hsn` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sac` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `unit_id` int DEFAULT NULL,
-  `alert_qty` int DEFAULT NULL,
-  `brand_id` int DEFAULT NULL,
-  `lot_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_items` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `count_id` int(11) DEFAULT NULL COMMENT 'Use to create ITEM Code',
+  `item_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `item_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `sku` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `hsn` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sac` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `unit_id` int(11) DEFAULT NULL,
+  `alert_qty` int(11) DEFAULT NULL,
+  `brand_id` int(11) DEFAULT NULL,
+  `lot_number` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `expire_date` date DEFAULT NULL,
   `price` double(20,4) DEFAULT NULL,
-  `tax_id` int DEFAULT NULL,
+  `tax_id` int(11) DEFAULT NULL,
   `purchase_price` double(20,4) DEFAULT NULL,
-  `tax_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `profit_margin` double(20,2) DEFAULT NULL,
   `sales_price` double(20,4) DEFAULT NULL,
   `stock` double(20,2) DEFAULT NULL,
-  `item_image` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `item_image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `company_id` int DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `discount_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'Percentage',
-  `discount` double(20,2) DEFAULT '0.00',
-  `service_bit` int DEFAULT '0',
-  `seller_points` double(20,2) DEFAULT '0.00',
-  `custom_barcode` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `item_group` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parent_id` int DEFAULT NULL,
-  `variant_id` int DEFAULT NULL,
-  `child_bit` int DEFAULT '0',
+  `created_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `discount_type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT 'Percentage',
+  `discount` double(20,2) DEFAULT 0.00,
+  `service_bit` int(11) DEFAULT 0,
+  `seller_points` double(20,2) DEFAULT 0.00,
+  `custom_barcode` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `item_group` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `variant_id` int(11) DEFAULT NULL,
+  `child_bit` int(11) DEFAULT 0,
   `mrp` double(20,4) DEFAULT NULL,
-  `designation_longue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `n_livre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `auteur` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `verificateur` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `traducteur` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `editeur` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `annee_edition` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `n_edition` int DEFAULT NULL,
-  `ISBN` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `couverture` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nature_de_Papier` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `emplacement` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `collection` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `designation_longue` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `n_livre` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `auteur` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `verificateur` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `traducteur` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `editeur` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `annee_edition` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `n_edition` int(11) DEFAULT NULL,
+  `ISBN` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `couverture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nature_de_Papier` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `emplacement` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `collection` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `BL` float DEFAULT NULL,
   `FA` float DEFAULT NULL,
-  `DEVISE` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `theme` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6696 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `DEVISE` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_items`
@@ -1445,7 +1348,7 @@ INSERT INTO `db_items` (`id`, `store_id`, `count_id`, `item_code`, `item_name`, 
 (2329, 2, 2329, 'IT022329', 'HHT SALIM 1L', 133, NULL, NULL, NULL, 64, 10, 327, NULL, NULL, 11.0000, 150, 10.1000, 'Inclusive', 0.00, 11.0000, 1000.00, NULL, NULL, NULL, '2023-07-31', '03:29:56 pm', 'sara', NULL, 1, 'Percentage', 0.00, 0, 0.00, '6111032000600', NULL, 'Single', NULL, NULL, 0, 0.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2330, 2, 2330, 'IT022330', 'UHT SALIM 1/2', 133, NULL, NULL, NULL, 64, 10, 327, NULL, NULL, 6.0000, 150, 5.5000, 'Inclusive', 0.00, 6.0000, 1000.00, NULL, NULL, NULL, '2023-07-31', '03:29:56 pm', 'sara', NULL, 1, 'Percentage', 0.00, 0, 0.00, '6111032000631', NULL, 'Single', NULL, NULL, 0, 0.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2331, 2, 2331, 'IT022331', 'AGERUL QUITAGASAS', 126, NULL, NULL, NULL, 64, 10, 327, NULL, NULL, 30.0000, 150, 24.0000, 'Inclusive', 0.00, 30.0000, 1000.00, NULL, NULL, NULL, '2023-07-31', '03:29:56 pm', 'sara', NULL, 1, 'Percentage', 0.00, 0, 0.00, '8420568900031', NULL, 'Single', NULL, NULL, 0, 0.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2332, 2, 2332, 'IT022332', 'QUITAGRASAS KIRIKO', 126, NULL, NULL, NULL, 64, 10, 327, NULL, NULL, 25.0000, 150, 18.0000, 'Inclusive', 0.00, 25.0000, 1000.00, NULL, NULL, NULL, '2023-07-31', '03:29:56 pm', 'sara', NULL, 1, 'Percentage', 0.00, 0, 0.00, '8411878311044', NULL, 'Single', NULL, NULL, 0, 0.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2332, 2, 2332, 'IT022332', 'QUITAGRASAS KIRIKO', 126, NULL, NULL, NULL, 64, 10, 327, NULL, NULL, 25.0000, 150, 18.0000, 'Inclusive', 0.00, 25.0000, 999.00, NULL, NULL, NULL, '2023-07-31', '03:29:56 pm', 'sara', NULL, 1, 'Percentage', 0.00, 0, 0.00, '8411878311044', NULL, 'Single', NULL, NULL, 0, 0.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2333, 2, 2333, 'IT022333', 'QUITAGRASAS KIRIKO 750ML', 126, NULL, NULL, NULL, 64, 10, 327, NULL, NULL, 25.0000, 150, 19.0000, 'Inclusive', 0.00, 25.0000, 1000.00, NULL, NULL, NULL, '2023-07-31', '03:29:56 pm', 'sara', NULL, 1, 'Percentage', 0.00, 0, 0.00, '8411878507188', NULL, 'Single', NULL, NULL, 0, 0.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2334, 2, 2334, 'IT022334', 'QUITAGRASAS ALEXE 750ML', 126, NULL, NULL, NULL, 64, 10, 327, NULL, NULL, 15.0000, 150, 12.5000, 'Inclusive', 0.00, 15.0000, 1000.00, NULL, NULL, NULL, '2023-07-31', '03:29:56 pm', 'sara', NULL, 1, 'Percentage', 0.00, 0, 0.00, '8414646036705', NULL, 'Single', NULL, NULL, 0, 0.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (2335, 2, 2335, 'IT022335', 'QUITAGRASAS ARUN 1L', 126, NULL, NULL, NULL, 64, 10, 327, NULL, NULL, 30.0000, 150, 22.0000, 'Inclusive', 0.00, 30.0000, 1000.00, NULL, NULL, NULL, '2023-07-31', '03:29:56 pm', 'sara', NULL, 1, 'Percentage', 0.00, 0, 0.00, '8437021720686', NULL, 'Single', NULL, NULL, 0, 0.0000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -5852,13 +5755,11 @@ INSERT INTO `db_items` (`id`, `store_id`, `count_id`, `item_code`, `item_name`, 
 -- Table structure for table `db_languages`
 --
 
-DROP TABLE IF EXISTS `db_languages`;
-CREATE TABLE IF NOT EXISTS `db_languages` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `language` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_languages` (
+  `id` int(11) NOT NULL,
+  `language` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_languages`
@@ -5875,32 +5776,29 @@ INSERT INTO `db_languages` (`id`, `language`, `status`) VALUES
 -- Table structure for table `db_package`
 --
 
-DROP TABLE IF EXISTS `db_package`;
-CREATE TABLE IF NOT EXISTS `db_package` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `package_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `package_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `package_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+CREATE TABLE `db_package` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `package_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `package_code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `package_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `monthly_price` double(20,2) DEFAULT NULL,
   `annual_price` double(20,2) DEFAULT NULL,
-  `trial_days` int DEFAULT NULL,
-  `max_users` int DEFAULT NULL,
-  `max_items` int DEFAULT NULL,
-  `max_invoices` int DEFAULT NULL,
-  `max_warehouses` int DEFAULT NULL,
+  `trial_days` int(11) DEFAULT NULL,
+  `max_users` int(11) DEFAULT NULL,
+  `max_items` int(11) DEFAULT NULL,
+  `max_invoices` int(11) DEFAULT NULL,
+  `max_warehouses` int(11) DEFAULT NULL,
   `expire_date` date DEFAULT NULL,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `plan_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_time` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `plan_type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_package`
@@ -5917,15 +5815,12 @@ INSERT INTO `db_package` (`id`, `store_id`, `package_type`, `package_code`, `pac
 -- Table structure for table `db_paymenttypes`
 --
 
-DROP TABLE IF EXISTS `db_paymenttypes`;
-CREATE TABLE IF NOT EXISTS `db_paymenttypes` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `payment_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_paymenttypes` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `payment_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_paymenttypes`
@@ -5943,18 +5838,15 @@ INSERT INTO `db_paymenttypes` (`id`, `store_id`, `payment_type`, `status`) VALUE
 -- Table structure for table `db_paypal`
 --
 
-DROP TABLE IF EXISTS `db_paypal`;
-CREATE TABLE IF NOT EXISTS `db_paypal` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `sandbox` int DEFAULT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+CREATE TABLE `db_paypal` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `sandbox` int(11) DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
-  `updated_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_by` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_paypal`
@@ -5969,17 +5861,15 @@ INSERT INTO `db_paypal` (`id`, `store_id`, `sandbox`, `email`, `updated_at`, `up
 -- Table structure for table `db_paypalpaylog`
 --
 
-DROP TABLE IF EXISTS `db_paypalpaylog`;
-CREATE TABLE IF NOT EXISTS `db_paypalpaylog` (
-  `payment_id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `txn_id` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+CREATE TABLE `db_paypalpaylog` (
+  `payment_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `txn_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `payment_gross` float(10,2) NOT NULL,
-  `currency_code` varchar(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `payer_email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `payment_status` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  PRIMARY KEY (`payment_id`)
+  `currency_code` varchar(5) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `payer_email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `payment_status` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -5988,15 +5878,12 @@ CREATE TABLE IF NOT EXISTS `db_paypalpaylog` (
 -- Table structure for table `db_permissions`
 --
 
-DROP TABLE IF EXISTS `db_permissions`;
-CREATE TABLE IF NOT EXISTS `db_permissions` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `role_id` int DEFAULT NULL,
-  `permissions` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6832 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_permissions` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  `permissions` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_permissions`
@@ -6734,41 +6621,37 @@ INSERT INTO `db_permissions` (`id`, `store_id`, `role_id`, `permissions`) VALUES
 -- Table structure for table `db_purchase`
 --
 
-DROP TABLE IF EXISTS `db_purchase`;
-CREATE TABLE IF NOT EXISTS `db_purchase` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `warehouse_id` int DEFAULT NULL,
-  `count_id` int DEFAULT NULL COMMENT 'Use to create Purchase Code',
-  `purchase_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reference_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_purchase` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `warehouse_id` int(11) DEFAULT NULL,
+  `count_id` int(11) DEFAULT NULL COMMENT 'Use to create Purchase Code',
+  `purchase_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reference_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `purchase_date` date DEFAULT NULL,
-  `purchase_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `supplier_id` int DEFAULT NULL,
+  `purchase_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supplier_id` int(11) DEFAULT NULL,
   `other_charges_input` double(20,4) DEFAULT NULL,
-  `other_charges_tax_id` int DEFAULT NULL,
+  `other_charges_tax_id` int(11) DEFAULT NULL,
   `other_charges_amt` double(20,4) DEFAULT NULL,
   `discount_to_all_input` double(20,4) DEFAULT NULL,
-  `discount_to_all_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_to_all_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tot_discount_to_all_amt` double(20,4) DEFAULT NULL,
   `subtotal` double(20,4) DEFAULT NULL COMMENT 'Purchased qty',
   `round_off` double(20,4) DEFAULT NULL COMMENT 'Pending Qty',
   `grand_total` double(20,4) DEFAULT NULL,
-  `purchase_note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `payment_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `purchase_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `paid_amount` double(20,4) DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `company_id` int DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `return_bit` int DEFAULT NULL COMMENT 'Purchase return raised',
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `supplier_id` (`supplier_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `return_bit` int(11) DEFAULT NULL COMMENT 'Purchase return raised'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_purchase`
@@ -6784,31 +6667,27 @@ INSERT INTO `db_purchase` (`id`, `store_id`, `warehouse_id`, `count_id`, `purcha
 -- Table structure for table `db_purchaseitems`
 --
 
-DROP TABLE IF EXISTS `db_purchaseitems`;
-CREATE TABLE IF NOT EXISTS `db_purchaseitems` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `purchase_id` int DEFAULT NULL,
-  `purchase_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `item_id` int DEFAULT NULL,
+CREATE TABLE `db_purchaseitems` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `purchase_id` int(11) DEFAULT NULL,
+  `purchase_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
   `purchase_qty` double(20,2) DEFAULT NULL,
   `price_per_unit` double(20,4) DEFAULT NULL,
-  `tax_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tax_id` int DEFAULT NULL,
+  `tax_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax_id` int(11) DEFAULT NULL,
   `tax_amt` double(20,4) DEFAULT NULL,
-  `discount_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `discount_input` double(20,4) DEFAULT NULL,
   `discount_amt` double(20,4) DEFAULT NULL,
   `unit_total_cost` double(20,4) DEFAULT NULL,
   `total_cost` double(20,4) DEFAULT NULL,
   `profit_margin_per` double(20,4) DEFAULT NULL,
   `unit_sales_price` double(20,4) DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `purchase_id` (`purchase_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `status` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_purchaseitems`
@@ -6824,32 +6703,27 @@ INSERT INTO `db_purchaseitems` (`id`, `store_id`, `purchase_id`, `purchase_statu
 -- Table structure for table `db_purchaseitemsreturn`
 --
 
-DROP TABLE IF EXISTS `db_purchaseitemsreturn`;
-CREATE TABLE IF NOT EXISTS `db_purchaseitemsreturn` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `purchase_id` int DEFAULT NULL,
-  `return_id` int DEFAULT NULL,
-  `return_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `item_id` int DEFAULT NULL,
+CREATE TABLE `db_purchaseitemsreturn` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `purchase_id` int(11) DEFAULT NULL,
+  `return_id` int(11) DEFAULT NULL,
+  `return_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
   `return_qty` double(20,2) DEFAULT NULL,
   `price_per_unit` double(20,4) DEFAULT NULL,
-  `tax_id` int DEFAULT NULL,
+  `tax_id` int(11) DEFAULT NULL,
   `tax_amt` double(20,4) DEFAULT NULL,
-  `tax_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `discount_input` double(20,4) DEFAULT NULL,
   `discount_amt` double(20,4) DEFAULT NULL,
-  `discount_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `unit_total_cost` double(20,4) DEFAULT NULL,
   `total_cost` double(20,4) DEFAULT NULL,
   `profit_margin_per` double(20,4) DEFAULT NULL,
   `unit_sales_price` double(20,4) DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `return_id` (`return_id`),
-  KEY `purchase_id` (`purchase_id`)
+  `status` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -6858,31 +6732,26 @@ CREATE TABLE IF NOT EXISTS `db_purchaseitemsreturn` (
 -- Table structure for table `db_purchasepayments`
 --
 
-DROP TABLE IF EXISTS `db_purchasepayments`;
-CREATE TABLE IF NOT EXISTS `db_purchasepayments` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `count_id` int DEFAULT NULL,
-  `payment_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `store_id` int DEFAULT NULL,
-  `purchase_id` int DEFAULT NULL,
+CREATE TABLE `db_purchasepayments` (
+  `id` int(11) NOT NULL,
+  `count_id` int(11) DEFAULT NULL,
+  `payment_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `purchase_id` int(11) DEFAULT NULL,
   `payment_date` date DEFAULT NULL,
-  `payment_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payment` double(20,4) DEFAULT NULL,
-  `payment_note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_time` time DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `account_id` int DEFAULT NULL,
-  `supplier_id` int DEFAULT NULL,
-  `short_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `purchase_id` (`purchase_id`),
-  KEY `supplier_id` (`supplier_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=110 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `account_id` int(11) DEFAULT NULL,
+  `supplier_id` int(11) DEFAULT NULL,
+  `short_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_purchasepayments`
@@ -6898,31 +6767,26 @@ INSERT INTO `db_purchasepayments` (`id`, `count_id`, `payment_code`, `store_id`,
 -- Table structure for table `db_purchasepaymentsreturn`
 --
 
-DROP TABLE IF EXISTS `db_purchasepaymentsreturn`;
-CREATE TABLE IF NOT EXISTS `db_purchasepaymentsreturn` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `count_id` int DEFAULT NULL,
-  `payment_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `store_id` int DEFAULT NULL,
-  `purchase_id` int DEFAULT NULL,
-  `return_id` int DEFAULT NULL,
+CREATE TABLE `db_purchasepaymentsreturn` (
+  `id` int(11) NOT NULL,
+  `count_id` int(11) DEFAULT NULL,
+  `payment_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `purchase_id` int(11) DEFAULT NULL,
+  `return_id` int(11) DEFAULT NULL,
   `payment_date` date DEFAULT NULL,
-  `payment_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payment` double(20,4) DEFAULT NULL,
-  `payment_note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_time` time DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `account_id` int DEFAULT NULL,
-  `supplier_id` int DEFAULT NULL,
-  `short_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `return_id` (`return_id`),
-  KEY `supplier_id` (`supplier_id`)
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `account_id` int(11) DEFAULT NULL,
+  `supplier_id` int(11) DEFAULT NULL,
+  `short_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -6931,40 +6795,36 @@ CREATE TABLE IF NOT EXISTS `db_purchasepaymentsreturn` (
 -- Table structure for table `db_purchasereturn`
 --
 
-DROP TABLE IF EXISTS `db_purchasereturn`;
-CREATE TABLE IF NOT EXISTS `db_purchasereturn` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `count_id` int DEFAULT NULL COMMENT 'Use to create Purchase Return Code',
-  `warehouse_id` int DEFAULT NULL,
-  `purchase_id` int DEFAULT NULL,
-  `return_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reference_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_purchasereturn` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `count_id` int(11) DEFAULT NULL COMMENT 'Use to create Purchase Return Code',
+  `warehouse_id` int(11) DEFAULT NULL,
+  `purchase_id` int(11) DEFAULT NULL,
+  `return_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reference_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `return_date` date DEFAULT NULL,
-  `return_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `supplier_id` int DEFAULT NULL,
+  `return_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supplier_id` int(11) DEFAULT NULL,
   `other_charges_input` double(20,4) DEFAULT NULL,
-  `other_charges_tax_id` int DEFAULT NULL,
+  `other_charges_tax_id` int(11) DEFAULT NULL,
   `other_charges_amt` double(20,4) DEFAULT NULL,
   `discount_to_all_input` double(20,4) DEFAULT NULL,
-  `discount_to_all_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_to_all_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tot_discount_to_all_amt` double(20,4) DEFAULT NULL,
   `subtotal` double(20,4) DEFAULT NULL COMMENT 'Purchased qty',
   `round_off` double(20,4) DEFAULT NULL COMMENT 'Pending Qty',
   `grand_total` double(20,4) DEFAULT NULL,
-  `return_note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `payment_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `return_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `paid_amount` double(20,4) DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `company_id` int DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `purchase_id` (`purchase_id`)
+  `created_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -6973,47 +6833,42 @@ CREATE TABLE IF NOT EXISTS `db_purchasereturn` (
 -- Table structure for table `db_quotation`
 --
 
-DROP TABLE IF EXISTS `db_quotation`;
-CREATE TABLE IF NOT EXISTS `db_quotation` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `warehouse_id` int DEFAULT NULL,
-  `count_id` int DEFAULT NULL COMMENT 'Use to create quotation Code',
-  `quotation_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reference_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_quotation` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `warehouse_id` int(11) DEFAULT NULL,
+  `count_id` int(11) DEFAULT NULL COMMENT 'Use to create quotation Code',
+  `quotation_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reference_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `quotation_date` date DEFAULT NULL,
   `expire_date` date DEFAULT NULL,
-  `quotation_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
+  `quotation_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
   `other_charges_input` double(20,4) DEFAULT NULL,
-  `other_charges_tax_id` int DEFAULT NULL,
+  `other_charges_tax_id` int(11) DEFAULT NULL,
   `other_charges_amt` double(20,4) DEFAULT NULL,
   `discount_to_all_input` double(20,4) DEFAULT NULL,
-  `discount_to_all_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_to_all_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tot_discount_to_all_amt` double(20,4) DEFAULT NULL,
   `subtotal` double(20,4) DEFAULT NULL,
   `round_off` double(20,4) DEFAULT NULL,
   `grand_total` double(20,4) DEFAULT NULL,
-  `quotation_note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `payment_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `quotation_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `paid_amount` double(20,4) DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `company_id` int DEFAULT NULL,
-  `pos` int DEFAULT NULL COMMENT '1=yes 0=no',
-  `status` int DEFAULT NULL,
-  `return_bit` int DEFAULT NULL COMMENT 'quotation return raised',
+  `created_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `pos` int(11) DEFAULT NULL COMMENT '1=yes 0=no',
+  `status` int(11) DEFAULT NULL,
+  `return_bit` int(11) DEFAULT NULL COMMENT 'quotation return raised',
   `customer_previous_due` double(20,4) DEFAULT NULL,
   `customer_total_due` double(20,4) DEFAULT NULL,
-  `sales_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `warehouse_id` (`warehouse_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `sales_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_quotation`
@@ -7028,30 +6883,26 @@ INSERT INTO `db_quotation` (`id`, `store_id`, `warehouse_id`, `count_id`, `quota
 -- Table structure for table `db_quotationitems`
 --
 
-DROP TABLE IF EXISTS `db_quotationitems`;
-CREATE TABLE IF NOT EXISTS `db_quotationitems` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `quotation_id` int DEFAULT NULL,
-  `quotation_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `item_id` int DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+CREATE TABLE `db_quotationitems` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `quotation_id` int(11) DEFAULT NULL,
+  `quotation_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `quotation_qty` double(20,2) DEFAULT NULL,
   `price_per_unit` double(20,4) DEFAULT NULL,
-  `tax_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tax_id` int DEFAULT NULL,
+  `tax_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax_id` int(11) DEFAULT NULL,
   `tax_amt` double(20,4) DEFAULT NULL,
-  `discount_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `discount_input` double(20,4) DEFAULT NULL,
   `discount_amt` double(20,4) DEFAULT NULL,
   `unit_total_cost` double(20,4) DEFAULT NULL,
   `total_cost` double(20,4) DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `seller_points` double(20,4) DEFAULT '0.0000',
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `quotation_id` (`quotation_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `status` int(11) DEFAULT NULL,
+  `seller_points` double(20,4) DEFAULT 0.0000
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_quotationitems`
@@ -7068,16 +6919,13 @@ INSERT INTO `db_quotationitems` (`id`, `store_id`, `quotation_id`, `quotation_st
 -- Table structure for table `db_roles`
 --
 
-DROP TABLE IF EXISTS `db_roles`;
-CREATE TABLE IF NOT EXISTS `db_roles` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `role_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_roles` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `role_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_roles`
@@ -7095,52 +6943,46 @@ INSERT INTO `db_roles` (`id`, `store_id`, `role_name`, `description`, `status`) 
 -- Table structure for table `db_sales`
 --
 
-DROP TABLE IF EXISTS `db_sales`;
-CREATE TABLE IF NOT EXISTS `db_sales` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `warehouse_id` int DEFAULT NULL,
-  `init_code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_sales` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `warehouse_id` int(11) DEFAULT NULL,
+  `init_code` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `count_id` decimal(20,0) DEFAULT NULL COMMENT 'Use to create Sales Code',
-  `sales_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reference_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sales_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reference_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sales_date` date DEFAULT NULL,
   `due_date` date DEFAULT NULL,
-  `sales_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
+  `sales_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
   `other_charges_input` double(20,2) DEFAULT NULL,
-  `other_charges_tax_id` int DEFAULT NULL,
+  `other_charges_tax_id` int(11) DEFAULT NULL,
   `other_charges_amt` double(20,2) DEFAULT NULL,
   `discount_to_all_input` double(20,2) DEFAULT NULL,
-  `discount_to_all_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_to_all_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tot_discount_to_all_amt` double(20,2) DEFAULT NULL,
   `subtotal` double(20,2) DEFAULT NULL,
   `round_off` double(20,2) DEFAULT NULL,
   `grand_total` double(20,4) DEFAULT NULL,
-  `sales_note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `payment_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sales_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `paid_amount` double(20,4) DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `company_id` int DEFAULT NULL,
-  `pos` int DEFAULT NULL COMMENT '1=yes 0=no',
-  `status` int DEFAULT NULL,
-  `return_bit` int DEFAULT NULL COMMENT 'sales return raised',
+  `created_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `pos` int(11) DEFAULT NULL COMMENT '1=yes 0=no',
+  `status` int(11) DEFAULT NULL,
+  `return_bit` int(11) DEFAULT NULL COMMENT 'sales return raised',
   `customer_previous_due` double(20,2) DEFAULT NULL,
   `customer_total_due` double(20,2) DEFAULT NULL,
-  `quotation_id` int DEFAULT NULL,
-  `coupon_id` int DEFAULT NULL,
-  `coupon_amt` double(20,2) DEFAULT '0.00',
-  `invoice_terms` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `customer_id` (`customer_id`),
-  KEY `warehouse_id` (`warehouse_id`),
-  KEY `coupon_id` (`coupon_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `quotation_id` int(11) DEFAULT NULL,
+  `coupon_id` int(11) DEFAULT NULL,
+  `coupon_amt` double(20,2) DEFAULT 0.00,
+  `invoice_terms` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_sales`
@@ -7239,7 +7081,8 @@ INSERT INTO `db_sales` (`id`, `store_id`, `warehouse_id`, `init_code`, `count_id
 (90, 2, 2, 'SL', '90', 'SL90', NULL, '2023-08-15', NULL, 'Final', 2, NULL, NULL, NULL, 0.00, 'in_percentage', 0.00, 2231.46, -0.46, 2231.0000, '', 'Paid', 2231.0000, '2023-08-15', '12:27:57 pm', 'SARA', '::1', 'DESKTOP-N5NTSRT', NULL, 1, 1, NULL, NULL, NULL, NULL, NULL, 0.00, ''),
 (91, 2, 2, 'SL', '91', 'SL91', '', '2023-08-15', NULL, 'Final', 2, NULL, NULL, NULL, NULL, 'in_percentage', NULL, 8.00, NULL, 8.0000, '', 'Paid', 8.0000, '2023-08-15', '05:22:16 pm', 'SARA', '::1', 'DESKTOP-N5NTSRT', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 0.00, ''),
 (92, 2, 2, 'SL', '92', 'SL92', '', '2023-08-15', NULL, 'Final', 2, NULL, NULL, NULL, NULL, 'in_percentage', NULL, 326.70, 0.30, 327.0000, '', 'Paid', 327.0000, '2023-08-15', '07:00:24 pm', 'SARA', '::1', 'DESKTOP-N5NTSRT', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 0.00, ''),
-(93, 2, 2, 'SL', '93', 'SL93', '1221', '2023-08-15', '2023-08-09', 'Final', 2, NULL, NULL, NULL, NULL, 'in_percentage', NULL, 108.90, 0.10, 109.0000, '', 'Paid', 109.0000, '2023-08-15', '07:01:01 pm', 'SARA', '::1', 'DESKTOP-N5NTSRT', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 0.00, '');
+(93, 2, 2, 'SL', '93', 'SL93', '1221', '2023-08-15', '2023-08-09', 'Final', 2, NULL, NULL, NULL, NULL, 'in_percentage', NULL, 108.90, 0.10, 109.0000, '', 'Paid', 109.0000, '2023-08-15', '07:01:01 pm', 'SARA', '::1', 'DESKTOP-N5NTSRT', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 0.00, ''),
+(94, 2, 2, 'SL', '94', 'SL94', '1111111111111', '2023-08-30', NULL, 'Final', 2, NULL, 150, NULL, NULL, 'in_percentage', NULL, 25.00, NULL, 25.0000, '', 'Paid', 25.0000, '2023-08-30', '11:34:48 pm', 'SARA', '::1', 'DESKTOP-N2GN4F8', NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 0.00, '');
 
 -- --------------------------------------------------------
 
@@ -7247,31 +7090,27 @@ INSERT INTO `db_sales` (`id`, `store_id`, `warehouse_id`, `init_code`, `count_id
 -- Table structure for table `db_salesitems`
 --
 
-DROP TABLE IF EXISTS `db_salesitems`;
-CREATE TABLE IF NOT EXISTS `db_salesitems` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `sales_id` int DEFAULT NULL,
-  `sales_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `item_id` int DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+CREATE TABLE `db_salesitems` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `sales_id` int(11) DEFAULT NULL,
+  `sales_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `sales_qty` double(20,2) DEFAULT NULL,
   `price_per_unit` double(20,4) DEFAULT NULL,
-  `tax_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tax_id` int DEFAULT NULL,
+  `tax_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax_id` int(11) DEFAULT NULL,
   `tax_amt` double(20,4) DEFAULT NULL,
-  `discount_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `discount_input` double(20,4) DEFAULT NULL,
   `discount_amt` double(20,4) DEFAULT NULL,
   `unit_total_cost` double(20,4) DEFAULT NULL,
   `total_cost` double(20,4) DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `seller_points` double(20,2) DEFAULT '0.00',
-  `purchase_price` double(20,3) DEFAULT '0.000',
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `sales_id` (`sales_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=675 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `status` int(11) DEFAULT NULL,
+  `seller_points` double(20,2) DEFAULT 0.00,
+  `purchase_price` double(20,3) DEFAULT 0.000
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_salesitems`
@@ -7396,7 +7235,8 @@ INSERT INTO `db_salesitems` (`id`, `store_id`, `sales_id`, `sales_status`, `item
 (671, 2, 90, 'Final', 6527, '', 99.00, 22.5400, 'Inclusive', 150, NULL, 'Percentage', 0.0000, 0.0000, 22.5400, 2231.4600, 1, 0.00, 22.540),
 (672, 2, 91, 'Final', 4116, '', 1.00, 8.0000, 'Inclusive', 150, NULL, 'Percentage', NULL, 0.0000, 8.0000, 8.0000, 1, 0.00, 8.000),
 (673, 2, 92, 'Final', 6695, '', 3.00, 108.9000, 'Inclusive', 150, NULL, 'Fixed', NULL, 0.0000, 108.9000, 326.7000, 1, 0.00, 99.000),
-(674, 2, 93, 'Final', 6695, '', 1.00, 108.9000, 'Inclusive', 150, NULL, 'Fixed', NULL, 0.0000, 108.9000, 108.9000, 1, 0.00, 99.000);
+(674, 2, 93, 'Final', 6695, '', 1.00, 108.9000, 'Inclusive', 150, NULL, 'Fixed', NULL, 0.0000, 108.9000, 108.9000, 1, 0.00, 99.000),
+(675, 2, 94, 'Final', 2332, '', 1.00, 25.0000, 'Inclusive', 150, NULL, 'Percentage', NULL, 0.0000, 25.0000, 25.0000, 1, 0.00, 25.000);
 
 -- --------------------------------------------------------
 
@@ -7404,31 +7244,27 @@ INSERT INTO `db_salesitems` (`id`, `store_id`, `sales_id`, `sales_status`, `item
 -- Table structure for table `db_salesitemsreturn`
 --
 
-DROP TABLE IF EXISTS `db_salesitemsreturn`;
-CREATE TABLE IF NOT EXISTS `db_salesitemsreturn` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `sales_id` int DEFAULT NULL,
-  `return_id` int DEFAULT NULL,
-  `return_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `item_id` int DEFAULT NULL,
+CREATE TABLE `db_salesitemsreturn` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `sales_id` int(11) DEFAULT NULL,
+  `return_id` int(11) DEFAULT NULL,
+  `return_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
   `return_qty` double(20,2) DEFAULT NULL,
   `price_per_unit` double(20,4) DEFAULT NULL,
-  `tax_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tax_id` int DEFAULT NULL,
+  `tax_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax_id` int(11) DEFAULT NULL,
   `tax_amt` double(20,4) DEFAULT NULL,
   `discount_input` double(20,4) DEFAULT NULL,
   `discount_amt` double(20,4) DEFAULT NULL,
-  `discount_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `unit_total_cost` double(20,4) DEFAULT NULL,
   `total_cost` double(20,4) DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `purchase_price` double(20,3) DEFAULT '0.000',
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `return_id` (`return_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `status` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `purchase_price` double(20,3) DEFAULT 0.000
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_salesitemsreturn`
@@ -7443,36 +7279,31 @@ INSERT INTO `db_salesitemsreturn` (`id`, `store_id`, `sales_id`, `return_id`, `r
 -- Table structure for table `db_salespayments`
 --
 
-DROP TABLE IF EXISTS `db_salespayments`;
-CREATE TABLE IF NOT EXISTS `db_salespayments` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `count_id` int DEFAULT NULL,
-  `payment_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `store_id` int DEFAULT NULL,
-  `sales_id` int DEFAULT NULL,
+CREATE TABLE `db_salespayments` (
+  `id` int(11) NOT NULL,
+  `count_id` int(11) DEFAULT NULL,
+  `payment_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `sales_id` int(11) DEFAULT NULL,
   `payment_date` date DEFAULT NULL,
-  `payment_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payment` double(20,4) DEFAULT NULL,
-  `payment_note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `payment_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `change_return` double(20,4) DEFAULT NULL COMMENT 'Refunding the greater amount',
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `account_id` int DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
-  `short_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `account_id` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `short_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `advance_adjusted` double(20,4) DEFAULT NULL,
-  `cheque_number` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cheque_period` int DEFAULT NULL,
-  `cheque_status` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `sales_id` (`sales_id`),
-  KEY `customer_id` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=382 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `cheque_number` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cheque_period` int(11) DEFAULT NULL,
+  `cheque_status` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_salespayments`
@@ -7570,7 +7401,8 @@ INSERT INTO `db_salespayments` (`id`, `count_id`, `payment_code`, `store_id`, `s
 (378, 89, 'SP0089', 2, 90, '2023-08-15', 'Cash', 2231.0000, 'Paid By Cash', 0.0000, '::1', 'DESKTOP-N5NTSRT', '12:27:57 pm', '2023-08-15', 'SARA', 1, NULL, 2, NULL, 0.0000, NULL, NULL, NULL),
 (379, 90, 'SP0090', 2, 91, '2023-08-15', 'Espèce', 8.0000, '', NULL, '::1', 'DESKTOP-N5NTSRT', '05:22:16 pm', '2023-08-15', 'SARA', 1, NULL, 2, NULL, 0.0000, '', 0, 'Pending'),
 (380, 91, 'SP0091', 2, 92, '2023-08-15', 'Espèce', 327.0000, '', NULL, '::1', 'DESKTOP-N5NTSRT', '07:00:24 pm', '2023-08-15', 'SARA', 1, NULL, 2, NULL, 0.0000, '', 0, 'Pending'),
-(381, 92, 'SP0092', 2, 93, '2023-08-15', 'Espèce', 109.0000, '', NULL, '::1', 'DESKTOP-N5NTSRT', '07:01:01 pm', '2023-08-15', 'SARA', 1, NULL, 2, NULL, 0.0000, '', 0, 'Pending');
+(381, 92, 'SP0092', 2, 93, '2023-08-15', 'Espèce', 109.0000, '', NULL, '::1', 'DESKTOP-N5NTSRT', '07:01:01 pm', '2023-08-15', 'SARA', 1, NULL, 2, NULL, 0.0000, '', 0, 'Pending'),
+(382, 93, 'SP0093', 2, 94, '2023-08-30', 'Espèce', 25.0000, '', NULL, '::1', 'DESKTOP-N2GN4F8', '11:34:48 pm', '2023-08-30', 'SARA', 1, 1, 2, NULL, 0.0000, '', 0, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -7578,33 +7410,28 @@ INSERT INTO `db_salespayments` (`id`, `count_id`, `payment_code`, `store_id`, `s
 -- Table structure for table `db_salespaymentsreturn`
 --
 
-DROP TABLE IF EXISTS `db_salespaymentsreturn`;
-CREATE TABLE IF NOT EXISTS `db_salespaymentsreturn` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `count_id` int DEFAULT NULL,
-  `payment_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `store_id` int DEFAULT NULL,
-  `sales_id` int DEFAULT NULL,
-  `return_id` int DEFAULT NULL,
+CREATE TABLE `db_salespaymentsreturn` (
+  `id` int(11) NOT NULL,
+  `count_id` int(11) DEFAULT NULL,
+  `payment_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `sales_id` int(11) DEFAULT NULL,
+  `return_id` int(11) DEFAULT NULL,
   `payment_date` date DEFAULT NULL,
-  `payment_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payment` double(20,4) DEFAULT NULL,
-  `payment_note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `payment_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `change_return` double(20,4) DEFAULT NULL COMMENT 'Refunding the greater amount',
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_time` time DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `account_id` int DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
-  `short_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `return_id` (`return_id`),
-  KEY `db_salespaymentsreturn_ibfk_3` (`customer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `account_id` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `short_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_salespaymentsreturn`
@@ -7619,46 +7446,41 @@ INSERT INTO `db_salespaymentsreturn` (`id`, `count_id`, `payment_code`, `store_i
 -- Table structure for table `db_salesreturn`
 --
 
-DROP TABLE IF EXISTS `db_salesreturn`;
-CREATE TABLE IF NOT EXISTS `db_salesreturn` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `count_id` int DEFAULT NULL COMMENT 'Use to create Sales Return Code',
-  `sales_id` int DEFAULT NULL,
-  `warehouse_id` int DEFAULT NULL,
-  `return_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reference_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_salesreturn` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `count_id` int(11) DEFAULT NULL COMMENT 'Use to create Sales Return Code',
+  `sales_id` int(11) DEFAULT NULL,
+  `warehouse_id` int(11) DEFAULT NULL,
+  `return_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reference_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `return_date` date DEFAULT NULL,
-  `return_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
+  `return_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
   `other_charges_input` double(20,4) DEFAULT NULL,
-  `other_charges_tax_id` int DEFAULT NULL,
+  `other_charges_tax_id` int(11) DEFAULT NULL,
   `other_charges_amt` double(20,4) DEFAULT NULL,
   `discount_to_all_input` double(20,4) DEFAULT NULL,
-  `discount_to_all_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_to_all_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tot_discount_to_all_amt` double(20,4) DEFAULT NULL,
   `subtotal` double(20,4) DEFAULT NULL,
   `round_off` double(20,4) DEFAULT NULL,
   `grand_total` double(20,4) DEFAULT NULL,
-  `return_note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `payment_status` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `return_note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_status` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `paid_amount` double(20,4) DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `company_id` int DEFAULT NULL,
-  `pos` int DEFAULT NULL COMMENT '1=yes 0=no',
-  `status` int DEFAULT NULL,
-  `return_bit` int DEFAULT NULL COMMENT 'Return raised or not 1 or null',
-  `coupon_id` int DEFAULT NULL,
-  `coupon_amt` double(20,2) DEFAULT '0.00',
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `sales_id` (`sales_id`),
-  KEY `coupon_id` (`coupon_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `pos` int(11) DEFAULT NULL COMMENT '1=yes 0=no',
+  `status` int(11) DEFAULT NULL,
+  `return_bit` int(11) DEFAULT NULL COMMENT 'Return raised or not 1 or null',
+  `coupon_id` int(11) DEFAULT NULL,
+  `coupon_amt` double(20,2) DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_salesreturn`
@@ -7673,22 +7495,18 @@ INSERT INTO `db_salesreturn` (`id`, `store_id`, `count_id`, `sales_id`, `warehou
 -- Table structure for table `db_shippingaddress`
 --
 
-DROP TABLE IF EXISTS `db_shippingaddress`;
-CREATE TABLE IF NOT EXISTS `db_shippingaddress` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `country_id` int DEFAULT NULL,
-  `state_id` int DEFAULT NULL,
-  `city` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `postcode` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `address` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
-  `status` int DEFAULT NULL,
-  `customer_id` int DEFAULT NULL,
-  `location_link` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
-  KEY `customer_id` (`customer_id`),
-  KEY `store_id` (`store_id`),
-  KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_shippingaddress` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `city` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `postcode` varchar(20) CHARACTER SET latin1 DEFAULT NULL,
+  `address` text CHARACTER SET latin1 DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `location_link` text CHARACTER SET latin1 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_shippingaddress`
@@ -7706,24 +7524,23 @@ INSERT INTO `db_shippingaddress` (`id`, `store_id`, `country_id`, `state_id`, `c
 -- Table structure for table `db_sitesettings`
 --
 
-DROP TABLE IF EXISTS `db_sitesettings`;
-CREATE TABLE IF NOT EXISTS `db_sitesettings` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `version` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `site_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `logo` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'path',
-  `machine_id` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `domain` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `unique_code` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_sitesettings` (
+  `id` int(11) NOT NULL,
+  `version` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `site_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'path',
+  `machine_id` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `domain` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `unique_code` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo_facture` varchar(225) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_sitesettings`
 --
 
-INSERT INTO `db_sitesettings` (`id`, `version`, `site_name`, `logo`, `machine_id`, `domain`, `unique_code`) VALUES
-(1, '3.0', 'TAYSSIR SUPERMARCHE', '/uploads/site/logolib_(5)1.png', '1', 'pointofsale.ozonepos.com', '4kcd2s8v9axrpm6gy1foh7tlqij5nw');
+INSERT INTO `db_sitesettings` (`id`, `version`, `site_name`, `logo`, `machine_id`, `domain`, `unique_code`, `logo_facture`) VALUES
+(1, '3.0', 'TAYSSIR SUPERMARCHE', '/uploads/site/logolib_(5)1.png', '1', 'pointofsale.ozonepos.com', '4kcd2s8v9axrpm6gy1foh7tlqij5nw', '/uploads/site/libraireblue21.png');
 
 -- --------------------------------------------------------
 
@@ -7731,17 +7548,14 @@ INSERT INTO `db_sitesettings` (`id`, `version`, `site_name`, `logo`, `machine_id
 -- Table structure for table `db_smsapi`
 --
 
-DROP TABLE IF EXISTS `db_smsapi`;
-CREATE TABLE IF NOT EXISTS `db_smsapi` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `info` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `key` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `key_value` varchar(600) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `delete_bit` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_smsapi` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `info` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `key` varchar(600) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `key_value` varchar(600) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `delete_bit` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_smsapi`
@@ -7761,18 +7575,15 @@ INSERT INTO `db_smsapi` (`id`, `store_id`, `info`, `key`, `key_value`, `delete_b
 -- Table structure for table `db_smstemplates`
 --
 
-DROP TABLE IF EXISTS `db_smstemplates`;
-CREATE TABLE IF NOT EXISTS `db_smstemplates` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `template_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `variables` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `status` int DEFAULT NULL,
-  `undelete_bit` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_smstemplates` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `template_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `variables` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `undelete_bit` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_smstemplates`
@@ -7790,21 +7601,19 @@ INSERT INTO `db_smstemplates` (`id`, `store_id`, `template_name`, `content`, `va
 -- Table structure for table `db_sobpayments`
 --
 
-DROP TABLE IF EXISTS `db_sobpayments`;
-CREATE TABLE IF NOT EXISTS `db_sobpayments` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `supplier_id` int DEFAULT NULL,
+CREATE TABLE `db_sobpayments` (
+  `id` int(11) NOT NULL,
+  `supplier_id` int(11) DEFAULT NULL,
   `payment_date` date DEFAULT NULL,
-  `payment_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `payment` double(10,2) DEFAULT NULL,
-  `payment_note` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_note` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_time` time DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -7813,21 +7622,18 @@ CREATE TABLE IF NOT EXISTS `db_sobpayments` (
 -- Table structure for table `db_states`
 --
 
-DROP TABLE IF EXISTS `db_states`;
-CREATE TABLE IF NOT EXISTS `db_states` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `state_code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state` varchar(4050) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country_code` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `country_id` int DEFAULT NULL,
-  `country` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_states` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `state_code` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(4050) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country_code` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `country` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `added_on` date DEFAULT NULL,
-  `company_id` int DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `company_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_states`
@@ -7842,23 +7648,20 @@ INSERT INTO `db_states` (`id`, `store_id`, `state_code`, `state`, `country_code`
 -- Table structure for table `db_stockadjustment`
 --
 
-DROP TABLE IF EXISTS `db_stockadjustment`;
-CREATE TABLE IF NOT EXISTS `db_stockadjustment` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `warehouse_id` int DEFAULT NULL,
-  `reference_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_stockadjustment` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `warehouse_id` int(11) DEFAULT NULL,
+  `reference_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `adjustment_date` date DEFAULT NULL,
-  `adjustment_note` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `adjustment_note` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4138 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_stockadjustment`
@@ -8212,22 +8015,16 @@ INSERT INTO `db_stockadjustment` (`id`, `store_id`, `warehouse_id`, `reference_n
 -- Table structure for table `db_stockadjustmentitems`
 --
 
-DROP TABLE IF EXISTS `db_stockadjustmentitems`;
-CREATE TABLE IF NOT EXISTS `db_stockadjustmentitems` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `warehouse_id` int DEFAULT NULL,
-  `adjustment_id` int DEFAULT NULL,
-  `item_id` int DEFAULT NULL,
+CREATE TABLE `db_stockadjustmentitems` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `warehouse_id` int(11) DEFAULT NULL,
+  `adjustment_id` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
   `adjustment_qty` double(20,2) DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  PRIMARY KEY (`id`),
-  KEY `purchase_id` (`adjustment_id`),
-  KEY `item_id` (`item_id`),
-  KEY `store_id` (`store_id`),
-  KEY `warehouse_id` (`warehouse_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8675 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `status` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_stockadjustmentitems`
@@ -12776,14 +12573,12 @@ INSERT INTO `db_stockadjustmentitems` (`id`, `store_id`, `warehouse_id`, `adjust
 -- Table structure for table `db_stockentry`
 --
 
-DROP TABLE IF EXISTS `db_stockentry`;
-CREATE TABLE IF NOT EXISTS `db_stockentry` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `db_stockentry` (
+  `id` int(11) NOT NULL,
   `entry_date` date DEFAULT NULL,
-  `item_id` int DEFAULT NULL,
-  `qty` int DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `item_id` int(11) DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -12792,27 +12587,21 @@ CREATE TABLE IF NOT EXISTS `db_stockentry` (
 -- Table structure for table `db_stocktransfer`
 --
 
-DROP TABLE IF EXISTS `db_stocktransfer`;
-CREATE TABLE IF NOT EXISTS `db_stocktransfer` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL COMMENT 'from store',
-  `to_store_id` int DEFAULT NULL COMMENT 'to store transfer',
-  `warehouse_from` int DEFAULT NULL,
-  `warehouse_to` int DEFAULT NULL,
+CREATE TABLE `db_stocktransfer` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL COMMENT 'from store',
+  `to_store_id` int(11) DEFAULT NULL COMMENT 'to store transfer',
+  `warehouse_from` int(11) DEFAULT NULL,
+  `warehouse_to` int(11) DEFAULT NULL,
   `transfer_date` date DEFAULT NULL,
-  `note` text CHARACTER SET latin1 COLLATE latin1_swedish_ci,
-  `created_by` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `note` text CHARACTER SET latin1 DEFAULT NULL,
+  `created_by` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `system_ip` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `warehouse_id` (`warehouse_from`),
-  KEY `warehouse_to` (`warehouse_to`),
-  KEY `db_stocktransfer_ibfk_4` (`to_store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_time` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `system_ip` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `system_name` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_stocktransfer`
@@ -12828,25 +12617,17 @@ INSERT INTO `db_stocktransfer` (`id`, `store_id`, `to_store_id`, `warehouse_from
 -- Table structure for table `db_stocktransferitems`
 --
 
-DROP TABLE IF EXISTS `db_stocktransferitems`;
-CREATE TABLE IF NOT EXISTS `db_stocktransferitems` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `stocktransfer_id` int DEFAULT NULL,
-  `store_id` int DEFAULT NULL COMMENT 'from store',
-  `to_store_id` int DEFAULT NULL COMMENT 'to store',
-  `warehouse_from` int DEFAULT NULL COMMENT 'warehouse ids',
-  `warehouse_to` int DEFAULT NULL COMMENT 'warehouse ids',
-  `item_id` int DEFAULT NULL,
+CREATE TABLE `db_stocktransferitems` (
+  `id` int(11) NOT NULL,
+  `stocktransfer_id` int(11) DEFAULT NULL,
+  `store_id` int(11) DEFAULT NULL COMMENT 'from store',
+  `to_store_id` int(11) DEFAULT NULL COMMENT 'to store',
+  `warehouse_from` int(11) DEFAULT NULL COMMENT 'warehouse ids',
+  `warehouse_to` int(11) DEFAULT NULL COMMENT 'warehouse ids',
+  `item_id` int(11) DEFAULT NULL,
   `transfer_qty` double(20,2) DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `warehouse_from` (`warehouse_from`),
-  KEY `warehouse_to` (`warehouse_to`),
-  KEY `stocktranfer_id` (`stocktransfer_id`),
-  KEY `item_id` (`item_id`),
-  KEY `db_stocktransferitems_ibfk_6` (`to_store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_stocktransferitems`
@@ -12861,96 +12642,94 @@ INSERT INTO `db_stocktransferitems` (`id`, `stocktransfer_id`, `store_id`, `to_s
 -- Table structure for table `db_store`
 --
 
-DROP TABLE IF EXISTS `db_store`;
-CREATE TABLE IF NOT EXISTS `db_store` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_code` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `store_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `store_website` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mobile` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `website` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `store_logo` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `logo` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `upi_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `upi_code` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `country` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(300) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `postcode` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gst_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `vat_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pan_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `bank_details` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `cid` int DEFAULT NULL,
-  `category_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `item_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
-  `supplier_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
-  `purchase_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
-  `purchase_return_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `customer_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
-  `sales_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
-  `sales_return_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `expense_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `accounts_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `journal_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cust_advance_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `invoice_view` int DEFAULT NULL COMMENT '1=Standard,2=Indian GST',
-  `sms_status` int DEFAULT NULL COMMENT '1=Enable 0=Disable',
-  `status` int DEFAULT NULL,
-  `language_id` int DEFAULT NULL,
-  `currency_id` int DEFAULT NULL,
-  `currency_placement` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `timezone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `date_format` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `time_format` int DEFAULT NULL,
+CREATE TABLE `db_store` (
+  `id` int(11) NOT NULL,
+  `store_code` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `store_name` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `store_website` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `website` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `store_logo` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `upi_id` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `upi_code` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(300) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `postcode` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gst_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `vat_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pan_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bank_details` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cid` int(11) DEFAULT NULL,
+  `category_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `item_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
+  `supplier_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
+  `purchase_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
+  `purchase_return_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
+  `sales_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'INITAL CODE',
+  `sales_return_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `expense_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `accounts_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `journal_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cust_advance_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `invoice_view` int(11) DEFAULT NULL COMMENT '1=Standard,2=Indian GST',
+  `sms_status` int(11) DEFAULT NULL COMMENT '1=Enable 0=Disable',
+  `status` int(11) DEFAULT NULL,
+  `language_id` int(11) DEFAULT NULL,
+  `currency_id` int(11) DEFAULT NULL,
+  `currency_placement` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `timezone` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_format` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `time_format` int(11) DEFAULT NULL,
   `sales_discount` double(20,4) DEFAULT NULL,
-  `currencysymbol_id` int DEFAULT NULL,
-  `regno_key` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `fav_icon` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `purchase_code` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `change_return` int DEFAULT NULL,
-  `sales_invoice_format_id` int DEFAULT NULL,
-  `pos_invoice_format_id` int DEFAULT NULL,
-  `sales_invoice_footer_text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `round_off` int DEFAULT NULL,
+  `currencysymbol_id` int(11) DEFAULT NULL,
+  `regno_key` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fav_icon` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `purchase_code` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `change_return` int(11) DEFAULT NULL,
+  `sales_invoice_format_id` int(11) DEFAULT NULL,
+  `pos_invoice_format_id` int(11) DEFAULT NULL,
+  `sales_invoice_footer_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `round_off` int(11) DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `quotation_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `decimals` int DEFAULT '2',
-  `money_transfer_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sales_payment_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `sales_return_payment_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `purchase_payment_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `purchase_return_payment_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `expense_payment_init` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `current_subscriptionlist_id` int DEFAULT '0',
-  `smtp_host` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `smtp_port` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `smtp_user` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `smtp_pass` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `smtp_status` int DEFAULT '0',
-  `sms_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `user_id` int NOT NULL,
-  `mrp_column` int DEFAULT '0',
-  `invoice_terms` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `previous_balance_bit` int DEFAULT '1' COMMENT '1=Show, 0=Hide - Shows on sales invoice',
-  `qty_decimals` int DEFAULT '2',
-  `signature` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `show_signature` int DEFAULT '0',
-  `t_and_c_status` int DEFAULT '1' COMMENT '1=Show, 0=Hide - Shows on sales invoice',
-  `t_and_c_status_pos` int DEFAULT '1',
-  `number_to_words` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'Default',
-  `default_account_id` int DEFAULT NULL,
-  `cnss` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `rc` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `quotation_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `decimals` int(11) DEFAULT 2,
+  `money_transfer_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sales_payment_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sales_return_payment_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `purchase_payment_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `purchase_return_payment_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `expense_payment_init` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `current_subscriptionlist_id` int(11) DEFAULT 0,
+  `smtp_host` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `smtp_port` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `smtp_user` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `smtp_pass` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `smtp_status` int(11) DEFAULT 0,
+  `sms_url` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `mrp_column` int(11) DEFAULT 0,
+  `invoice_terms` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `previous_balance_bit` int(11) DEFAULT 1 COMMENT '1=Show, 0=Hide - Shows on sales invoice',
+  `qty_decimals` int(11) DEFAULT 2,
+  `signature` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `show_signature` int(11) DEFAULT 0,
+  `t_and_c_status` int(11) DEFAULT 1 COMMENT '1=Show, 0=Hide - Shows on sales invoice',
+  `t_and_c_status_pos` int(11) DEFAULT 1,
+  `number_to_words` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT 'Default',
+  `default_account_id` int(11) DEFAULT NULL,
+  `cnss` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rc` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_store`
@@ -12966,18 +12745,15 @@ INSERT INTO `db_store` (`id`, `store_code`, `store_name`, `store_website`, `mobi
 -- Table structure for table `db_stripe`
 --
 
-DROP TABLE IF EXISTS `db_stripe`;
-CREATE TABLE IF NOT EXISTS `db_stripe` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `sandbox` int DEFAULT NULL,
-  `publishable_key` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `api_secret` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+CREATE TABLE `db_stripe` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `sandbox` int(11) DEFAULT NULL,
+  `publishable_key` text CHARACTER SET utf8mb4 DEFAULT NULL,
+  `api_secret` text CHARACTER SET utf8mb4 DEFAULT NULL,
   `updated_at` date DEFAULT NULL,
-  `updated_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
+  `updated_by` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -12986,18 +12762,16 @@ CREATE TABLE IF NOT EXISTS `db_stripe` (
 -- Table structure for table `db_stripepayments`
 --
 
-DROP TABLE IF EXISTS `db_stripepayments`;
-CREATE TABLE IF NOT EXISTS `db_stripepayments` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `product_id` int NOT NULL,
-  `buyer_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `buyer_email` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `paid_amount` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `paid_amount_currency` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `txn_id` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `payment_status` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+CREATE TABLE `db_stripepayments` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `buyer_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `buyer_email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `paid_amount` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `paid_amount_currency` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `txn_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `payment_status` varchar(25) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `created` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -13006,38 +12780,36 @@ CREATE TABLE IF NOT EXISTS `db_stripepayments` (
 -- Table structure for table `db_subscription`
 --
 
-DROP TABLE IF EXISTS `db_subscription`;
-CREATE TABLE IF NOT EXISTS `db_subscription` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `payment_id` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `package_id` int DEFAULT NULL,
-  `package_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `package_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+CREATE TABLE `db_subscription` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `payment_id` varchar(250) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `package_id` int(11) DEFAULT NULL,
+  `package_type` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `package_name` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `description` text CHARACTER SET utf8mb4 DEFAULT NULL,
   `subscription_date` date DEFAULT NULL,
   `expire_date` date DEFAULT NULL,
-  `trial_days` int DEFAULT NULL,
-  `max_users` int DEFAULT NULL,
-  `max_warehouses` int DEFAULT NULL,
-  `max_items` int DEFAULT NULL,
-  `max_invoices` int DEFAULT NULL,
-  `payment_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `txn_id` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `trial_days` int(11) DEFAULT NULL,
+  `max_users` int(11) DEFAULT NULL,
+  `max_warehouses` int(11) DEFAULT NULL,
+  `max_items` int(11) DEFAULT NULL,
+  `max_invoices` int(11) DEFAULT NULL,
+  `payment_by` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `txn_id` varchar(250) CHARACTER SET utf8mb4 DEFAULT NULL,
   `payment_gross` double(10,2) DEFAULT NULL,
-  `currency_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `payer_email` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `payment_status` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `currency_code` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `payer_email` varchar(250) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `payment_status` varchar(250) CHARACTER SET utf8mb4 DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `system_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `package_status` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `payment_type` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'manual subscription only',
-  `package_count` int DEFAULT NULL COMMENT 'manual subscription only',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_time` varchar(20) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_by` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `system_ip` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `system_name` varchar(100) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `package_status` varchar(100) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `payment_type` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'manual subscription only',
+  `package_count` int(11) DEFAULT NULL COMMENT 'manual subscription only'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_subscription`
@@ -13057,37 +12829,34 @@ INSERT INTO `db_subscription` (`id`, `store_id`, `payment_id`, `package_id`, `pa
 -- Table structure for table `db_suppliers`
 --
 
-DROP TABLE IF EXISTS `db_suppliers`;
-CREATE TABLE IF NOT EXISTS `db_suppliers` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `count_id` int DEFAULT NULL COMMENT 'Use to create supplier Code',
-  `supplier_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `supplier_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mobile` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `gstin` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tax_number` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `vatin` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_suppliers` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `count_id` int(11) DEFAULT NULL COMMENT 'Use to create supplier Code',
+  `supplier_code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `supplier_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gstin` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tax_number` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `vatin` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `opening_balance` double(20,4) DEFAULT NULL,
   `purchase_due` double(20,4) DEFAULT NULL,
   `purchase_return_due` double(20,4) DEFAULT NULL,
-  `country_id` int DEFAULT NULL,
-  `state_id` int DEFAULT NULL,
-  `city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `postcode` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country_id` int(11) DEFAULT NULL,
+  `state_id` int(11) DEFAULT NULL,
+  `city` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `postcode` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `company_id` int DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_time` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_suppliers`
@@ -13103,24 +12872,20 @@ INSERT INTO `db_suppliers` (`id`, `store_id`, `count_id`, `supplier_code`, `supp
 -- Table structure for table `db_supplier_payments`
 --
 
-DROP TABLE IF EXISTS `db_supplier_payments`;
-CREATE TABLE IF NOT EXISTS `db_supplier_payments` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `purchasepayment_id` int DEFAULT NULL,
-  `supplier_id` int DEFAULT NULL,
+CREATE TABLE `db_supplier_payments` (
+  `id` int(11) NOT NULL,
+  `purchasepayment_id` int(11) DEFAULT NULL,
+  `supplier_id` int(11) DEFAULT NULL,
   `payment_date` date DEFAULT NULL,
-  `payment_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `payment_type` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
   `payment` double(10,2) DEFAULT NULL,
-  `payment_note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created_date` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `supplier_id` (`supplier_id`),
-  KEY `purchasepayment_id` (`purchasepayment_id`)
+  `payment_note` text CHARACTER SET utf8mb4 DEFAULT NULL,
+  `system_ip` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `system_name` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_time` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_date` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `created_by` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -13129,18 +12894,15 @@ CREATE TABLE IF NOT EXISTS `db_supplier_payments` (
 -- Table structure for table `db_tax`
 --
 
-DROP TABLE IF EXISTS `db_tax`;
-CREATE TABLE IF NOT EXISTS `db_tax` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `tax_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_tax` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `tax_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tax` double(20,4) DEFAULT NULL,
-  `group_bit` int DEFAULT NULL COMMENT '1=Yes, 0=No',
-  `subtax_ids` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tax groups IDs',
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=152 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `group_bit` int(11) DEFAULT NULL COMMENT '1=Yes, 0=No',
+  `subtax_ids` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Tax groups IDs',
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_tax`
@@ -13157,13 +12919,11 @@ INSERT INTO `db_tax` (`id`, `store_id`, `tax_name`, `tax`, `group_bit`, `subtax_
 -- Table structure for table `db_timezone`
 --
 
-DROP TABLE IF EXISTS `db_timezone`;
-CREATE TABLE IF NOT EXISTS `db_timezone` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `timezone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=549 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_timezone` (
+  `id` int(11) NOT NULL,
+  `timezone` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_timezone`
@@ -13725,17 +13485,14 @@ INSERT INTO `db_timezone` (`id`, `timezone`, `status`) VALUES
 -- Table structure for table `db_twilio`
 --
 
-DROP TABLE IF EXISTS `db_twilio`;
-CREATE TABLE IF NOT EXISTS `db_twilio` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `account_sid` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `auth_token` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `twilio_phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `status` int DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_twilio` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `account_sid` varchar(250) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `auth_token` varchar(250) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `twilio_phone` varchar(20) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `status` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_twilio`
@@ -13751,17 +13508,14 @@ INSERT INTO `db_twilio` (`id`, `store_id`, `account_sid`, `auth_token`, `twilio_
 -- Table structure for table `db_units`
 --
 
-DROP TABLE IF EXISTS `db_units`;
-CREATE TABLE IF NOT EXISTS `db_units` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `unit_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `company_id` int DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_units` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `unit_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_units`
@@ -13778,43 +13532,40 @@ INSERT INTO `db_units` (`id`, `store_id`, `unit_name`, `description`, `company_i
 -- Table structure for table `db_users`
 --
 
-DROP TABLE IF EXISTS `db_users`;
-CREATE TABLE IF NOT EXISTS `db_users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `first_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `last_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `password` blob,
-  `member_of` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `firstname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `lastname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mobile` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `photo` blob,
-  `gender` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+CREATE TABLE `db_users` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `username` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `first_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` blob DEFAULT NULL,
+  `member_of` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `firstname` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastname` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` blob DEFAULT NULL,
+  `gender` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dob` date DEFAULT NULL,
-  `country` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` blob,
-  `postcode` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `role_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `role_id` int DEFAULT NULL,
-  `profile_picture` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `country` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` blob DEFAULT NULL,
+  `postcode` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role_id` int(11) DEFAULT NULL,
+  `profile_picture` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` double DEFAULT NULL,
-  `creater_id` int DEFAULT NULL,
-  `updater_id` int DEFAULT NULL,
+  `creater_id` int(11) DEFAULT NULL,
+  `updater_id` int(11) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `default_warehouse_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `default_warehouse_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_users`
@@ -13831,15 +13582,11 @@ INSERT INTO `db_users` (`id`, `store_id`, `username`, `first_name`, `last_name`,
 -- Table structure for table `db_userswarehouses`
 --
 
-DROP TABLE IF EXISTS `db_userswarehouses`;
-CREATE TABLE IF NOT EXISTS `db_userswarehouses` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  `warehouse_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `warehouse_id` (`warehouse_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_userswarehouses` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `warehouse_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_userswarehouses`
@@ -13854,17 +13601,14 @@ INSERT INTO `db_userswarehouses` (`id`, `user_id`, `warehouse_id`) VALUES
 -- Table structure for table `db_variants`
 --
 
-DROP TABLE IF EXISTS `db_variants`;
-CREATE TABLE IF NOT EXISTS `db_variants` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `variant_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `variant_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=273 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_variants` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `variant_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `variant_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` mediumtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_variants`
@@ -13892,19 +13636,16 @@ INSERT INTO `db_variants` (`id`, `store_id`, `variant_code`, `variant_name`, `de
 -- Table structure for table `db_warehouse`
 --
 
-DROP TABLE IF EXISTS `db_warehouse`;
-CREATE TABLE IF NOT EXISTS `db_warehouse` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `warehouse_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `warehouse_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mobile` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  `created_date` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_warehouse` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `warehouse_type` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `warehouse_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mobile` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `created_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_warehouse`
@@ -13922,18 +13663,13 @@ INSERT INTO `db_warehouse` (`id`, `store_id`, `warehouse_type`, `warehouse_name`
 -- Table structure for table `db_warehouseitems`
 --
 
-DROP TABLE IF EXISTS `db_warehouseitems`;
-CREATE TABLE IF NOT EXISTS `db_warehouseitems` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `store_id` int DEFAULT NULL,
-  `warehouse_id` int DEFAULT NULL,
-  `item_id` int DEFAULT NULL,
-  `available_qty` double(20,2) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `store_id` (`store_id`),
-  KEY `warehouse_id` (`warehouse_id`),
-  KEY `item_id` (`item_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12577 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE `db_warehouseitems` (
+  `id` int(11) NOT NULL,
+  `store_id` int(11) DEFAULT NULL,
+  `warehouse_id` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `available_qty` double(20,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `db_warehouseitems`
@@ -14107,7 +13843,6 @@ INSERT INTO `db_warehouseitems` (`id`, `store_id`, `warehouse_id`, `item_id`, `a
 (8203, 2, 2, 2329, 1000.00),
 (8204, 2, 2, 2330, 1000.00),
 (8205, 2, 2, 2331, 1000.00),
-(8206, 2, 2, 2332, 1000.00),
 (8207, 2, 2, 2333, 1000.00),
 (8208, 2, 2, 2334, 1000.00),
 (8209, 2, 2, 2335, 1000.00),
@@ -15787,9 +15522,9 @@ INSERT INTO `db_warehouseitems` (`id`, `store_id`, `warehouse_id`, `item_id`, `a
 (9883, 2, 2, 4009, 1000.00),
 (9884, 2, 2, 4010, 1000.00),
 (9885, 2, 2, 4011, 1000.00),
-(9886, 2, 2, 4012, 1000.00);
+(9886, 2, 2, 4012, 1000.00),
+(9887, 2, 2, 4013, 1000.00);
 INSERT INTO `db_warehouseitems` (`id`, `store_id`, `warehouse_id`, `item_id`, `available_qty`) VALUES
-(9887, 2, 2, 4013, 1000.00),
 (9888, 2, 2, 4014, 1000.00),
 (9889, 2, 2, 4015, 1000.00),
 (9890, 2, 2, 4016, 1000.00),
@@ -17574,9 +17309,9 @@ INSERT INTO `db_warehouseitems` (`id`, `store_id`, `warehouse_id`, `item_id`, `a
 (11670, 2, 2, 5796, 1000.00),
 (11671, 2, 2, 5797, 1000.00),
 (11672, 2, 2, 5798, 1000.00),
-(11673, 2, 2, 5799, 1000.00);
+(11673, 2, 2, 5799, 1000.00),
+(11674, 2, 2, 5800, 1000.00);
 INSERT INTO `db_warehouseitems` (`id`, `store_id`, `warehouse_id`, `item_id`, `available_qty`) VALUES
-(11674, 2, 2, 5800, 1000.00),
 (11675, 2, 2, 5801, 1000.00),
 (11676, 2, 2, 5802, 1000.00),
 (11677, 2, 2, 5803, 1000.00),
@@ -18472,7 +18207,8 @@ INSERT INTO `db_warehouseitems` (`id`, `store_id`, `warehouse_id`, `item_id`, `a
 (12570, 2, 2, 6540, 999.00),
 (12572, 2, 2, 6527, 900.00),
 (12573, 2, 2, 4116, 999.00),
-(12576, 2, 2, 6695, 996.00);
+(12576, 2, 2, 6695, 996.00),
+(12577, 2, 2, 2332, 999.00);
 
 -- --------------------------------------------------------
 
@@ -18480,25 +18216,1042 @@ INSERT INTO `db_warehouseitems` (`id`, `store_id`, `warehouse_id`, `item_id`, `a
 -- Table structure for table `temp_holdinvoice`
 --
 
-DROP TABLE IF EXISTS `temp_holdinvoice`;
-CREATE TABLE IF NOT EXISTS `temp_holdinvoice` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `invoice_id` int DEFAULT NULL,
+CREATE TABLE `temp_holdinvoice` (
+  `id` int(11) NOT NULL,
+  `invoice_id` int(11) DEFAULT NULL,
   `invoice_date` date DEFAULT NULL,
-  `reference_id` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `item_id` int DEFAULT NULL,
-  `item_qty` int DEFAULT NULL,
+  `reference_id` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `item_qty` int(11) DEFAULT NULL,
   `item_price` double(10,2) DEFAULT NULL,
   `tax` double(10,2) DEFAULT NULL,
   `created_date` date DEFAULT NULL,
-  `created_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_ip` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `system_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `pos` int DEFAULT NULL,
-  `status` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `created_time` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_ip` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `system_name` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pos` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `ac_accounts`
+--
+ALTER TABLE `ac_accounts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `paymenttypes_id` (`paymenttypes_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `supplier_id` (`supplier_id`),
+  ADD KEY `expense_id` (`expense_id`);
+
+--
+-- Indexes for table `ac_moneydeposits`
+--
+ALTER TABLE `ac_moneydeposits`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `from_account_id` (`debit_account_id`),
+  ADD KEY `to_account_id` (`credit_account_id`),
+  ADD KEY `db_moneydeposits_ibfk_3` (`store_id`);
+
+--
+-- Indexes for table `ac_moneytransfer`
+--
+ALTER TABLE `ac_moneytransfer`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `from_account_id` (`debit_account_id`),
+  ADD KEY `to_account_id` (`credit_account_id`),
+  ADD KEY `db_moneytransfer_ibfk_3` (`store_id`);
+
+--
+-- Indexes for table `ac_transactions`
+--
+ALTER TABLE `ac_transactions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `journal_id` (`transaction_type`),
+  ADD KEY `account_id` (`debit_account_id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `ac_accounts_id` (`ref_accounts_id`),
+  ADD KEY `ac_moneytransfer_id` (`ref_moneytransfer_id`),
+  ADD KEY `ac_moneydeposits_id` (`ref_moneydeposits_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `ref_salespayments_id` (`ref_salespayments_id`),
+  ADD KEY `ref_purchasepayments_id` (`ref_purchasepayments_id`),
+  ADD KEY `ref_purchasepaymentsreturn_id` (`ref_purchasepaymentsreturn_id`),
+  ADD KEY `ac_transactions_ibfk_9` (`ref_salespaymentsreturn_id`),
+  ADD KEY `supplier_id` (`supplier_id`),
+  ADD KEY `ref_expense_id` (`ref_expense_id`);
+
+--
+-- Indexes for table `bd_delivery`
+--
+ALTER TABLE `bd_delivery`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `warehouse_id` (`warehouse_id`);
+
+--
+-- Indexes for table `ci_sessions`
+--
+ALTER TABLE `ci_sessions`
+  ADD KEY `ci_sessions_timestamp` (`timestamp`);
+
+--
+-- Indexes for table `db_bankdetails`
+--
+ALTER TABLE `db_bankdetails`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_brands`
+--
+ALTER TABLE `db_brands`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_category`
+--
+ALTER TABLE `db_category`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_cobpayments`
+--
+ALTER TABLE `db_cobpayments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_country`
+--
+ALTER TABLE `db_country`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_coupons`
+--
+ALTER TABLE `db_coupons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_currency`
+--
+ALTER TABLE `db_currency`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_custadvance`
+--
+ALTER TABLE `db_custadvance`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_customers`
+--
+ALTER TABLE `db_customers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_customer_coupons`
+--
+ALTER TABLE `db_customer_coupons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `coupon_id` (`coupon_id`);
+
+--
+-- Indexes for table `db_customer_payments`
+--
+ALTER TABLE `db_customer_payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `salespayment_id` (`salespayment_id`);
+
+--
+-- Indexes for table `db_emailtemplates`
+--
+ALTER TABLE `db_emailtemplates`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_expense`
+--
+ALTER TABLE `db_expense`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `account_id` (`account_id`);
+
+--
+-- Indexes for table `db_expense_category`
+--
+ALTER TABLE `db_expense_category`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_fivemojo`
+--
+ALTER TABLE `db_fivemojo`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_hold`
+--
+ALTER TABLE `db_hold`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `warehouse_id` (`warehouse_id`);
+
+--
+-- Indexes for table `db_holditems`
+--
+ALTER TABLE `db_holditems`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `sales_id` (`hold_id`),
+  ADD KEY `item_id` (`item_id`);
+
+--
+-- Indexes for table `db_instamojo`
+--
+ALTER TABLE `db_instamojo`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_instamojopayments`
+--
+ALTER TABLE `db_instamojopayments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_items`
+--
+ALTER TABLE `db_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_languages`
+--
+ALTER TABLE `db_languages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_package`
+--
+ALTER TABLE `db_package`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_paymenttypes`
+--
+ALTER TABLE `db_paymenttypes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_paypal`
+--
+ALTER TABLE `db_paypal`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_paypalpaylog`
+--
+ALTER TABLE `db_paypalpaylog`
+  ADD PRIMARY KEY (`payment_id`);
+
+--
+-- Indexes for table `db_permissions`
+--
+ALTER TABLE `db_permissions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_purchase`
+--
+ALTER TABLE `db_purchase`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `supplier_id` (`supplier_id`);
+
+--
+-- Indexes for table `db_purchaseitems`
+--
+ALTER TABLE `db_purchaseitems`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `purchase_id` (`purchase_id`);
+
+--
+-- Indexes for table `db_purchaseitemsreturn`
+--
+ALTER TABLE `db_purchaseitemsreturn`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `return_id` (`return_id`),
+  ADD KEY `purchase_id` (`purchase_id`);
+
+--
+-- Indexes for table `db_purchasepayments`
+--
+ALTER TABLE `db_purchasepayments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `purchase_id` (`purchase_id`),
+  ADD KEY `supplier_id` (`supplier_id`);
+
+--
+-- Indexes for table `db_purchasepaymentsreturn`
+--
+ALTER TABLE `db_purchasepaymentsreturn`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `return_id` (`return_id`),
+  ADD KEY `supplier_id` (`supplier_id`);
+
+--
+-- Indexes for table `db_purchasereturn`
+--
+ALTER TABLE `db_purchasereturn`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `purchase_id` (`purchase_id`);
+
+--
+-- Indexes for table `db_quotation`
+--
+ALTER TABLE `db_quotation`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `warehouse_id` (`warehouse_id`);
+
+--
+-- Indexes for table `db_quotationitems`
+--
+ALTER TABLE `db_quotationitems`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `quotation_id` (`quotation_id`);
+
+--
+-- Indexes for table `db_roles`
+--
+ALTER TABLE `db_roles`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_sales`
+--
+ALTER TABLE `db_sales`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `warehouse_id` (`warehouse_id`),
+  ADD KEY `coupon_id` (`coupon_id`);
+
+--
+-- Indexes for table `db_salesitems`
+--
+ALTER TABLE `db_salesitems`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `sales_id` (`sales_id`);
+
+--
+-- Indexes for table `db_salesitemsreturn`
+--
+ALTER TABLE `db_salesitemsreturn`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `return_id` (`return_id`);
+
+--
+-- Indexes for table `db_salespayments`
+--
+ALTER TABLE `db_salespayments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `sales_id` (`sales_id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
+-- Indexes for table `db_salespaymentsreturn`
+--
+ALTER TABLE `db_salespaymentsreturn`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `return_id` (`return_id`),
+  ADD KEY `db_salespaymentsreturn_ibfk_3` (`customer_id`);
+
+--
+-- Indexes for table `db_salesreturn`
+--
+ALTER TABLE `db_salesreturn`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `sales_id` (`sales_id`),
+  ADD KEY `coupon_id` (`coupon_id`);
+
+--
+-- Indexes for table `db_shippingaddress`
+--
+ALTER TABLE `db_shippingaddress`
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `id` (`id`);
+
+--
+-- Indexes for table `db_sitesettings`
+--
+ALTER TABLE `db_sitesettings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_smsapi`
+--
+ALTER TABLE `db_smsapi`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_smstemplates`
+--
+ALTER TABLE `db_smstemplates`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_sobpayments`
+--
+ALTER TABLE `db_sobpayments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_states`
+--
+ALTER TABLE `db_states`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_stockadjustment`
+--
+ALTER TABLE `db_stockadjustment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_stockadjustmentitems`
+--
+ALTER TABLE `db_stockadjustmentitems`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `purchase_id` (`adjustment_id`),
+  ADD KEY `item_id` (`item_id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `warehouse_id` (`warehouse_id`);
+
+--
+-- Indexes for table `db_stockentry`
+--
+ALTER TABLE `db_stockentry`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_stocktransfer`
+--
+ALTER TABLE `db_stocktransfer`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `warehouse_id` (`warehouse_from`),
+  ADD KEY `warehouse_to` (`warehouse_to`),
+  ADD KEY `db_stocktransfer_ibfk_4` (`to_store_id`);
+
+--
+-- Indexes for table `db_stocktransferitems`
+--
+ALTER TABLE `db_stocktransferitems`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `warehouse_from` (`warehouse_from`),
+  ADD KEY `warehouse_to` (`warehouse_to`),
+  ADD KEY `stocktranfer_id` (`stocktransfer_id`),
+  ADD KEY `item_id` (`item_id`),
+  ADD KEY `db_stocktransferitems_ibfk_6` (`to_store_id`);
+
+--
+-- Indexes for table `db_store`
+--
+ALTER TABLE `db_store`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_stripe`
+--
+ALTER TABLE `db_stripe`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_stripepayments`
+--
+ALTER TABLE `db_stripepayments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_subscription`
+--
+ALTER TABLE `db_subscription`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_suppliers`
+--
+ALTER TABLE `db_suppliers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_supplier_payments`
+--
+ALTER TABLE `db_supplier_payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `supplier_id` (`supplier_id`),
+  ADD KEY `purchasepayment_id` (`purchasepayment_id`);
+
+--
+-- Indexes for table `db_tax`
+--
+ALTER TABLE `db_tax`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_timezone`
+--
+ALTER TABLE `db_timezone`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `db_twilio`
+--
+ALTER TABLE `db_twilio`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_units`
+--
+ALTER TABLE `db_units`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_users`
+--
+ALTER TABLE `db_users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_userswarehouses`
+--
+ALTER TABLE `db_userswarehouses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `warehouse_id` (`warehouse_id`);
+
+--
+-- Indexes for table `db_variants`
+--
+ALTER TABLE `db_variants`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_warehouse`
+--
+ALTER TABLE `db_warehouse`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
+-- Indexes for table `db_warehouseitems`
+--
+ALTER TABLE `db_warehouseitems`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `store_id` (`store_id`),
+  ADD KEY `warehouse_id` (`warehouse_id`),
+  ADD KEY `item_id` (`item_id`);
+
+--
+-- Indexes for table `temp_holdinvoice`
+--
+ALTER TABLE `temp_holdinvoice`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `ac_accounts`
+--
+ALTER TABLE `ac_accounts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `ac_moneydeposits`
+--
+ALTER TABLE `ac_moneydeposits`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `ac_moneytransfer`
+--
+ALTER TABLE `ac_moneytransfer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ac_transactions`
+--
+ALTER TABLE `ac_transactions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=844;
+
+--
+-- AUTO_INCREMENT for table `bd_delivery`
+--
+ALTER TABLE `bd_delivery`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `db_bankdetails`
+--
+ALTER TABLE `db_bankdetails`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `db_brands`
+--
+ALTER TABLE `db_brands`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=385;
+
+--
+-- AUTO_INCREMENT for table `db_category`
+--
+ALTER TABLE `db_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+
+--
+-- AUTO_INCREMENT for table `db_cobpayments`
+--
+ALTER TABLE `db_cobpayments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_country`
+--
+ALTER TABLE `db_country`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
+
+--
+-- AUTO_INCREMENT for table `db_coupons`
+--
+ALTER TABLE `db_coupons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=344;
+
+--
+-- AUTO_INCREMENT for table `db_currency`
+--
+ALTER TABLE `db_currency`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
+--
+-- AUTO_INCREMENT for table `db_custadvance`
+--
+ALTER TABLE `db_custadvance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `db_customers`
+--
+ALTER TABLE `db_customers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `db_customer_coupons`
+--
+ALTER TABLE `db_customer_coupons`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `db_customer_payments`
+--
+ALTER TABLE `db_customer_payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_emailtemplates`
+--
+ALTER TABLE `db_emailtemplates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `db_expense`
+--
+ALTER TABLE `db_expense`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `db_expense_category`
+--
+ALTER TABLE `db_expense_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `db_fivemojo`
+--
+ALTER TABLE `db_fivemojo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_hold`
+--
+ALTER TABLE `db_hold`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_holditems`
+--
+ALTER TABLE `db_holditems`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_instamojo`
+--
+ALTER TABLE `db_instamojo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `db_instamojopayments`
+--
+ALTER TABLE `db_instamojopayments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_items`
+--
+ALTER TABLE `db_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6696;
+
+--
+-- AUTO_INCREMENT for table `db_languages`
+--
+ALTER TABLE `db_languages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `db_package`
+--
+ALTER TABLE `db_package`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `db_paymenttypes`
+--
+ALTER TABLE `db_paymenttypes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT for table `db_paypal`
+--
+ALTER TABLE `db_paypal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `db_paypalpaylog`
+--
+ALTER TABLE `db_paypalpaylog`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_permissions`
+--
+ALTER TABLE `db_permissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6832;
+
+--
+-- AUTO_INCREMENT for table `db_purchase`
+--
+ALTER TABLE `db_purchase`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `db_purchaseitems`
+--
+ALTER TABLE `db_purchaseitems`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
+
+--
+-- AUTO_INCREMENT for table `db_purchaseitemsreturn`
+--
+ALTER TABLE `db_purchaseitemsreturn`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_purchasepayments`
+--
+ALTER TABLE `db_purchasepayments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+
+--
+-- AUTO_INCREMENT for table `db_purchasepaymentsreturn`
+--
+ALTER TABLE `db_purchasepaymentsreturn`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_purchasereturn`
+--
+ALTER TABLE `db_purchasereturn`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_quotation`
+--
+ALTER TABLE `db_quotation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `db_quotationitems`
+--
+ALTER TABLE `db_quotationitems`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `db_roles`
+--
+ALTER TABLE `db_roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `db_sales`
+--
+ALTER TABLE `db_sales`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+
+--
+-- AUTO_INCREMENT for table `db_salesitems`
+--
+ALTER TABLE `db_salesitems`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=676;
+
+--
+-- AUTO_INCREMENT for table `db_salesitemsreturn`
+--
+ALTER TABLE `db_salesitemsreturn`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `db_salespayments`
+--
+ALTER TABLE `db_salespayments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=383;
+
+--
+-- AUTO_INCREMENT for table `db_salespaymentsreturn`
+--
+ALTER TABLE `db_salespaymentsreturn`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `db_salesreturn`
+--
+ALTER TABLE `db_salesreturn`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `db_shippingaddress`
+--
+ALTER TABLE `db_shippingaddress`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `db_sitesettings`
+--
+ALTER TABLE `db_sitesettings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `db_smsapi`
+--
+ALTER TABLE `db_smsapi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `db_smstemplates`
+--
+ALTER TABLE `db_smstemplates`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `db_sobpayments`
+--
+ALTER TABLE `db_sobpayments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_states`
+--
+ALTER TABLE `db_states`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+
+--
+-- AUTO_INCREMENT for table `db_stockadjustment`
+--
+ALTER TABLE `db_stockadjustment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4138;
+
+--
+-- AUTO_INCREMENT for table `db_stockadjustmentitems`
+--
+ALTER TABLE `db_stockadjustmentitems`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8675;
+
+--
+-- AUTO_INCREMENT for table `db_stockentry`
+--
+ALTER TABLE `db_stockentry`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_stocktransfer`
+--
+ALTER TABLE `db_stocktransfer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `db_stocktransferitems`
+--
+ALTER TABLE `db_stocktransferitems`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `db_store`
+--
+ALTER TABLE `db_store`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `db_stripe`
+--
+ALTER TABLE `db_stripe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_stripepayments`
+--
+ALTER TABLE `db_stripepayments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_subscription`
+--
+ALTER TABLE `db_subscription`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `db_suppliers`
+--
+ALTER TABLE `db_suppliers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `db_supplier_payments`
+--
+ALTER TABLE `db_supplier_payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `db_tax`
+--
+ALTER TABLE `db_tax`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+
+--
+-- AUTO_INCREMENT for table `db_timezone`
+--
+ALTER TABLE `db_timezone`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=549;
+
+--
+-- AUTO_INCREMENT for table `db_twilio`
+--
+ALTER TABLE `db_twilio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `db_units`
+--
+ALTER TABLE `db_units`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+
+--
+-- AUTO_INCREMENT for table `db_users`
+--
+ALTER TABLE `db_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+
+--
+-- AUTO_INCREMENT for table `db_userswarehouses`
+--
+ALTER TABLE `db_userswarehouses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+
+--
+-- AUTO_INCREMENT for table `db_variants`
+--
+ALTER TABLE `db_variants`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=273;
+
+--
+-- AUTO_INCREMENT for table `db_warehouse`
+--
+ALTER TABLE `db_warehouse`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+
+--
+-- AUTO_INCREMENT for table `db_warehouseitems`
+--
+ALTER TABLE `db_warehouseitems`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12578;
+
+--
+-- AUTO_INCREMENT for table `temp_holdinvoice`
+--
+ALTER TABLE `temp_holdinvoice`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
