@@ -254,6 +254,18 @@ class Quotation extends MY_Controller
 
 		// Render the HTML as PDF
 		$dompdf->render();
+		$pdf = $dompdf->getCanvas();
+		$font = $dompdf->getFontMetrics()->getFont("Arial", "normal");
+		$size = 9;
+		$pageCount = $dompdf->getCanvas()->get_page_count();
+		// hiegth -10
+		$x = $dompdf->getCanvas()->get_height() - 32;
+		$y = $dompdf->getCanvas()->get_width() - 27;
+		// color gray
+
+		for ($pageNumber = 1; $pageNumber <= $pageCount; $pageNumber++) {
+			$pdf->page_text($y, $x,  "$pageCount", $font, $size, array(12, 12, 12));
+		}
 
 		// Output the generated PDF (1 = download and 0 = preview)
 		$dompdf->stream("Quotation_$quotation_id-" . date('M') . "_" . date('d') . "_" . date('Y'), array("Attachment" => 0));
