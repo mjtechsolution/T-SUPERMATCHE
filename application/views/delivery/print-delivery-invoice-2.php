@@ -571,7 +571,7 @@
                 <td>
 
                 </td>
-                <td class="text-left f-12 " style="padding-bottom:6px">
+                <td class="text-right f-12 " style="padding-bottom:6px">
                      <?= $tot_qty ?>
                 </td>
                 
