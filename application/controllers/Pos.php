@@ -55,7 +55,7 @@ class Pos extends MY_Controller {
 
 		} 
 		else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 

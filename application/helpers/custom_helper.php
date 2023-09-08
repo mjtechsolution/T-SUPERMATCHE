@@ -1,7 +1,7 @@
 <?php
 function demo_app()
 {
-  return false;
+  return true;
 }
 function app_version()
 {
@@ -473,9 +473,6 @@ function get_init_code($value, $store_id = '', $only_code_flag = false)
     $CI->db->select("category_init");
   if ($value == 'item')
     $CI->db->select("item_init");
-  if ($value == 'delivery') {
-    $CI->db->select("delivery_init");
-  }
   if ($value == 'supplier')
     $CI->db->select("supplier_init");
   if ($value == 'purchase')
@@ -496,6 +493,8 @@ function get_init_code($value, $store_id = '', $only_code_flag = false)
       $CI->db->select("journal_init");*/
   if ($value == 'quotation')
     $CI->db->select("quotation_init");
+  if ($value == 'delivery')
+    $CI->db->select("delivery_init");
   if ($value == 'money_transfer')
     $CI->db->select("money_transfer_init");
   if ($value == 'sales_payment')
@@ -561,6 +560,10 @@ function get_init_code($value, $store_id = '', $only_code_flag = false)
   if ($value == 'quotation') {
     $maxid = get_count_id('db_quotation');
     return $query->quotation_init . str_pad($maxid, 4, '0', STR_PAD_LEFT);
+  }
+  if ($value == 'delivery') {
+    $maxid = get_count_id('db_delivery');
+    return $query->delivery_init . str_pad($maxid, 4, '0', STR_PAD_LEFT);
   }
   if ($value == 'money_transfer') {
     $maxid = get_count_id('ac_moneytransfer');
@@ -1015,6 +1018,7 @@ function get_sales_id_of_quotation($quotation_id)
   $CI = &get_instance();
   return $CI->db->select('id')->where('quotation_id', $quotation_id)->get('db_sales')->row()->id;
 }
+
 function get_quotation_details($quotation_id)
 {
   $CI = &get_instance();

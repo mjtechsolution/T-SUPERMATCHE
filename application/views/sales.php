@@ -122,7 +122,7 @@
          <!-- Content Header (Page header) -->
          <section class="content-header">
             <h1>
-               <?= $page_title; ?>hash_hkdf
+               <?= $page_title; ?>
                <small><?= $this->lang->line('add_or_update') ?> <?= $this->lang->line('sales') ?> Sales</small>
             </h1>
             <ol class="breadcrumb">
@@ -274,9 +274,7 @@
 
                                                    <th rowspan='2' style="width:10%;min-width: 180px;"><?= $this->lang->line('quantity'); ?></th>
                                                    <th rowspan='2' style="width:10%"><?= $this->lang->line('unit_price'); ?></th>
-                                                   <th rowspan='2' style="width:10%"><?= $this->lang->line('discount'); ?>(<?= $CI->currency() ?>)</th>
-                                                   <th rowspan='2' style="width:10%"><?= $this->lang->line('tax_amount'); ?></th>
-                                                   <th rowspan='2' style="width:5%"><?= $this->lang->line('tax'); ?></th>
+                                               
                                                    <th rowspan='2' style="width:7.5%"><?= $this->lang->line('total_amount'); ?></th>
                                                    <th rowspan='2' style="width:7.5%"><?= $this->lang->line('action'); ?></th>
                                                 </tr>

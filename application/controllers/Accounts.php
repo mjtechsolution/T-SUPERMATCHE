@@ -51,7 +51,7 @@ class Accounts extends MY_Controller {
 			$result=$this->accounts->verify_and_save();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 	public function update($id){
@@ -72,7 +72,7 @@ class Accounts extends MY_Controller {
 			$result=$this->accounts->update_accounts();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 
@@ -102,7 +102,7 @@ class Accounts extends MY_Controller {
 											if($this->permissions('accounts_edit'))
 											$str2.='<li>
 												<a data-toggle="tooltip" title="Edit Record ?" href="'.base_url().'accounts/update/'.$accounts->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 
@@ -116,7 +116,7 @@ class Accounts extends MY_Controller {
 											if($this->permissions('accounts_delete') && !$accounts->delete_bit)
 											$str2.='<li>
 												<a style="cursor:pointer" data-toggle="tooltip" title="Delete Record ?" onclick="delete_accounts('.$accounts->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

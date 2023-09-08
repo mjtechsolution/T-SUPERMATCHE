@@ -74,7 +74,7 @@ class Sales_return extends MY_Controller
 			$result = $this->sales->verify_save_and_update();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 
@@ -136,21 +136,21 @@ class Sales_return extends MY_Controller
 			if ($this->permissions('sales_return_view'))
 				$str2 .= '<li>
 												<a title="View Invoice" href="' . base_url() . 'sales_return/invoice/' . $sales->id . '" >
-													<i class="fa fa-fw fa-eye text-blue"></i>View sales
+													<i class="fa fa-fw fa-eye text-blue"></i>Voir les ventes
 												</a>
 											</li>';
 
 			if ($this->permissions('sales_return_edit'))
 				$str2 .= '<li>
 												<a title="Update Record ?" href="' . base_url() . '' . $str1 . $sales->id . '">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 
 			if ($this->permissions('sales_return_payment_view'))
 				$str2 .= '<li>
 												<a title="Pay" class="pointer" onclick="view_payments(' . $sales->id . ')" >
-													<i class="fa fa-fw fa-money text-blue"></i>View Payments
+													<i class="fa fa-fw fa-money text-blue"></i>Voir les paiements
 												</a>
 											</li>';
 
@@ -178,7 +178,7 @@ class Sales_return extends MY_Controller
 			if ($this->permissions('sales_return_delete'))
 				$str2 .= '<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_return(\'' . $sales->id . '\')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

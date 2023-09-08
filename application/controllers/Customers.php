@@ -34,7 +34,7 @@ class Customers extends MY_Controller
 			$result = $this->customers->verify_and_save();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 	public function update($id)
@@ -55,7 +55,7 @@ class Customers extends MY_Controller
 			$result = $this->customers->update_customers();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 
@@ -115,7 +115,7 @@ class Customers extends MY_Controller
 			if ($this->permissions('customers_edit') && $customers->delete_bit != 1)
 				$str2 .= '<li>
 												<a title="Edit Record ?" href="' . base_url() . 'customers/update/' . $customers->id . '">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 
@@ -129,7 +129,7 @@ class Customers extends MY_Controller
 			if ($this->permissions('sales_payment_view'))
 				$str2 .= '<li>
 												<a title="Pay" class="pointer" onclick="view_payments(' . $customers->id . ')" >
-													<i class="fa fa-fw fa-money text-blue"></i>View Payments
+													<i class="fa fa-fw fa-money text-blue"></i>Voir les paiements
 												</a>
 											</li>';
 
@@ -148,7 +148,7 @@ class Customers extends MY_Controller
 			if ($this->permissions('customers_delete') && $customers->delete_bit != 1)
 				$str2 .= '<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_customers(' . $customers->id . ')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

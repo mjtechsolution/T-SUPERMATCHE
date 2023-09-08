@@ -431,7 +431,7 @@
         <table width="100%">
             <tr>
                 <td colspan="3">
-                    <p>DESTINATAIRE : </p>
+                    <p><b>DESTINATAIRE : </b></p>
                 </td>
             </tr>
             <!--  $company_phone = $res1->phone;
@@ -442,15 +442,7 @@
   $company_address = $res1->address;
   $company_gst_no = $res1->gst_no;
   $company_vat_no = $res1->vat_no; -->
-            <tr>
-                <td>
-                    <p class="destina_title">Addresse de facture : </p>
-                </td>
-
-                <td>
-                    <p class="destina_title">Informations Complémentaires: </p>
-                </td>
-            </tr>
+       
             <tr>
                 <td>
                     <div class="destina_content">
@@ -486,7 +478,7 @@
 
 
         <div class="title_facture">
-            <p>DETAILS DE LA FACTURE</p>
+            <p>DETAILS DU DEVIS</p>
         </div>
 
         <table width="100%">
@@ -611,7 +603,7 @@
                             <td width="50%" class="f-12 f-b bg-blue b-r">
                                 <!-- i need tva here -->
 
-                                <p> <?= ($tot_total_cost * ($tax / 100)) ?> DH </p>
+                                <p> <?= number_format($tot_total_cost * ($tax / 100),2) ?> DH </p>
                             </td>
                         </tr>
                         <tr>
@@ -621,13 +613,13 @@
                                 <p>Montant TTC : </p>
                             </td>
                             <td width="50%" class="f-12 f-b bg-blue b-r">
-                                <p><?= $tot_total_cost + ($tot_total_cost * ($tax / 100))  ?> DH</p>
+                                <p><?= number_format($tot_total_cost + number_format($tot_total_cost * ($tax / 100),2),2)  ?> DH</p>
                             </td>
                         </tr>
                         <tr>
 
                             <td width="50%" class="f-12 text-right f-b">
-                                <p>TTC en Mots : </p>
+                                <p> Montant TTC en lettre : </p>
                             </td>
 
                             <td width="50%" class="f-12 f-b bg-blue b-r" style="padding-bottom:13px">

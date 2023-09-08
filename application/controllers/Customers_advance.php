@@ -85,7 +85,7 @@ class Customers_advance extends MY_Controller {
 										if ($this->permissions('cust_adv_payments_edit')) {
 											$str2 .= '<li>
 												<a title="Edit Record ?" href="' . base_url() . 'customers_advance/update/' . $rec->id . '">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 										}
@@ -101,7 +101,7 @@ class Customers_advance extends MY_Controller {
 										if ($this->permissions('cust_adv_payments_delete')) {
 											$str2 .= '<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_advance(' . $rec->id . ')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											</ul>

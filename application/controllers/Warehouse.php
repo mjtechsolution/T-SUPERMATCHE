@@ -32,7 +32,7 @@
 			} 
 			else {
 				//echo validation_errors();
-				echo "Please Fill Compulsory(* marked) Fields.";
+				echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 			}
 		
 		}

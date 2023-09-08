@@ -98,14 +98,14 @@ class Tax_group extends MY_Controller {
 											if($this->permissions('tax_edit'))
 											$str2.='<li>
 												<a title="Edit Record ?" href="'.base_url().'tax_group/update/'.$tax->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifierfierfier
 												</a>
 											</li>';
 
 											if($this->permissions('tax_delete'))
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_tax('.$tax->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

@@ -49,7 +49,7 @@ class Items extends MY_Controller
 			$result = $this->items->save_record(array('command' => 'save'));
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 
@@ -118,7 +118,7 @@ class Items extends MY_Controller
 			$result = $this->items->save_record($modal_post);
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 
@@ -163,7 +163,7 @@ class Items extends MY_Controller
 			$result = $this->items->save_record(array('command' => 'update'));
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 
@@ -248,14 +248,14 @@ class Items extends MY_Controller
 			if ($this->permissions('items_edit') || $this->permissions('services_edit'))
 				$str2 .= '<li>
 												<a title="Edit Record ?" href="' . base_url(($items->service_bit) ? 'services/update/' . $items->id : 'items/update/' . $items->id) . '">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 
 			if ($this->permissions('items_delete') || $this->permissions('services_delete'))
 				$str2 .= '<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_items(' . $items->id . ')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

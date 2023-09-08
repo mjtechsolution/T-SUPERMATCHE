@@ -89,7 +89,7 @@ class Discount_coupon extends MY_Controller {
 			if ($this->permissions('discountCouponEdit')) {
 				$str2 .= '<li>
 												<a title="Edit Record ?" href="' . base_url() . 'discount_coupon/update/' . $discount_coupon->id . '">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 			}
@@ -97,7 +97,7 @@ class Discount_coupon extends MY_Controller {
 			if ($this->permissions('discountCouponDelete')) {
 				$str2 .= '<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_coupon(' . $discount_coupon->id . ')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 

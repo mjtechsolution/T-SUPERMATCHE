@@ -62,7 +62,7 @@ class Sales_payments extends MY_Controller {
 											if($this->permissions('sales_payment_delete'))
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_payment(\''.$sales->id.'\')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

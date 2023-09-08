@@ -240,7 +240,7 @@
                               <span id="collection" style="display:none" class="text-danger"></span>
                            </div>
 
-                           <div class="form-group col-md-4">
+                           <!-- <div class="form-group col-md-4">
                               <label for="BL"><?= $this->lang->line('bl'); ?></label>
                               <input type="text" class="form-control " id="BL" name="BL" placeholder="BL" value="<?php print $BL; ?>">
                               <span id="BL" style="display:none" class="text-danger"></span>
@@ -256,7 +256,7 @@
                               <label for="seller_points"><?= $this->lang->line('seller_points'); ?></label>
                               <input type="text" class="form-control only_currency" id="seller_points" name="seller_points" placeholder="" value="<?php print $seller_points; ?>">
                               <span id="seller_points_msg" style="display:none" class="text-danger"></span>
-                           </div>
+                           </div> -->
                            <div class="form-group col-md-4">
                               <label for="custom_barcode"><?= $this->lang->line('barcode'); ?></label>
                               <input type="text" class="form-control " id="custom_barcode" name="custom_barcode" placeholder="" value="<?php print $custom_barcode; ?>">

@@ -89,14 +89,14 @@ class State extends MY_Controller {
 											//if($this->permissions('places_edit'))
 											$str2.='<li>
 												<a title="Edit Record ?" href="'.base_url().'state/update/'.$state->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifierfier
 												</a>
 											</li>';
 
 											//if($this->permissions('places_delete'))
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_state('.$state->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

@@ -108,7 +108,7 @@ class Subscribers extends MY_Controller {
 			$result=$this->subscription->save_and_update();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}*/
 	/*public function update($id){
@@ -169,7 +169,7 @@ class Subscribers extends MY_Controller {
 											if($this->permissions('subscription_delete'))
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_subscription('.$subscription->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

@@ -30,7 +30,7 @@ class Services extends MY_Controller {
 			$result=$this->services->verify_and_save();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 	public function update($id){
@@ -55,7 +55,7 @@ class Services extends MY_Controller {
 			$result=$this->services->update_services();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 

@@ -171,8 +171,12 @@ function handleTwoDigits($digits)
         $tens = intval($digits / 10);
         $units = $digits % 10;
 
-        $tens_word = xml()['m'][$tens];
+      
 
+        $tens_word = xml()['m'][$tens];
+        if ($units == 1) {
+            $tens_word .= ' et ';
+        }
         // Handle special cases for numbers in the range 70-79 and 90-99
         if ($tens == 7 && $units > 0) {
             $tens_word = "Soixante-" . xml()['x'][10 + $units];
@@ -201,7 +205,7 @@ function handleHundreds($digits)
         $first_digit_word = "";
     }
 
-    return (trim($first_digit_word) ? $first_digit_word . " Cent" : "Cent") . (trim($other_two_digits_word) ? " et {$other_two_digits_word}" : "");
+    return (trim($first_digit_word) ? $first_digit_word . " Cent" : "Cent") . (trim($other_two_digits_word) ? " {$other_two_digits_word}" : "");
 }
 
 

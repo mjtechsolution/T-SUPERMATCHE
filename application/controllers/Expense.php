@@ -37,7 +37,7 @@ class Expense extends MY_Controller {
 			$result=$this->expense->verify_and_save();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 	public function update($id){
@@ -60,7 +60,7 @@ class Expense extends MY_Controller {
 			$result=$this->expense->update_expense();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 
@@ -91,14 +91,14 @@ class Expense extends MY_Controller {
 											if($this->permissions('expense_edit'))
 											$str2.='<li>
 												<a title="Edit Record ?" href="'.base_url().'expense/update/'.$expense->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 
 											if($this->permissions('expense_delete'))
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_expense('.$expense->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											
@@ -196,14 +196,14 @@ class Expense extends MY_Controller {
 											if($this->permissions('expense_category_edit'))
 											$str2.='<li>
 												<a title="Edit Record ?" href="expense_update/'.$category->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 
 											if($this->permissions('expense_category_delete'))
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_category('.$category->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

@@ -31,7 +31,7 @@ class Stock_adjustment extends MY_Controller {
 	    	$result = $this->stock_adjustment->verify_save_and_update();
 	    	echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 	
@@ -74,14 +74,14 @@ class Stock_adjustment extends MY_Controller {
 											if($this->permissions('stock_adjustment_edit'))
 											$str2.='<li>
 												<a title="Update Record ?" href="'.base_url().'stock_adjustment/update/'.$stock_adjustment->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 
 											if($this->permissions('stock_adjustment_delete'))
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_stock_adjustment(\''.$stock_adjustment->id.'\')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

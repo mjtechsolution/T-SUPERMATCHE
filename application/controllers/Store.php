@@ -78,14 +78,14 @@ class Store extends MY_Controller {
 											if($this->permissions('store_edit'))
 											$str2.='<li>
 												<a title="Edit Record ?" data-toggle="tooltip" href="'.base_url('store_profile/update/'.$store->id).'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifierfier
 												</a>
 											</li>';
 
 											if($this->permissions('store_delete') && $store->id!=1)
 											$str2.='<li>
 												<a style="cursor:pointer" data-toggle="tooltip" title="Delete Record ?" onclick="delete_store('.$store->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

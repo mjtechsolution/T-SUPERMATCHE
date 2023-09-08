@@ -84,14 +84,14 @@ class Category extends MY_Controller {
 											if($this->permissions('items_category_edit'))
 											$str2.='<li>
 												<a title="Edit Record ?" href="'.base_url().'category/update/'.$category->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 
 											if($this->permissions('items_category_delete'))
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_category('.$category->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											
@@ -153,7 +153,7 @@ class Category extends MY_Controller {
 
 		} 
 		else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 	//END

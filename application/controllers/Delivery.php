@@ -4,13 +4,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-class Quotation extends MY_Controller
+class Delivery extends MY_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load_global();
-		$this->load->model('quotation_model', 'quotation');
+		$this->load->model('delivery_model', 'delivery');
 		$this->load->helper('sms_template_helper');
 	}
 
@@ -23,25 +23,26 @@ class Quotation extends MY_Controller
 	{
 		$this->permission_check('quotation_view');
 		$data = $this->data;
-		$data['page_title'] = $this->lang->line('quotation_list');
-		$this->load->view('quotation/quotation_list', $data);
+		$data['page_title'] = $this->lang->line('delivery_list');
+		$this->load->view('delivery/delivery_list', $data);
 	}
 	public function add()
 	{
 		$this->permission_check('quotation_add');
 		$data = $this->data;
-		$data['page_title'] = $this->lang->line('quotation');
-		$this->load->view('quotation/quotation', $data);
+		$data['page_title'] = $this->lang->line('delivery_add');
+		$this->load->view('delivery/delivery', $data);
 	}
 
 
-	public function quotation_save_and_update()
+
+	public function delivery_save_and_update()
 	{
-		$this->form_validation->set_rules('quotation_date', 'Quotation Date', 'trim|required');
+		$this->form_validation->set_rules('delivery_date', 'delivery Date', 'trim|required');
 		$this->form_validation->set_rules('customer_id', 'Customer Name', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE) {
-			$result = $this->quotation->verify_save_and_update();
+			$result = $this->delivery->verify_save_and_update();
 			echo $result;
 		} else {
 			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
@@ -51,42 +52,42 @@ class Quotation extends MY_Controller
 
 	public function update($id)
 	{
-		$this->belong_to('db_quotation', $id);
+		$this->belong_to('db_sales', $id);
 		$this->permission_check('quotation_edit');
 		$data = $this->data;
-		$data = array_merge($data, array('quotation_id' => $id));
-		$data['page_title'] = $this->lang->line('quotation');
-		$this->load->view('quotation/quotation', $data);
+		$data = array_merge($data, array('sales_id' => $id));
+		$data['page_title'] = $this->lang->line('delivery');
+		$this->load->view('delivery/delivery', $data);
 	}
 
 
 	public function ajax_list()
 	{
-		$list = $this->quotation->get_datatables();
+		$list = $this->delivery->get_datatables();
 
 		$data = array();
 		$no = $_POST['start'];
-		foreach ($list as $quotation) {
+		foreach ($list as $delivery) {
 
 			$no++;
 			$row = array();
-			$row[] = '<input type="checkbox" name="checkbox[]" value=' . $quotation->id . ' class="checkbox column_checkbox" >';
+			$row[] = '<input type="checkbox" name="checkbox[]" value=' . $delivery->id . ' class="checkbox column_checkbox" >';
 
 			$str = '';
-			if ($quotation->sales_status != '')
+			if ($delivery->sales_status != '')
 				$str = "<span title='Converted to Sales Invoice' class='label label-success' style='cursor:pointer'> Converted </span>";
-			$row[] = show_date($quotation->quotation_date) . "<br>" . $str;
-			$row[] = (!empty($quotation->expire_date)) ? show_date($quotation->expire_date) : '';
+			$row[] = show_date($delivery->delivery_date) . "<br>" . $str;
+			$row[] = (!empty($delivery->expire_date)) ? show_date($delivery->expire_date) : '';
 
-			$row[] = $quotation->quotation_code;
+			$row[] = $delivery->delivery_code;
 
-			$row[] = $quotation->reference_no;
-			$row[] = $quotation->customer_name;
+			$row[] = $delivery->reference_no;
+			$row[] = $delivery->customer_name;
 
-			$row[] = store_number_format($quotation->grand_total);
-			$row[] = ($quotation->created_by);
+			$row[] = store_number_format($delivery->grand_total);
+			$row[] = ($delivery->created_by);
 
-			$str1 = base_url() . 'quotation/update/';
+			$str1 = base_url() . 'delivery/update/';
 
 			$str2 = '<div class="btn-group" title="View Account">
 										<a class="btn btn-primary btn-o dropdown-toggle" data-toggle="dropdown" href="#">
@@ -94,50 +95,38 @@ class Quotation extends MY_Controller
 										</a>
 										<ul role="menu" class="dropdown-menu dropdown-light pull-right">';
 
-			if ($this->permissions('sales_add') && $quotation->sales_status == '')
-				$str2 .= '<li>
-												<a title="Convert to Invoice" href="' . base_url() . 'sales/quotation/' . $quotation->id . '" >
-													<i class="fa fa-fw fa-exchange text-blue"></i>Convert to Invoice
-												</a>
-											</li>';
-
-			if ($quotation->sales_status == 'Converted')
-				$str2 .= '<li>
-												<a title="View to Invoice" href="' . base_url() . 'sales/invoice/' . get_sales_id_of_quotation($quotation->id) . '" >
-													<i class="fa fa-fw fa-eye text-blue"></i>Voir les ventes Invoice
-												</a>
-											</li>';
+		
 
 			if ($this->permissions('quotation_view'))
 				$str2 .= '<li>
-												<a title="View Invoice" href="' . base_url() . 'quotation/invoice/' . $quotation->id . '" >
-													<i class="fa fa-fw fa-eye text-blue"></i>View Quotation
+												<a title="View Invoice" href="' . base_url() . 'delivery/invoice/' . $delivery->id . '" >
+													<i class="fa fa-fw fa-eye text-blue"></i>View delivery
 												</a>
 											</li>';
 
 			if ($this->permissions('quotation_edit'))
 				$str2 .= '<li>
-												<a title="Update Record ?" href="' . $str1 . $quotation->id . '">
+												<a title="Update Record ?" href="' . $str1 . $delivery->id . '">
 													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 
 			if ($this->permissions('quotation_add') || $this->permissions('quotation_edit'))
 				$str2 .= '<li>
-												<a title="Take Print" target="_blank" href="' . base_url() . 'quotation/print_invoice/' . $quotation->id . '">
+												<a title="Take Print" target="_blank" href="' . base_url() . 'delivery/print_invoice/' . $delivery->id . '">
 													<i class="fa fa-fw fa-print text-blue"></i>Print
 												</a>
 											</li>
 
 											<li>
-												<a title="Download PDF" target="_blank" href="' . base_url() . 'quotation/pdf/' . $quotation->id . '">
+												<a title="Download PDF" target="_blank" href="' . base_url() . 'delivery/pdf/' . $delivery->id	 . '">
 													<i class="fa fa-fw fa-file-pdf-o text-blue"></i>PDF
 												</a>
 											</li>';
 
 			if ($this->permissions('quotation_delete'))
 				$str2 .= '<li>
-												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_quotation(\'' . $quotation->id . '\')">
+												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_delivery(\'' . $delivery->id . '\')">
 													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
@@ -152,8 +141,8 @@ class Quotation extends MY_Controller
 
 		$output = array(
 			"draw" => $_POST['draw'],
-			"recordsTotal" => $this->quotation->count_all(),
-			"recordsFiltered" => $this->quotation->count_filtered(),
+			"recordsTotal" => $this->delivery->count_all(),
+			"recordsFiltered" => $this->delivery->count_filtered(),
 			"data" => $data,
 		);
 		//output to json format
@@ -166,20 +155,20 @@ class Quotation extends MY_Controller
 		$status = $this->input->post('status');
 
 
-		$result = $this->quotation->update_status($id, $status);
+		$result = $this->delivery->update_status($id, $status);
 		return $result;
 	}
-	public function delete_quotation()
+	public function delete_delivery()
 	{
 		$this->permission_check_with_msg('quotation_delete');
 		$id = $this->input->post('q_id');
-		echo $this->quotation->delete_quotation($id);
+		echo $this->delivery->delete_delivery($id);
 	}
 	public function multi_delete()
 	{
 		$this->permission_check_with_msg('quotation_delete');
 		$ids = implode(",", $_POST['checkbox']);
-		echo $this->quotation->delete_quotation($ids);
+		echo $this->delivery->delete_delivery($ids);
 	}
 
 
@@ -187,46 +176,46 @@ class Quotation extends MY_Controller
 	public function search_item()
 	{
 		$q = $this->input->get('q');
-		$result = $this->quotation->search_item($q);
+		$result = $this->delivery->search_item($q);
 		echo $result;
 	}
 	public function find_item_details()
 	{
 		$id = $this->input->post('id');
 
-		$result = $this->quotation->find_item_details($id);
+		$result = $this->delivery->find_item_details($id);
 		echo $result;
 	}
 
-	//quotation invoice form
+	//delivery invoice form
 	public function invoice($id)
 	{
-		$this->belong_to('db_quotation', $id);
+		$this->belong_to('db_delivery', $id);
 		if (!$this->permissions('quotation_view')) {
 			$this->show_access_denied_page();
 		}
 		$data = $this->data;
-		$data = array_merge($data, array('quotation_id' => $id));
-		$data['page_title'] = $this->lang->line('quotation_invoice');
-		$this->load->view('quotation/quotation-invoice', $data);
+		$data = array_merge($data, array('delivery_id' => $id));
+		$data['page_title'] = $this->lang->line('delivery_invoice');
+		$this->load->view('delivery/delivery-invoice', $data);
 	}
 
-	//Print quotation invoice 
-	public function print_invoice($quotation_id)
+	//Print delivery invoice 
+	public function print_invoice($delivery_id)
 	{
-		$this->belong_to('db_quotation', $quotation_id);
+		$this->belong_to('db_delivery', $delivery_id);
 		if (!$this->permissions('quotation_add') && !$this->permissions('quotation_edit')) {
 			$this->show_access_denied_page();
 		}
 		$data = $this->data;
-		$data = array_merge($data, array('quotation_id' => $quotation_id));
-		$data['page_title'] = $this->lang->line('quotation_invoice');
+		$data = array_merge($data, array('delivery_id' => $delivery_id));
+		$data['page_title'] = 'Livraison';
 
-		$this->load->view('quotation/print-quotation-invoice', $data);
+		$this->load->view('delivery/print-delivery-invoice', $data);
 	}
 
 
-	public function pdf($quotation_id)
+	public function pdf($delivery_id)
 	{
 		if (!$this->permissions('quotation_add') && !$this->permissions('quotation_edit')) {
 			$this->show_access_denied_page();
@@ -234,9 +223,9 @@ class Quotation extends MY_Controller
 
 		$data = $this->data;
 		$data['page_title'] = $this->lang->line('quotation_invoice');
-		$data = array_merge($data, array('quotation_id' => $quotation_id));
+		$data = array_merge($data, array('sales_id' => $sales_id,'delivery_id' => $delivery_id));
 
-		$this->load->view('quotation/print-quotation-invoice-2', $data);
+		$this->load->view('delivery/print-delivery-invoice-2', $data);
 
 
 
@@ -268,7 +257,7 @@ class Quotation extends MY_Controller
 		}
 
 		// Output the generated PDF (1 = download and 0 = preview)
-		$dompdf->stream("Quotation_$quotation_id-" . date('M') . "_" . date('d') . "_" . date('Y'), array("Attachment" => 0));
+		$dompdf->stream("delivery_$delivery_id-" . date('M') . "_" . date('d') . "_" . date('Y'), array("Attachment" => 0));
 	}
 
 
@@ -277,29 +266,29 @@ class Quotation extends MY_Controller
 	/*v1.1*/
 	public function return_row_with_data($rowcount, $item_id)
 	{
-		echo $this->quotation->get_items_info($rowcount, $item_id);
+		echo $this->delivery->get_items_info($rowcount, $item_id);
 	}
-	public function return_quotation_list($quotation_id)
+	public function return_delivery_list($sales_id)
 	{
-		echo $this->quotation->return_quotation_list($quotation_id);
+		echo $this->delivery->return_delivery_list($sales_id);
 	}
 
 	public function show_pay_now_modal()
 	{
 		$this->permission_check_with_msg('quotation_view');
-		$quotation_id = $this->input->post('quotation_id');
-		echo $this->quotation->show_pay_now_modal($quotation_id);
+		$delivery_id = $this->input->post('delivery_id');
+		echo $this->delivery->show_pay_now_modal($delivery_id);
 	}
 	public function save_payment()
 	{
 		$this->permission_check_with_msg('quotation_add');
-		echo $this->quotation->save_payment();
+		echo $this->delivery->save_payment();
 	}
 	public function view_payments_modal()
 	{
 		$this->permission_check_with_msg('quotation_view');
-		$quotation_id = $this->input->post('quotation_id');
-		echo $this->quotation->view_payments_modal($quotation_id);
+		$delivery_id = $this->input->post('delivery_id');
+		echo $this->delivery->view_payments_modal($delivery_id);
 	}
 	public function get_customers_select_list()
 	{
@@ -318,7 +307,7 @@ class Quotation extends MY_Controller
 	{
 		echo get_warehouse_select_list(null, $_POST['store_id']);
 	}
-	//Print quotation Payment Receipt
+	//Print delivery Payment Receipt
 	public function print_show_receipt($payment_id)
 	{
 		if (!$this->permissions('quotation_add') && !$this->permissions('quotation_edit')) {

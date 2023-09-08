@@ -86,14 +86,14 @@ class Variants extends MY_Controller {
 											if($this->permissions('variant_edit'))
 											$str2.='<li>
 												<a title="Edit Record ?" href="'.base_url().'variants/update/'.$variant->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 
 											if($this->permissions('variant_delete'))
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_variant('.$variant->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

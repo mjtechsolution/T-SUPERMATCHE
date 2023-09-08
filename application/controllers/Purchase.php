@@ -38,7 +38,7 @@ class Purchase extends MY_Controller
 			$result = $this->purchase->verify_save_and_update();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 
@@ -70,7 +70,7 @@ class Purchase extends MY_Controller
 
 			echo json_encode($res);
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 
@@ -121,7 +121,7 @@ class Purchase extends MY_Controller
 			if ($this->permissions('purchase_edit'))
 				$str2 .= '<li>
 												<a title="Update Record ?" href="' . base_url() . 'purchase/update/' . $purchase->id . '">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 
@@ -129,7 +129,7 @@ class Purchase extends MY_Controller
 				$str2 .= '
 											<li>
 												<a title="Pay" class="pointer" onclick="view_payments(' . $purchase->id . ')" >
-													<i class="fa fa-fw fa-money text-blue"></i>View Payments
+													<i class="fa fa-fw fa-money text-blue"></i>Voir les paiements
 												</a>
 											</li>';
 
@@ -162,7 +162,7 @@ class Purchase extends MY_Controller
 			if ($this->permissions('purchase_delete'))
 				$str2 .= '<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_purchase(\'' . $purchase->id . '\')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

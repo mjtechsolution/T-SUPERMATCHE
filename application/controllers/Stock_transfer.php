@@ -33,7 +33,7 @@ class Stock_transfer extends MY_Controller {
 	    	$result = $this->stock_transfer->verify_save_and_update();
 	    	echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 	
@@ -91,7 +91,7 @@ class Stock_transfer extends MY_Controller {
 											if($this->permissions('stock_transfer_edit'))
 											$str2.='<li>
 												<a title="Update Record ?" href="'.base_url('stock_transfer/update/').$stock_transfer->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifierfier
 												</a>
 											</li>';
 
@@ -101,7 +101,7 @@ class Stock_transfer extends MY_Controller {
 											if($this->permissions('stock_transfer_delete'))
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_stock(\''.$stock_transfer->id.'\')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

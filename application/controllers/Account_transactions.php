@@ -244,7 +244,7 @@ class Account_transactions extends MY_Controller {
 											if($this->permissions('accounts_delete'))
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_transaction('.$record_id.','.$entry_of.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

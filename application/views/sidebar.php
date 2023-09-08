@@ -293,10 +293,6 @@ $CI = &get_instance();
                   </a></li>
               <?php } ?>
 
-              <?php if ($CI->permissions('sales_view')) { ?>
-                <li class="sales-active-li"><a href="<?php echo $base_url; ?>deliverys"><i class="fa fa-list "></i> <span>List bon de livraison</span></a></li>
-              <?php } ?>
-
 
 
             </ul>
@@ -447,7 +443,33 @@ $CI = &get_instance();
             </ul>
           </li>
         <?php } ?>
-      <?php } ?><!-- is_user() -->
+      <?php } ?>
+
+      
+      <?php if (!is_user()) { ?>
+        <?php if ($CI->permissions('quotation_add')  || $CI->permissions('quotation_view')) { ?>
+          <!-- <li class="header">QUOTATION</li> -->
+          <li class="pos-active-li delivery_list-active-li delivery-active-li delivery-return-active-li delivery-return-list-active-li treeview">
+            <a href="#">
+            <i class="fa fa-truck text-aqua"></i> <span><?= $this->lang->line('delivery'); ?></span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <?php if ($CI->permissions('quotation_add')) { ?>
+                <li class="delivery-active-li"><a href="<?php echo $base_url; ?>delivery/add"><i class="fa fa-plus-square-o "></i> <span><?= $this->lang->line('new_delivery'); ?></span></a></li>
+              <?php } ?>
+
+              <?php if ($CI->permissions('quotation_view')) { ?>
+                <li class="delivery-active-li"><a href="<?php echo $base_url; ?>delivery"><i class="fa fa-list "></i> <span><?= $this->lang->line('delivery_list'); ?></span></a></li>
+              <?php } ?>
+
+
+            </ul>
+          </li>
+        <?php } ?>
+      <?php } ?>
 
 
 

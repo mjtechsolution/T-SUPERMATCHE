@@ -58,14 +58,14 @@ class Sales extends MY_Controller
 	{
 
 
-		$this->form_validation->set_rules('reference_no', 'Sales Date', 'trim|required');
+		$this->form_validation->set_rules('Sales Date', 'trim|required');
 		$this->form_validation->set_rules('customer_id', 'Customer Name', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE) {
 			$result = $this->sales->verify_save_and_update();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 
@@ -84,7 +84,7 @@ class Sales extends MY_Controller
 			$result = $this->sales->sales_delivery_verify_save_and_update();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 
@@ -181,21 +181,21 @@ class Sales extends MY_Controller
 			if ($this->permissions('sales_view'))
 				$str2 .= '<li>
 												<a title="View Invoice" href="' . base_url() . 'sales/invoice/' . $sales->id . '" >
-													<i class="fa fa-fw fa-eye text-blue"></i>View sales
+													<i class="fa fa-fw fa-eye text-blue"></i>Voir les ventes
 												</a>
 											</li>';
 
 			if ($this->permissions('sales_edit'))
 				$str2 .= '<li>
 												<a title="Update Record ?" href="' . base_url() . '' . $str1 . $sales->id . '">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 
 			if ($this->permissions('sales_payment_view'))
 				$str2 .= '<li>
 												<a title="Pay" class="pointer" onclick="view_payments(' . $sales->id . ')" >
-													<i class="fa fa-fw fa-money text-blue"></i>View Payments
+													<i class="fa fa-fw fa-money text-blue"></i>Voir les paiements
 												</a>
 											</li>';
 
@@ -215,19 +215,19 @@ class Sales extends MY_Controller
 											</li>
 											<li>
 												<a style="cursor:pointer" title="Print POS Invoice ?" onclick="print_invoice(' . $sales->id . ')">
-													<i class="fa fa-fw fa-file-text text-blue"></i>POS Invoice
+													<i class="fa fa-fw fa-file-text text-blue"></i>Imprimer  POS de vente
 												</a>
 											</li>';
 
 			if ($this->permissions('sales_return_add'))
 				$str2 .= '<li>
 												<a title="Sales Return" href="' . base_url() . 'sales_return/add/' . $sales->id . '">
-													<i class="fa fa-fw fa-undo text-blue"></i>Sales Return
+													<i class="fa fa-fw fa-undo text-blue"></i>vente de retour
 												</a>
 											</li>
 											
 											<li>
-												<a style="cursor:pointer" onclick="view_livrison(' . $sales->id . ')" title="' . base_url() . 'sales/delivery/' . $sales->id . '" title="AJOUTER UNE LIVRAISON" >
+												<a style="cursor:pointer"  href="' . base_url() . 'delivery/update/' . $sales->id . '" title="AJOUTER UNE LIVRAISON" >
 													<i class="fa fa-truck  text-blue"></i>Ajouter une livraison													
 												</a>
 											</li>';
@@ -235,7 +235,7 @@ class Sales extends MY_Controller
 			if ($this->permissions('sales_delete'))
 				$str2 .= '<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_sales(\'' . $sales->id . '\')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 										</ul>
@@ -257,6 +257,7 @@ class Sales extends MY_Controller
 		//output to json format
 		echo json_encode($output);
 	}
+
 	public function update_status()
 	{
 		$this->permission_check('sales_edit');

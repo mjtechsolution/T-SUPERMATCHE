@@ -104,7 +104,7 @@ class Customer_coupon extends MY_Controller {
 											if($this->permissions('customerCouponDelete'))
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_coupon(\''.$customer_coupon->id.'\')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											

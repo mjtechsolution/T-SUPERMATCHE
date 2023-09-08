@@ -35,7 +35,7 @@ class Money_transfer extends MY_Controller {
 			$result=$this->money_transfer->verify_and_save();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 	public function update($id){
@@ -58,7 +58,7 @@ class Money_transfer extends MY_Controller {
 			$result=$this->money_transfer->update_money_transfer();
 			echo $result;
 		} else {
-			echo "Please Fill Compulsory(* marked) Fields.";
+			echo "Veuillez remplir les champs obligatoires (marqués par un *).";
 		}
 	}
 
@@ -92,14 +92,14 @@ class Money_transfer extends MY_Controller {
 											if($this->permissions('money_transfer_edit'))
 											$str2.='<li>
 												<a title="Edit Record ?" href="'.base_url().'money_transfer/update/'.$money_transfer->id.'">
-													<i class="fa fa-fw fa-edit text-blue"></i>Edit
+													<i class="fa fa-fw fa-edit text-blue"></i>Modifier
 												</a>
 											</li>';
 
 											if($this->permissions('money_transfer_delete'))
 											$str2.='<li>
 												<a style="cursor:pointer" title="Delete Record ?" onclick="delete_money_transfer('.$money_transfer->id.')">
-													<i class="fa fa-fw fa-trash text-red"></i>Delete
+													<i class="fa fa-fw fa-trash text-red"></i>Supprimer
 												</a>
 											</li>
 											
